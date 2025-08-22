@@ -15,7 +15,7 @@
                         <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="Filter:"/></TextBlock>
                         <CheckBox x:Name="checkboxShowUnique" Content="Show unique relic effects" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" IsChecked="False" Checked="ToggleShowUniqueEffects" Unchecked="ToggleShowUniqueEffects"/>
                         <Button Content="Clear" HorizontalAlignment="Left" Margin="460,11,0,0" VerticalAlignment="Top" Width="70" Click="Button_ClearEffectFilter"/>
-                        <ListView x:Name="listviewRelicEffects" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,62,10,10" MouseRightButtonDown="Listview_RightClickRelicEffects">
+                        <ListView x:Name="listviewRelicEffects" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,62,10,10">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Id" Width="60" DisplayMemberBinding="{Binding Path=EffectId}"/>

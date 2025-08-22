@@ -684,24 +684,4 @@ public partial class MainWindow : Window
             MessageBox.Show("Problem loading settings file.");
         }
     }
-
-    //
-    //
-    //
-
-    //
-
-    private void Listview_RightClickRelicEffects(object sender, MouseEventArgs e)
-    {
-        // Get the clicked item
-        var clickedItem = (sender as ListView)?.SelectedItem;
-
-        if (clickedItem != null)
-        {
-            // Show the context menu
-            ItemContextMenu.IsOpen = true;
-        }
-
-    }
-
 }
