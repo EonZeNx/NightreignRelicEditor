@@ -1,0 +1,1831 @@
+ID	Name	unknown_6	
+10000	FP Restoration upon Successive Attacks	-1	
+10001	Taking attacks improves attack power	-1	
+10002	Switching Weapons Boosts Attack Power	-1	
+11000	[Wylder] +1 additional Character Skill use	-1	
+11001	Flask Also Heals Allies	-1	
+11002	[Wylder] Art gauge greatly filled when ability is activated	-1	
+12000	[Guardian] Increased duration for Character Skill	-1	
+12001	Art gauge charged from successful guarding	-1	
+12002	[Guardian] Slowly restores nearby allies' HP while Art is active	-1	
+12003	[Guardian] Slowly restores nearby allies' HP while Art is active	-1	
+13000	Physical attack power increases after using grease items	-1	
+13001	Critical Hits Earn Runes	-1	
+13002	Improved Attack Power with 3+ Bows Equipped	-1	
+14000	[Duchess] Successive dagger attack reprises event upon nearby enemies	-1	
+14001	[Duchess] Become difficult to spot and silence footsteps after landing critical from behind	-1	
+14002	Slowly restore HP for self and nearby allies when HP is low	-1	
+15000	[Raider] Duration of Ultimate Art extended	-1	
+15001	[Raider] Damage taken while using Character Skill improves attack power and stamina	-1	
+15002	Defeating enemies near Totem Stela restores HP	-1	
+16000	[Revenant] Strengthens family and allies when Ultimate Art is activated	-1	
+16001	Increased rune acquisition for self and allies	-1	
+16002	[Revenant] Expend own HP to fully heal nearby allies when activating Art	-1	
+17000	Attack power increased for each evergaol prisoner defeated	-1	
+17001	Max FP Up with 3+ Staves Equipped	-1	
+17002	[Recluse] Suffer blood loss and increase attack power upon Art activation	-1	
+18000	HP restored when using medicinal boluses, etc.	-1	
+18001	Art gauge fills moderately upon critical hit	-1	
+18002	[Executor] Roaring restores HP while Art is active	-1	
+100000	Taking attacks improves attack power	-1	
+310000	Increased Maximum HP	-1	
+310100	Increased Maximum FP	-1	
+310200	Increased Maximum Stamina	-1	
+310400	Increased Maximum HP	-1	
+310401	Increased Maximum Stamina	-1	
+311000	Improved Item Discovery	-1	
+311100	More Runes From Defeated Enemies	-1	
+311500	Improved Stamina Recovery	-1	
+311600	Improved Blood Loss Resistance	-1	
+311601	Improved Frost Resistance	-1	
+311700	Improved Poison Resistance	-1	
+311701	Improved Rot Resistance	-1	
+311800	Improved Sleep Resistance	-1	
+311801	Improved Madness Resistance	-1	
+311900	Improved Death Blight Resistance	-1	
+312000	Improved Poison & Rot Resistance	-1	
+312001	Improved Blood Loss & Frost Resistance	-1	
+312002	Improved Sleep & Madness Resistance	-1	
+312100	Improved Poise	-1	
+312300	Improved Skill Attack Power	-1	
+312500	Improved Dexterity	-1	
+312501	Successive Attacks Boost Attack Power	-1	
+320000	Improved Magic Attack Power	-1	
+320001	Impaired Physical Damage Negation	-1	
+320100	Improved Lightning Attack Power	-1	
+320101	Impaired Physical Damage Negation	-1	
+320200	Improved Fire Attack Power	-1	
+320201	Impaired Physical Damage Negation	-1	
+320300	Improved Holy Attack Power	-1	
+320301	Impaired Physical Damage Negation	-1	
+320400	Improved Attack Power at Low HP	-1	
+320500	Improved Attack Power at Full HP	-1	
+320600	Improved Thrusting Counterattack	-1	
+320700	Improved Guard Breaking	-1	
+320800	Successive Attacks Boost Attack Power	-1	
+320801	null	-1	
+320900	Improved Critical Hits	-1	
+321000	Projectile Damage Drop-Off Reduced	-1	
+321200	Improved Chain Attack Finishers	-1	
+321300	Improved Charge Attacks	-1	
+321500	Improved Ranged Weapon Attacks	-1	
+321600	Blood Loss in Vicinity Increases Attack Power	-1	
+321700	Poison & Rot in Vicinity Increases Attack Power	-1	
+321800	Improved Jump Attacks	-1	
+321900	Improved Roar & Breath Attacks	-1	
+322000	Improved Guard Counters	-1	
+322100	Improved Throwing Pots	-1	
+322200	Improved Perfuming Arts	-1	
+330000	Improved Sorceries	-1	
+330400	Improved Incantations	-1	
+330600	Extended Spell Duration	-1	
+330700	Improved Spell Casting Speed	-1	
+330800	Reduced Spell FP Cost	-1	
+330801	Maximum HP Down	-1	
+330900	Improved Charged Spells & Skills	-1	
+340000	Improved Physical Damage Negation	-1	
+340100	Improved Magic Damage Negation	-1	
+340200	Improved Fire Damage Negation	-1	
+340300	Improved Lightning Damage Negation	-1	
+340400	Improved Holy Damage Negation	-1	
+340500	Improved Affinity Damage Negation	-1	
+340700	Improved Dodging	-1	
+340701	Impaired Damage Negation	-1	
+340800	Improved Damage Negation at Low HP	-1	
+340900	Improved Damage Negation at Full HP	-1	
+341000	Improved Guarding Ability	-1	
+350000	Improved Flask HP Restoration	-1	
+350200	Continuous HP Recovery	-1	
+350300	Defeating Enemies Restores HP	-1	
+350400	Successive Attack HP Restoration	-1	
+350500	Critical Hit HP Restoration	-1	
+350600	Critical Hit FP Restoration	-1	
+360200	Reduced Skill FP Cost	-1	
+360700	No Rune Loss or Level Down Upon Death	-1	
+361100	Defeating Enemies Restores FP	-1	
+370000	Improved Item Discovery	-1	
+370001	More Runes From Defeated Enemies	-1	
+370002	Continuous HP Loss	-1	
+6001400	Physical Attack Up +3	100	
+6001401	Physical Attack Up +4	100	
+6001500	Magic Attack Power Up +3	100	
+6001501	Magic Attack Power Up +4	100	
+6001600	Fire Attack Power Up +3	100	
+6001601	Fire Attack Power Up +4	100	
+6001700	Lightning Attack Power Up +3	100	
+6001701	Lightning Attack Power Up +4	100	
+6001800	Holy Attack Power Up +3	100	
+6001801	Holy Attack Power Up +4	100	
+6002600	Improved Magic Damage Negation +1	7002600	
+6002601	Improved Magic Damage Negation +2	7002600	
+6002700	Improved Fire Damage Negation +1	7002700	
+6002701	Improved Fire Damage Negation +2	7002700	
+6002800	Improved Lightning Damage Negation +1	7002800	
+6002801	Improved Lightning Damage Negation +2	7002800	
+6002900	Improved Holy Damage Negation +1	7002900	
+6002901	Improved Holy Damage Negation +2	7002900	
+6003000	Improved Poison Resistance +1	7003000	
+6003001	Improved Poison Resistance +2	7003000	
+6003100	Improved Blood Loss Resistance +1	7003100	
+6003101	Improved Blood Loss Resistance +2	7003100	
+6003200	Improved Sleep Resistance +1	7003200	
+6003201	Improved Sleep Resistance +2	7003200	
+6003300	Improved Death Blight Resistance +1	7003300	
+6003301	Improved Death Blight Resistance +2	7003300	
+6003400	Improved Rot Resistance +1	7003400	
+6003401	Improved Rot Resistance +2	7003400	
+6003500	Improved Frost Resistance +1	7003500	
+6003501	Improved Frost Resistance +2	7003500	
+6003600	Improved Madness Resistance +1	7003600	
+6003601	Improved Madness Resistance +2	7003600	
+6005600	Partial HP Restoration upon Post-Damage Attacks +1	7005600	
+6005601	Partial HP Restoration upon Post-Damage Attacks +2	7005600	
+6030200	HP restored when using medicinal boluses, etc. +1	7030200	
+6030600	Art gauge charged from successful guarding +1	7030600	
+6030800	Art gauge fills moderately upon critical hit +1	7030800	
+6030900	Physical attack power increases after using grease items +1	100	
+6030901	Physical attack power increases after using grease items +2	100	
+6035100	Critical Hit Boosts Stamina Recovery Speed +1	7035100	
+6040100	Improved Guard Counters +1	100	
+6040101	Improved Guard Counters +2	100	
+6040300	Improved Throwing Pot Damage +1	7040300	
+6040400	Improved Throwing Knife Damage +1	7040400	
+6040500	Improved Glintstone and Gravity Stone Damage +1	7040500	
+6043100	Improved Perfuming Arts +1	7043100	
+6060300	Max HP increased for each great enemy defeated at a Great Church.	6060300	
+6060400	Runes and Item Discovery increased for each great enemy defeated at a Fort	6060400	
+6060500	Arcane increased for each great enemy defeated at a Ruin	6060500	
+6060600	Max stamina increased for each great enemy defeated at a Great Encampment	6060600	
+6090000	Defeating enemies fills more of the Art gauge +1	7090000	
+6160000	HP Restoration upon Thrusting Counterattack +1	7160000	
+6260000	Attack power up when facing poison-afflicted enemy +1	7260300	
+6260001	Attack power up when facing poison-afflicted enemy +2	7260300	
+6260300	Attack power up when facing scarlet rot-afflictedenemy +1	7260300	
+6260301	Attack power up when facing scarlet rot-afflictedenemy +2	7260300	
+6260400	Attack power up when facing frostbite-afflictedenemy +1	7260400	
+6260401	Attack power up when facing frostbite-afflictedenemy +2	7260400	
+6500000	[Wylder] Character Skill inflicts Blood Loss	900	
+6500100	[Guardian] Character Skill Boosts Damage Negation of Nearby Allies	900	
+6500200	[Ironeye] Character Skill Inflicts Heavy Poison Damage on Poisoned Enemies	900	
+6500300	[Duchess] Use Character Skill for Brief Invulnerability	900	
+6500400	[Raider] Hit With Character Skill to Reduce Enemy Attack Power	900	
+6500500	[Revenant] Increased Max FP upon Ability Activation	900	
+6500600	[Recluse] Collect Affinity Residues to Negate Affinity	900	
+6500700	[Executor] Slowly Restore HP upon Ability Activation	900	
+6600000	Sleep in Vicinity Improves Attack Power	100	
+6600001	Sleep in Vicinity Improves Attack Power +1	100	
+6600100	Madness in Vicinity Improves Attack Power	100	
+6600101	Madness in Vicinity Improves Attack Power +1	100	
+6610400	Increased Maximum HP	6610400	
+6610500	Increased Maximum FP	6610500	
+6610600	Increased Maximum Stamina	6610600	
+6610700	Reduced FP Consumption	6610700	
+6610800	Improved Affinity Attack Power	100	
+6610801	Improved Affinity Attack Power +1	100	
+6610802	Improved Affinity Attack Power +2	100	
+6611001	Improved Physical Damage Negation +1	7006200	
+6611002	Improved Physical Damage Negation +2	7006200	
+6611100	Improved Affinity Damage Negation	6611100	
+6611101	Improved Affinity Damage Negation +1	6611100	
+6611102	Improved Affinity Damage Negation +2	6611100	
+6611200	Improved Sorceries	6611200	
+6611201	Improved Sorceries +1	6611200	
+6611202	Improved Sorceries +2	6611200	
+6611300	Improved Incantations	6611300	
+6611301	Improved Incantations +1	6611300	
+6611302	Improved Incantations +2	6611300	
+6611400	Improved Flask HP Restoration	6611400	
+6621000	Crimsonspill Crystal Tear in possession at start of expedition	6621000	
+6621100	Crimson Crystal Tear in possession at start of expedition	6621000	
+6621200	Cerulean Crystal Tear in possession at start of expedition	6621000	
+6621300	Speckled Hardtear in possession at start of expedition	6621000	
+6621400	Crimson Bubbletear in possession at start of expedition	6621000	
+6621500	Opaline Bubbletear in possession at start of expedition	6621000	
+6621600	Crimsonburst Crystal Tear in possession at start of expedition	6621000	
+6621700	Greenburst Crystal Tear in possession at start of expedition	6621000	
+6621800	Opaline Hardtear in possession at start of expedition	6621000	
+6621900	Thorny Cracked Tear in possession at start of expedition	6621000	
+6622000	Spiked Cracked Tear in possession at start of expedition	6621000	
+6622100	Windy Crystal Tear in possession at start of expedition	6621000	
+6622200	Ruptured Crystal Tear in possession at start of expedition	6621000	
+6622300	Leaden Hardtear in possession at start of expedition	6621000	
+6622400	Twiggy Cracked Tear in possession at start of expedition	6621000	
+6622500	Crimsonwhorl Bubbletear in possession at start of expedition	6621000	
+6622600	Cerulean Hidden Tear in possession at start of expedition	6621000	
+6622700	Stonebarb Cracked Tear in possession at start of expedition	6621000	
+6622800	Flame-Shrouding Cracked Tear in possession at start of expedition	6621000	
+6622900	Magic-Shrouding Cracked Tear in possession at start of expedition	6621000	
+6623000	Lightning-Shrouding Cracked Tear in possession at start of expedition	6621000	
+6623100	Holy-Shrouding Cracked Tear in possession at start of expedition	6621000	
+6624000	Uplifting Aromatic in possession at start of expedition	6624000	
+6624100	Spark Aromatic in possession at start of expedition	6624000	
+6624200	Ironjar Aromatic in possession at start of expedition	6624000	
+6624300	Bloodboil Aromatic in possession at start of expedition	6624000	
+6624400	Poison Spraymist in possession at start of expedition	6624000	
+6624500	Acid Spraymist in possession at start of expedition	6624000	
+6630000	Dormant Power Helps Discover Daggers	6630000	
+6630100	Dormant Power Helps Discover Straight Swords	6630000	
+6630200	Dormant Power Helps Discover Greatswords	6630000	
+6630300	Dormant Power Helps Discover Colossal Swords	6630000	
+6630400	Dormant Power Helps Discover Curved Swords	6630000	
+6630500	Dormant Power Helps Discover Curved Greatswords	6630000	
+6630600	Dormant Power Helps Discover Katana	6630000	
+6630700	Dormant Power Helps Discover Twinblades	6630000	
+6630800	Dormant Power Helps Discover Thrusting Swords	6630000	
+6630900	Dormant Power Helps Discover Heavy Thrusting Swords	6630000	
+6631000	Dormant Power Helps Discover Axes	6630000	
+6631100	Dormant Power Helps Discover Greataxes	6630000	
+6631200	Dormant Power Helps Discover Hammers	6630000	
+6631300	Dormant Power Helps Discover Great Hammers	6630000	
+6631400	Dormant Power Helps Discover Flails	6630000	
+6631500	Dormant Power Helps Discover Spears	6630000	
+6631600	Dormant Power Helps Discover Great Spears	6630000	
+6631700	Dormant Power Helps Discover Halberds	6630000	
+6631800	Dormant Power Helps Discover Reapers	6630000	
+6631900	Dormant Power Helps Discover Fists	6630000	
+6632000	Dormant Power Helps Discover Claws	6630000	
+6632100	Dormant Power Helps Discover Whips	6630000	
+6632200	Dormant Power Helps Discover Colossal Weapons	6630000	
+6632300	Dormant Power Helps Discover Bows	6630000	
+6632400	Dormant Power Helps Discover Greatbows	6630000	
+6632500	Dormant Power Helps Discover Crossbows	6630000	
+6632600	Dormant Power Helps Discover Ballistas	6630000	
+6632700	Dormant Power Helps Discover Small Shields	6630000	
+6632800	Dormant Power Helps Discover Medium Shields	6630000	
+6632900	Dormant Power Helps Discover Greatshields	6630000	
+6633000	Dormant Power Helps Discover Staves	6630000	
+6633100	Dormant Power Helps Discover Sacred Seals	6630000	
+6633200	Dormant Power Helps Discover Torches	6630000	
+6640000	[Wylder] Improved Mind, Reduced Vigor	900	
+6640100	[Wylder] Improved Intelligence and Faith, Reduced Strength and Dexterity	900	
+6641000	[Guardian] Improved Strength and Dexterity, Reduced Vigor	900	
+6641100	[Guardian] Improved Mind and Faith, Reduced Vigor	900	
+6642000	[Ironeye] Improved Arcane, Reduced Dexterity	900	
+6642100	[Ironeye] Improved Vigor and Strength, Reduced Dexterity	900	
+6643000	[Duchess] Improved Vigor and Strength, Reduced Mind	900	
+6643100	[Duchess] Improved Mind and Faith, Reduced Intelligence	900	
+6644000	[Raider] Improved Mind and Intelligence, Reduced Vigor and Endurance	900	
+6644100	[Raider] Improved Arcane, Reduced Vigor	900	
+6645000	[Revenant] Improved Vigor and Endurance, Reduced Mind	900	
+6645100	[Revenant] Improved Strength, Reduced Faith	900	
+6646000	[Recluse] Improved Vigor, Endurance, and Dexterity, Reduced Intelligence and Faith	900	
+6646100	[Recluse] Improved Intelligence and Faith, Reduced Mind	900	
+6647000	[Executor] Improved Vigor and Endurance, Reduced Arcane	900	
+6647100	[Executor] Improved Dexterity and Arcane, Reduced Vigor	900	
+6820000	Taking Damage Causes Poison Buildup	6820000	
+6820100	Taking Damage Causes Rot Buildup	6820100	
+6820200	Taking Damage Causes Frost Buildup	6820200	
+6820300	Taking Damage Causes Blood Loss Buildup	6820300	
+6820400	Taking Damage Causes Madness Buildup	6820400	
+6820500	Taking Damage Causes Sleep Buildup	6820500	
+6820600	Taking Damage Causes Death Buildup	6820600	
+6830000	Reduced Strength and Intelligence	6830000	
+6830100	Reduced Dexterity and Faith	6830100	
+6830200	Reduced Intelligence and Dexterity	6830200	
+6830300	Reduced Faith and Strength	6830300	
+6830400	Reduced Vigor and Arcane	6830400	
+6840000	Reduced Rune Acquisition	6840000	
+6840100	Reduced Flask HP Restoration	6840100	
+6840200	Ultimate Art Charging Impaired	6840200	
+6850200	All Resistances Down	6850200	
+6850500	Continuous HP Loss	6850500	
+6850700	More Damage Taken After Evasion	6850700	
+6850800	Repeated Evasions Lower Damage Negation	6850800	
+6850900	Reduced Damage Negation for Flask Usages	6850900	
+6851200	Lower Attack When Below Max HP	6851200	
+6851300	Poison Buildup When Below Max HP	6851300	
+6851400	Rot Buildup When Below Max HP	6851400	
+6851700	Near Death Reduces Max HP	6851700	
+7000000	Vigor +1	7000000	52
+7000001	Vigor +2	7000000	52
+7000002	Vigor +3	7000000	52
+7000090	Increased Maximum HP	7000000	
+7000100	Mind +1	7000100	52
+7000101	Mind +2	7000100	52
+7000102	Mind +3	7000100	52
+7000190	Increased Maximum FP	7000100	
+7000200	Endurance +1	7000200	52
+7000201	Endurance +2	7000200	52
+7000202	Endurance +3	7000200	52
+7000290	Increased Maximum Stamina	7000200	
+7000300	Strength +1	7000300	52
+7000301	Strength +2	7000300	52
+7000302	Strength +3	7000300	52
+7000400	Dexterity +1	7000400	52
+7000401	Dexterity +2	7000400	52
+7000402	Dexterity +3	7000400	52
+7000500	Intelligence +1	7000500	52
+7000501	Intelligence +2	7000500	52
+7000502	Intelligence +3	7000500	52
+7000600	Faith +1	7000600	52
+7000601	Faith +2	7000600	52
+7000602	Faith +3	7000600	52
+7000700	Arcane +1	7000700	52
+7000701	Arcane +2	7000700	52
+7000702	Arcane +3	7000700	52
+7000800	Character Skill Cooldown Reduction +1	7000800	47
+7000801	Character Skill Cooldown Reduction +2	7000800	47
+7000802	Character Skill Cooldown Reduction +3	7000800	47
+7000900	Ultimate Art Gauge +1	7000900	47
+7000901	Ultimate Art Gauge +2	7000900	47
+7000902	Ultimate Art Gauge +3	7000900	47
+7001000	Poise +1	7001000	47
+7001001	Poise +2	7001000	47
+7001002	Poise +3	7001000	47
+7001100	Continuous HP Recovery	7001100	
+7001400	Physical Attack Up	100	47
+7001401	Physical Attack Up +1	100	47
+7001402	Physical Attack Up +2	100	47
+7001500	Magic Attack Power Up	100	47
+7001501	Magic Attack Power Up +1	100	47
+7001502	Magic Attack Power Up +2	100	47
+7001600	Fire Attack Power Up	100	47
+7001601	Fire Attack Power Up +1	100	47
+7001602	Fire Attack Power Up +2	100	47
+7001700	Lightning Attack Power Up	100	47
+7001701	Lightning Attack Power Up +1	100	47
+7001702	Lightning Attack Power Up +2	100	47
+7001800	Holy Attack Power Up	100	47
+7001801	Holy Attack Power Up +1	100	47
+7001802	Holy Attack Power Up +2	100	47
+7002600	Magic Damage Negation Up	7002600	47
+7002700	Fire Damage Negation Up	7002700	47
+7002800	Lightning Damage Negation Up	7002800	47
+7002900	Holy Damage Negation Up	7002900	47
+7003000	Improved Poison Resistance	7003000	47
+7003100	Improved Blood Loss Resistance	7003100	47
+7003200	Improved Sleep Resistance	7003200	47
+7003300	Improved Death Blight Resistance	7003300	47
+7003400	Improved Rot Resistance	7003400	47
+7003500	Improved Frost Resistance	7003500	47
+7003600	Improved Madness Resistance	7003600	47
+7005600	Partial HP Restoration upon Post-Damage Attacks	7005600	46
+7006000	Improved Stance-Breaking when Two-Handing	100	46
+7006001	Improved Stance-Breaking when Two-Handing	7006001	
+7006100	Improved Stance-Breaking when Wielding Two Armaments	100	46
+7006101	Improved Stance-Breaking when Wielding Two Armaments	7006101	
+7006200	Improved Physical Damage Negation	7006200	
+7010200	Flask Also Heals Allies	7010200	46
+7010500	[Wylder] Art activation spreads fire in area	900	67
+7010700	[Duchess] Successive dagger attack reprises event upon nearby enemies	900	67
+7010900	[Revenant] Expend own HP to fully heal nearby allies when activating Art	900	67
+7011000	[Guardian] Increased duration for Character Skill	900	67
+7011200	[Revenant] Trigger ghostflame explosion during Ultimate Art activation	900	67
+7011600	[Guardian] Creates whirlwind when charging halberd attacks	900	67
+7011700	[Executor] Roaring restores HP while Art is active	900	67
+7012000	[Guardian] Slowly restores nearby allies' HP while Art is active	900	67
+7012200	Slowly restore HP for self and nearby allies when HP is low	7012200	46
+7012300	Improved Damage Negation at Low HP	7012300	46
+7020000	[Wylder] Standard attacks enhanced with fiery follow-ups when using Character Skill (greatsword only)	900	67
+7030000	Improved Poise Near Totem Stela	900	67
+7030200	HP restored when using medicinal boluses, etc.	7030200	46
+7030600	Art gauge charged from successful guarding	7030600	46
+7030700	Draw enemy attention while guarding	7030700	46
+7030800	Art gauge fills moderately upon critical hit	7030800	46
+7030900	Physical attack power increases after using grease items	100	46
+7031200	[Revenant] Strengthens family and allies when Ultimate Art is activated	900	67
+7031300	[Raider] Damage taken while using Character Skill improves attack power and stamina	900	67
+7031800	[Duchess] Become difficult to spot and silence footsteps after landing critical from behind	900	67
+7031900	Critical Hits Earn Runes	7031900	46
+7032200	Taking attacks improves attack power	100	46
+7032400	[Wylder] Art gauge greatly filled when ability is activated	900	67
+7032700	[Duchess] Defeating enemies while Art is active ups attack power	900	67
+7032800	[Recluse] Collecting affinity residue activates Terra Magica	900	67
+7032900	[Recluse] Suffer blood loss and increase attack power upon Art activation	900	67
+7033200	[Wylder] +1 additional Character Skill use	900	67
+7033400	[Guardian] Successful guards send out shockwaves while ability is active	900	67
+7034100	[Recluse] Activating Ultimate Art raises Max HP	900	67
+7034400	[Executor] Character Skill Boosts Attack but Attacking Drains HP	900	67
+7034500	[Executor] While Character Skill is active, unlocking use of cursed sword restores HP	900	67
+7034600	[Ironeye] Art Charge Activation Adds Poison Effect	900	67
+7034700	[Ironeye] Boosts thrusting counterattacks after executing Art	900	67
+7035100	Critical Hit Boosts Stamina Recovery Speed	7035100	46
+7035400	Gesture "Crossed Legs" Builds Up Madness	7035400	
+7035410	Gesture "Crossed Legs" Builds Up Madness	7035410	
+7035500	Madness Continually Recovers FP	7035500	
+7035510	Madness Continually Recovers FP	7035510	
+7035700	Switching Weapons Adds an Affinity Attack	7035700	
+7035800	Boosts Attack Power of Added Affinity Attacks	7035800	
+7035900	Switching Weapons Boosts Attack Power	100	
+7036000	FP Restoration upon Successive Attacks	7036000	
+7036100	HP Recovery From Successful Guarding	7036100	46
+7040000	Improved Initial Standard Attack	100	46
+7040100	Improved Guard Counters	100	46
+7040200	Improved Critical Hits	100	46
+7040201	Improved Critical Hits +1	7040201	
+7040300	Improved Throwing Pot Damage	7040300	39
+7040400	Improved Throwing Knife Damage	7040400	39
+7040500	Improved Glintstone and Gravity Stone Damage	7040500	39
+7043000	Improved Roar & Breath Attacks	100	39
+7043100	Improved Perfuming Arts	7043100	39
+7043200	Improved Stonedigger Sorcery	800	39
+7043300	Improved Carian Sword Sorcery	800	39
+7043400	Improved Glintblade Sorcery	800	39
+7043500	Improved Invisibility Sorcery	800	39
+7043600	Improved Crystalian sorcery	800	39
+7043700	Improved Gravity Sorcery	800	39
+7043800	Improved Thorn Sorcery	800	39
+7044000	Improved Fundamentalist Incantations	800	39
+7044100	Improved Dragon Cult Incantations	800	39
+7044200	Improved Giants' Flame Incantations	800	39
+7044300	Improved Godslayer Incantations	800	39
+7044400	Improved Bestial Incantations	800	39
+7044500	Improved Frenzied Flame Incantations	800	39
+7044600	Improved Dragon Communion Incantations	800	39
+7050000	Raised stamina recovery for nearby allies, but not for self	7050000	46
+7050100	Items confer effect to all nearby allies	7050100	46
+7060000	Attack power increased for each evergaol prisoner defeated	100	46
+7060100	Max FP increased for each Sorcerer's Rise unlocked	7060100	46
+7060200	Attack power increased for each Night Invader defeated	100	46
+7070000	Treasure marked upon map	7070000	46
+7080000	Improved Attack Power with 3+ Daggers Equipped	100	10
+7080100	Improved Attack Power with 3+ Straight Swords Equipped	100	10
+7080200	Improved Attack Power with 3+ Greatswords Equipped	100	10
+7080300	Improved Attack Power with 3+ Colossal Swords Equipped	100	10
+7080400	Improved Attack Power with 3+ Curved Swords Equipped	100	10
+7080500	Improved Attack Power with 3+ Curved Greatswords Equipped	100	10
+7080600	Improved Attack Power with 3+ Katana Equipped	100	10
+7080700	Improved Attack Power with 3+ Twinblades Equipped	100	10
+7080800	Improved Attack Power with 3+ Thrusting Swords Equipped	100	10
+7080900	Improved Attack Power with 3+ Heavy Thrusting Swords Equipped	100	10
+7081000	Improved Attack Power with 3+ Axes Equipped	100	10
+7081100	Improved Attack Power with 3+ Greataxes Equipped	100	10
+7081200	Improved Attack Power with 3+ Hammers Equipped	100	10
+7081300	Improved Attack Power with 3+ Great Hammers Equipped	100	10
+7081400	Improved Attack Power with 3+ Flails Equipped	100	10
+7081500	Improved Attack Power with 3+ Spears Equipped	100	10
+7081700	Improved Attack Power with 3+ Great Spears Equipped	100	10
+7081800	Improved Attack Power with 3+ Halberds Equipped	100	10
+7081900	Improved Attack Power with 3+ Reapers Equipped	100	10
+7082000	Improved Attack Power with 3+ Fists Equipped	100	10
+7082100	Improved Attack Power with 3+ Claws Equipped	100	10
+7082200	Improved Attack Power with 3+ Whips Equipped	100	10
+7082300	Improved Attack Power with 3+ Colossal Weapons Equipped	100	10
+7082400	Improved Attack Power with 3+ Bows Equipped	100	10
+7082500	Max FP Up with 3+ Staves Equipped	7082500	10
+7082600	Max FP Up with 3+ Sacred Seals Equipped	7082500	10
+7082700	Max HP Up with 3+ Small Shields Equipped	7082700	10
+7082800	Max HP Up with 3+ Medium Shields Equipped	7082700	10
+7082900	Max HP Up with 3+ Greatshields Equipped	7082700	10
+7090000	Defeating enemies fills more of the Art gauge	7090000	46
+7090100	Defeating enemies restores HP for allies but not for self	7090100	46
+7090300	Defeating enemies near Totem Stela restores HP	900	67
+7100100	Stamina Recovery upon Landing Attacks	7100100	46
+7100110	Stamina Recovery upon Landing Attacks +1	7100110	
+7110000	Increased rune acquisition for self and allies	7110000	46
+7120000	Starting armament deals magic damage	200	37
+7120100	Starting armament deals fire damage	200	37
+7120200	Starting armament deals lightning damage	200	37
+7120300	Starting armament deals holy damage	200	37
+7120400	Starting armament inflicts frost	200	37
+7120500	Starting armament inflicts poison	200	37
+7120600	Starting armament inflicts blood loss	200	37
+7120900	Stonesword Key in possession at start of expedition	7120900	39
+7121000	Small Pouch in possession at start of expedition	7121000	39
+7121100	Fire Pots in possession at start of expedition	7121100	39
+7121200	Magic Pots in possession at start of expedition	7121200	39
+7121300	Lightning Pots in possession at start of expedition	7121300	39
+7121400	Holy Water Pots in possession at start of expedition	7121400	39
+7121500	Poisonbone Darts in possession at start of expedition	7121500	39
+7121600	Crystal Darts in possession at start of expedition	7121600	39
+7121700	Throwing Daggers in possession at start of expedition	7121700	39
+7121800	Glintstone Scraps in possession at start of expedition	7121800	39
+7121900	Gravity Stone Chunks in possession at start of expedition	7121900	39
+7122000	Bewitching Branches in possession at start of expedition	7122000	39
+7122100	Wraith Calling Bell in possession at start of expedition	7122100	39
+7122200	Fire Grease in possession at start of expedition	7122200	39
+7122300	Magic Grease in possession at start of expedition	7122300	39
+7122400	Lightning Grease in possession at start of expedition	7122400	39
+7122500	Holy Grease in possession at start of expedition	7122500	39
+7122600	Shield Grease in possession at start of expedition	7122600	39
+7122700	Changes compatible armament's skill to Glintblade Phalanx at start of expedition	300	37
+7122800	Changes compatible armament's skill to Gravitas at start of expedition	300	37
+7122900	Changes compatible armament's skill to Flaming Strike at start of expedition	300	37
+7123000	Changes compatible armament's skill to Eruption at start of expedition	300	37
+7123100	Changes compatible armament's skill to Thunderbolt at start of expedition	300	37
+7123200	Changes compatible armament's skill to Lightning Slash at start of expedition	300	37
+7123300	Changes compatible armament's skill to Sacred Blade at start of expedition	300	37
+7123400	Changes compatible armament's skill to Prayerful Strike at start of expedition	300	37
+7123500	Changes compatible armament's skill to Poisonous Mist at start of expedition	300	37
+7123600	Changes compatible armament's skill to Poison Moth Flight at start of expedition	300	37
+7123700	Changes compatible armament's skill to Blood Blade at start of expedition	300	37
+7123800	Changes compatible armament's skill to Seppuku at start of expedition	300	37
+7123900	Changes compatible armament's skill to Chilling Mist at start of expedition	300	37
+7124000	Changes compatible armament's skill to Hoarfrost Stomp at start of expedition	300	37
+7124100	Changes compatible armament's skill to White Shadow's Lure at start of expedition	300	37
+7124300	Changes compatible armament's skill to Endure at start of expedition	300	37
+7124400	Changes compatible armament's skill to Quickstep at start of expedition	300	37
+7124500	Changes compatible armament's skill to Storm Stomp at start of expedition	300	37
+7124600	Changes compatible armament's skill to Determination at start of expedition	300	37
+7124700	Changes compatible armament's skill to Rain of Arrows at start of expedition	300	37
+7126000	Starlight Shards in possession at start of expedition	7126000	39
+7126001	Starlight Shards in possession at start of expedition	7126001	
+7126002	Starlight Shards in possession at start of expedition	7126002	
+7150000	Guard counter is given a boost based on current HP	100	46
+7160000	HP Restoration upon Thrusting Counterattack	7160000	46
+7220000	[Revenant] Power up while fighting alongside family	900	67
+7230000	Rune discount for shop purchases while on expedition	7230000	46
+7230001	Huge rune discount for shop purchases while on expedition	7230001	
+7240000	Improved Poise & Damage Negation When Knocked Back by Damage	7240000	46
+7260000	Attack power up when facing poison-afflicted enemy	7260300	46
+7260300	Attack power up when facing scarlet rot-afflicted enemy	7260300	46
+7260400	Attack power up when facing frostbite-afflicted enemy	7260400	46
+7260700	Frostbite in Vicinity Conceals Self	7260700	
+7260800	Poison & Rot in Vicinity Increases Attack Power	7260800	
+7270100	[Ironeye] +1 additional Character Skill use	900	67
+7280000	[Ironeye] Extends duration of weak point	900	67
+7290000	[Duchess] Improved Character Skill Attack Power	900	67
+7310000	[Raider] Duration of Ultimate Art extended	900	67
+7330000	Improved Dagger Attack Power	100	10
+7330100	Improved Straight Sword Attack Power	100	10
+7330200	Improved Greatsword Attack Power	100	10
+7330300	Improved Colossal Sword Attack Power	100	10
+7330400	Improved Curved Sword Attack Power	100	10
+7330500	Improved Curved Greatsword Attack Power	100	10
+7330600	Improved Katana Attack Power	100	10
+7330700	Improved Twinblade Attack Power	100	10
+7330800	Improved Thrusting Sword Attack Power	100	10
+7330900	Improved Heavy Thrusting Sword Attack Power	100	10
+7331000	Improved Axe Attack Power	100	10
+7331100	Improved Greataxe Attack Power	100	10
+7331200	Improved Hammer Attack Power	100	10
+7331300	Improved Great Hammer Attack Power	100	10
+7331400	Improved Flail Attack Power	100	10
+7331500	Improved Spear Attack Power	100	10
+7331700	Improved Great Spear Attack Power	100	10
+7331800	Improved Halberd Attack Power	100	10
+7331900	Improved Reaper Attack Power	100	10
+7332000	Improved Fist Attack Power	100	10
+7332100	Improved Claw Attack Power	100	10
+7332200	Improved Whip Attack Power	100	10
+7332300	Improved Colossal Weapon Attack Power	100	10
+7332400	Improved Bow Attack Power	100	10
+7340000	HP Restoration upon Dagger Attacks	7340000	10
+7340100	HP Restoration upon Straight Sword Attacks	7340000	10
+7340200	HP Restoration upon Greatsword Attacks	7340000	10
+7340300	HP Restoration upon Colossal Sword Attacks	7340000	10
+7340400	HP Restoration upon Curved Sword Attacks	7340000	10
+7340500	HP Restoration upon Curved Greatsword Attacks	7340000	10
+7340600	HP Restoration upon Katana Attacks	7340000	10
+7340700	HP Restoration upon Twinblade Attacks	7340000	10
+7340800	HP Restoration upon Thrusting Sword Attacks	7340000	10
+7340900	HP Restoration upon Heavy Thrusting Sword Attacks	7340000	10
+7341000	HP Restoration upon Axe Attacks	7340000	10
+7341100	HP Restoration upon Greataxe Attacks	7340000	10
+7341200	HP Restoration upon Hammer Attacks	7340000	10
+7341300	HP Restoration upon Great Hammer Attacks	7340000	10
+7341400	HP Restoration upon Flail Attacks	7340000	10
+7341500	HP Restoration upon Spear Attacks	7340000	10
+7341700	HP Restoration upon Great Spear Attacks	7340000	10
+7341800	HP Restoration upon Halberd Attacks	7340000	10
+7341900	HP Restoration upon Reaper Attacks	7340000	10
+7342000	HP Restoration upon Fist Attacks	7340000	10
+7342100	HP Restoration upon Claw Attacks	7340000	10
+7342200	HP Restoration upon Whip Attacks	7340000	10
+7342300	HP Restoration upon Colossal Weapon Attacks	7340000	10
+7342400	HP Restoration upon Bow Attacks	7340000	10
+7350000	FP Restoration upon Dagger Attacks	7350000	10
+7350100	FP Restoration upon Straight Sword Attacks	7350000	10
+7350200	FP Restoration upon Greatsword Attacks	7350000	10
+7350300	FP Restoration upon Colossal Sword Attacks	7350000	10
+7350400	FP Restoration upon Curved Sword Attacks	7350000	10
+7350500	FP Restoration upon Curved Greatsword Attacks	7350000	10
+7350600	FP Restoration upon Katana Attacks	7350000	10
+7350700	FP Restoration upon Twinblade Attacks	7350000	10
+7350800	FP Restoration upon Thrusting Sword Attacks	7350000	10
+7350900	FP Restoration upon Heavy Thrusting Sword Attacks	7350000	10
+7351000	FP Restoration upon Axe Attacks	7350000	10
+7351100	FP Restoration upon Greataxe Attacks	7350000	10
+7351200	FP Restoration upon Hammer Attacks	7350000	10
+7351300	FP Restoration upon Great Hammer Attacks	7350000	10
+7351400	FP Restoration upon Flail Attacks	7350000	10
+7351500	FP Restoration upon Spear Attacks	7350000	10
+7351700	FP Restoration upon Great Spear Attacks	7350000	10
+7351800	FP Restoration upon Halberd Attacks	7350000	10
+7351900	FP Restoration upon Reaper Attacks	7350000	10
+7352000	FP Restoration upon Fist Attacks	7350000	10
+7352100	FP Restoration upon Claw Attacks	7350000	10
+7352200	FP Restoration upon Whip Attacks	7350000	10
+7352300	FP Restoration upon Colossal Weapon Attacks	7350000	10
+7352400	FP Restoration upon Bow Attacks	7350000	10
+8000000	Increased Maximum HP	400000	
+8000001	Increased Maximum HP	400000	
+8010000	Increased Maximum FP	400010	
+8010001	Increased Maximum FP	400010	
+8010100	Reduced FP Consumption	400020	
+8010101	Reduced FP Consumption	400020	
+8020000	Increased Maximum Stamina	400020	
+8020001	Increased Maximum Stamina	400020	
+8020200	Improved Stamina Recovery	400030	
+8020201	Improved Stamina Recovery	400030	
+8100000	Improved Physical Attack Power	-1	
+8100001	Improved Physical Attack Power	-1	
+8100100	Improved Magic Attack Power	401000	
+8100101	Improved Magic Attack Power	401000	
+8100102	Improved Magic Attack Power	401000	
+8100200	Improved Fire Attack Power	401000	
+8100201	Improved Fire Attack Power	401000	
+8100202	Improved Fire Attack Power	401000	
+8100300	Improved Lightning Attack Power	401000	
+8100301	Improved Lightning Attack Power	401000	
+8100302	Improved Lightning Attack Power	401000	
+8100400	Improved Holy Attack Power	401000	
+8100401	Improved Holy Attack Power	401000	
+8100402	Improved Holy Attack Power	401000	
+8100500		-1	
+8100501		-1	
+8110000	Attacks Inflict Poison	401000	
+8110001	Attacks Inflict Poison	401000	
+8110002	Attacks Inflict Poison	401000	
+8110010	Attacks Inflict Poison	401000	
+8110011	Attacks Inflict Poison	401000	
+8110012	Attacks Inflict Poison	401000	
+8110100	Attacks Inflict Blood Loss	401000	
+8110101	Attacks Inflict Blood Loss	401000	
+8110102	Attacks Inflict Blood Loss	401000	
+8110110	Attacks Inflict Blood Loss	401000	
+8110111	Attacks Inflict Blood Loss	401000	
+8110112	Attacks Inflict Blood Loss	401000	
+8110200	Attacks Inflict Sleep	401000	
+8110201	Attacks Inflict Sleep	401000	
+8110202	Attacks Inflict Sleep	401000	
+8110210	Attacks Inflict Sleep	401000	
+8110211	Attacks Inflict Sleep	401000	
+8110212	Attacks Inflict Sleep	401000	
+8110400	Attacks Inflict Rot	401000	
+8110401	Attacks Inflict Rot	401000	
+8110402	Attacks Inflict Rot	401000	
+8110410	Attacks Inflict Rot	401000	
+8110411	Attacks Inflict Rot	401000	
+8110412	Attacks Inflict Rot	401000	
+8110500	Attacks Inflict Frost	401000	
+8110501	Attacks Inflict Frost	401000	
+8110502	Attacks Inflict Frost	401000	
+8110510	Attacks Inflict Frost	401000	
+8110511	Attacks Inflict Frost	401000	
+8110512	Attacks Inflict Frost	401000	
+8110700	Add Fire to Weapon	401000	
+8110701	Add Fire to Weapon	401000	
+8110702	Add Fire to Weapon	401000	
+8110703	Add Fire to Weapon	401000	
+8110800	Add Magic to Weapon	401000	
+8110801	Add Magic to Weapon	401000	
+8110802	Add Magic to Weapon	401000	
+8110803	Add Magic to Weapon	401000	
+8110900	Add Lightning to Weapon	401000	
+8110901	Add Lightning to Weapon	401000	
+8110902	Add Lightning to Weapon	401000	
+8110903	Add Lightning to Weapon	401000	
+8111000	Add Holy to Weapon	401000	
+8111001	Add Holy to Weapon	401000	
+8111002	Add Holy to Weapon	401000	
+8111003	Add Holy to Weapon	401000	
+8120000	Improved Stance-Breaking	-1	
+8120001	Improved Stance-Breaking	-1	
+8130000	Improved Critical Hits	-1	
+8130001	Improved Critical Hits	-1	
+8130002	Improved Critical Hits	-1	
+8140000	Improved Guard Breaking	-1	
+8140001	Improved Guard Breaking	-1	
+8140002	Improved Guard Breaking	-1	
+8200000	Improved Physical Damage Negation	400030	
+8200001	Improved Physical Damage Negation	400030	
+8200100	Improved Magic Damage Negation	401010	
+8200101	Improved Magic Damage Negation	401010	
+8200102	Improved Magic Damage Negation	401010	
+8200200	Improved Fire Damage Negation	401010	
+8200201	Improved Fire Damage Negation	401010	
+8200202	Improved Fire Damage Negation	401010	
+8200300	Improved Lightning Damage Negation	401010	
+8200301	Improved Lightning Damage Negation	401010	
+8200302	Improved Lightning Damage Negation	401010	
+8200400	Improved Holy Damage Negation	401010	
+8200401	Improved Holy Damage Negation	401010	
+8200402	Improved Holy Damage Negation	401010	
+8200500	Improved Affinity Damage Negation	400040	
+8200501	Improved Affinity Damage Negation	400040	
+8210000	Improved Poison Resistance	401010	
+8210001	Improved Poison Resistance	401010	
+8210002	Improved Poison Resistance	401010	
+8210100	Improved Blood Loss Resistance	401010	
+8210101	Improved Blood Loss Resistance	401010	
+8210102	Improved Blood Loss Resistance	401010	
+8210200	Improved Sleep Resistance	401010	
+8210201	Improved Sleep Resistance	401010	
+8210202	Improved Sleep Resistance	401010	
+8210300	Improved Death Blight Resistance	401010	
+8210301	Improved Death Blight Resistance	401010	
+8210302	Improved Death Blight Resistance	401010	
+8210400	Improved Rot Resistance	401010	
+8210401	Improved Rot Resistance	401010	
+8210402	Improved Rot Resistance	401010	
+8210500	Improved Frost Resistance	401010	
+8210501	Improved Frost Resistance	401010	
+8210502	Improved Frost Resistance	401010	
+8210600	Improved Madness Resistance	401010	
+8210601	Improved Madness Resistance	401010	
+8210602	Improved Madness Resistance	401010	
+8210700		400050	
+8210701		400050	
+8220000	Improved Guarding Ability	-1	
+8220001	Improved Guarding Ability	-1	
+8220002	Improved Guarding Ability	-1	
+8230000	Improved Poise	-1	
+8230001	Improved Poise	-1	
+8300000	Improved Attack Power when Two-Handing	401020	
+8300001	Improved Attack Power when Two-Handing	401020	
+8300002	Improved Attack Power when Two-Handing	401020	
+8310000	Attack Up when Wielding Two Armaments	401020	
+8310001	Attack Up when Wielding Two Armaments	401020	
+8310002	Attack Up when Wielding Two Armaments	401020	
+8320000	Improved Chain Attack Finishers	401020	
+8320001	Improved Chain Attack Finishers	401020	
+8320002	Improved Chain Attack Finishers	401020	
+8320100	Improved Charge Attacks	401020	
+8320101	Improved Charge Attacks	401020	
+8320102	Improved Charge Attacks	401020	
+8320300	Improved Jump Attacks	401020	
+8320301	Improved Jump Attacks	401020	
+8320302	Improved Jump Attacks	401020	
+8320400	Dmg Negation Up upon Landing Charge Attacks	401020	
+8320410	Dmg Negation Up upon Landing Charge Attacks	401020	
+8320420	Dmg Negation Up upon Landing Charge Attacks	401020	
+8330000	Improved Sorceries	401020	
+8330001	Improved Sorceries	401020	
+8330002	Improved Sorceries	401020	
+8330100	Improved Incantations	401020	
+8330101	Improved Incantations	401020	
+8330102	Improved Incantations	401020	
+8330103		401020	
+8330104		401020	
+8330200	Improved Charged Sorceries	401020	
+8330201	Improved Charged Sorceries	401020	
+8330202	Improved Charged Sorceries	401020	
+8330300	Improved Charged Incantation	401020	
+8330301	Improved Charged Incantation	401020	
+8330302	Improved Charged Incantation	401020	
+8330400	Improved Spell Casting Speed	401020	
+8330401	Improved Spell Casting Speed	401020	
+8330500	Extended Spell Duration	401020	
+8330600	Reduced Spell FP Cost	401020	
+8330601	Reduced Spell FP Cost	401020	
+8330602	Reduced Spell FP Cost	401020	
+8330700	Communion Grants Anti-Dragon Effect	401020	
+8330900	Dmg Negation Up While Casting Spells	401020	
+8330910	Dmg Negation Up While Casting Spells	401020	
+8330920	Dmg Negation Up While Casting Spells	401020	
+8340000	Improved Ranged Weapon Attacks	401020	
+8340001	Improved Ranged Weapon Attacks	401020	
+8340002	Improved Ranged Weapon Attacks	401020	
+8340100	Projectile Damage Drop-Off Reduced	401020	
+8340101	Projectile Damage Drop-Off Reduced	401020	
+8340102	Projectile Damage Drop-Off Reduced	401020	
+8350000	Improved Skill Attack Power	401020	
+8350001	Improved Skill Attack Power	401020	
+8350002	Improved Skill Attack Power	401020	
+8350200	Reduced Skill FP Cost	401020	
+8350201	Reduced Skill FP Cost	401020	
+8350202	Reduced Skill FP Cost	401020	
+8350400	Parries Activate Golden Retaliation	401020	
+8360000	Ultimate Art Gauge Charge Speed Up	-1	
+8370000	Character Skill Cooldown Reduction	-1	
+8410000	Improved Dodging	8410000	
+8410100	Lightning upon Dodging	401030	
+8420000	Improved Guard Counters	401020	
+8420001	Improved Guard Counters	401020	
+8420002	Improved Guard Counters	401020	
+8420100	Guard Counters Activate Holy Attacks	401020	
+8420200	Guard Counters Launch Summoning Attack	401020	
+8430000	Improved Thrusting Counterattack	401020	
+8440000	Improved Flask HP Restoration	400060	
+8440001	Improved Flask HP Restoration	400060	
+8440200	Gradual Restoration by Flask	8440200	
+8450000	Magma Surge Sprint	401030	
+8450100	Ice Storm Surge Sprint	401030	
+8460100	Savage Pillars of Flame Rise While Walking	401030	
+8460200	Flame of Frenzy While Walking	401030	
+8460300	Wraiths While Walking	401030	
+8460400	Vicious Star Rain Pours While Walking	401030	
+8460500	Storm of Red Lightning While Walking	401030	
+8500000	More Runes From Defeated Enemies	-1	
+8500100		-1	
+8500101		-1	
+8500102		-1	
+8510000	Improved Item Discovery	-1	
+8510001	Improved Item Discovery	-1	
+8510002	Improved Item Discovery	-1	
+8520000	Less Likely to Be Targeted	-1	
+8520001	Less Likely to Be Targeted	-1	
+8520002	Less Likely to Be Targeted	-1	
+8530000	Multiple Periodical Glintblades	401030	
+8530100	Many Periodical Glintblades	401030	
+8530200	Periodical Giant Glintblades	401030	
+8540000	Continuous HP Recovery	401050	
+8600100	HP Restoration upon Landing Attacks	-1	
+8600101	HP Restoration upon Landing Attacks	-1	
+8600102	HP Restoration upon Landing Attacks	-1	
+8600200	FP Restoration upon Landing Attacks	-1	
+8600201	FP Restoration upon Landing Attacks	-1	
+8600202	FP Restoration upon Landing Attacks	-1	
+8600300	Sudden Enemy Death upon Landing Attacks	8600300	
+8610000	HP Restoration upon Successive Attacks	-1	
+8610100	FP Restoration upon Successive Attacks	-1	
+8610300	Magic Attack Follows Charge Attacks that Land	401020	
+8610400	Fire Attack Follows Charge Attacks that Land	401020	
+8610500	Lightning Follows Charge Attacks that Land	401020	
+8610600	Holy Attack Follows Charge Attacks that Land	401020	
+8610700	Successive Attacks Negate Damage	8610700	
+8610710	Successive Attacks Negate Damage	8610700	
+8610720	Successive Attacks Negate Damage	8610700	
+8620000	Taking Damage Restores FP	8620000	
+8620010	Taking Damage Restores FP	8620000	
+8620020	Taking Damage Restores FP	8620000	
+8620100	Taking Damage Boosts Damage Negation	8620100	
+8620110	Taking Damage Boosts Damage Negation	8620100	
+8620120	Taking Damage Boosts Damage Negation	8620100	
+8630000	Defeating Enemies Restores HP	-1	
+8630010	Defeating Enemies Restores HP	-1	
+8630020	Defeating Enemies Restores HP	-1	
+8630100	Defeating Enemies Restores FP	-1	
+8630110	Defeating Enemies Restores FP	-1	
+8630120	Defeating Enemies Restores FP	-1	
+8630200	Attacks Summon Wraiths	8630200	
+8630300	Attacks Release Mist of Charm	8630200	
+8630400	Attacks Call Vengeful Spirits	8630200	
+8630500	Attacks Generate Lava	8630200	
+8630600	Attacks Release Mist of Frost	8630200	
+8630700	Attacks Unleash Lightning	8630200	
+8630800	Attacks Generate Golden Shockwave	8630200	
+8640000	Critical Hit HP Restoration	-1	
+8640100	Critical Hit FP Restoration	-1	
+8642000	Damage Boosted after Critical Hit	-1	
+8650000	HP Recovery From Successful Guarding	-1	
+8650100	FP Recovery From Successful Guarding	-1	
+8652000	Successful Guarding Ups Poise	8652000	
+8652010	Successful Guarding Ups Poise	8652000	
+8652020	Successful Guarding Ups Poise	8652000	
+8652100	Successful Guarding Ups Dmg Negation	8652100	
+8652110	Successful Guarding Ups Dmg Negation	8652100	
+8652120	Successful Guarding Ups Dmg Negation	8652100	
+8660000	Improved Attack Power at Low HP	-1	
+8660001	Improved Attack Power at Low HP	-1	
+8660002	Improved Attack Power at Low HP	-1	
+8660100	Improved Damage Negation at Low HP	-1	
+8660101	Improved Damage Negation at Low HP	-1	
+8660102	Improved Damage Negation at Low HP	-1	
+8660200	Critical Hits Inflict Blood Loss	8660200	
+8660300	Creates Holy Ground at Low HP	8660300	
+8670000	Improved Attack Power at Full HP	-1	
+8670001	Improved Attack Power at Full HP	-1	
+8670002	Improved Attack Power at Full HP	-1	
+8670100	Improved Damage Negation at Full HP	-1	
+8670101	Improved Damage Negation at Full HP	-1	
+8670102	Improved Damage Negation at Full HP	-1	
+8690000	Poison Produces a Mist of Poison	401040	
+8690100	Madness Produces a Frenzied Burst	401040	
+8690200	Rot Produces a Mist of Scarlet Rot	401040	
+8690300	Frostbite Produces a Mist of Frost	401040	
+8690400	Sleep Produces a Mist of Sleep	401040	
+8700002	Poison Increases Attack Power	401040	
+8710002	Blood Loss Increases Attack Power	401040	
+8760000	Reduced Maximum HP	400000	
+8760050	Reduced Maximum HP	400000	
+8760100	Reduced Maximum FP	400010	
+8760150	Reduced Maximum FP	400010	
+8760200	Reduced Maximum Stamina	400020	
+8760250	Reduced Maximum Stamina	400020	
+8761000	Impaired Physical Damage Negation	400030	
+8761050	Impaired Physical Damage Negation	400030	
+8761100	Impaired Affinity Damage Negation	400040	
+8761150	Impaired Affinity Damage Negation	400040	
+8762000	All Resistances Down	400050	
+8762050	All Resistances Down	400050	
+8763000	Reduced Flask HP Restoration	400060	
+8763050	Reduced Flask HP Restoration	400060	
+8766000	Continuous HP Loss	401050	
+8766050	Continuous HP Loss	401050	
+8770000	Night's Tide Damage Increased	8770000	
+8770050	Night's Tide Damage Increased	8770050	
+8771000	Damage Increased by Night's Encroachment	8771000	
+8771050	Damage Increased by Night's Encroachment	8771050	
+8800100	More Damage Taken After Evasion	8800100	
+8800150	More Damage Taken After Evasion	8800150	
+8800200	Repeated Evasions Lower Damage Negation	8800200	
+8800250	Repeated Evasions Lower Damage Negation	8800250	
+8801000	Reduced Damage Negation for Flask Usages	8801000	
+8801050	Reduced Damage Negation for Flask Usages	8801050	
+8810000	Lower Attack When Below Max HP	8810000	
+8810050	Lower Attack When Below Max HP	8810050	
+8810200	Slower Art Gauge When Below Max HP	8810200	
+8810250	Slower Art Gauge When Below Max HP	8810250	
+8810300	Poison Buildup When Below Max HP	8810300	
+8810350	Poison Buildup When Below Max HP	8810350	
+8810400	Rot Buildup When Below Max HP	8810400	
+8810450	Rot Buildup When Below Max HP	8810450	
+8813100	Lower Stamina Impairs Dmg Negation	8813100	
+8813150	Lower Stamina Impairs Dmg Negation	8813150	
+8821000	Attacks Impaired on Occasion	8821000	
+8821050	Attacks Impaired on Occasion	8821050	
+8830000	Ailments Cause Increased Damage	8830000	
+8830050	Ailments Cause Increased Damage	8830050	
+8831000	Near Death Reduces Art Gauge	8831000	
+8831050	Near Death Reduces Art Gauge	8831050	
+8831200	Near Death Reduces Max HP	8831200	
+8831250	Near Death Reduces Max HP	8831250	
+8850000	Increased Maximum HP	400000	
+8850050	Increased Maximum HP	400000	
+8850100	Increased Maximum FP	400010	
+8850150	Increased Maximum FP	400010	
+8850200	Reduced FP Consumption	400010	
+8850250	Reduced FP Consumption	400010	
+8850300	Increased Maximum Stamina	400020	
+8850350	Increased Maximum Stamina	400020	
+8850400	Improved Stamina Recovery	400020	
+8850450	Improved Stamina Recovery	400020	
+8850500	Physical Attack Up	8850500	
+8850550	Physical Attack Up	8850550	
+8850600	Improved Affinity Attack Power	8850600	
+8850650	Improved Affinity Attack Power	8850650	
+8850700	Improved Stance-Breaking	8850700	
+8850750	Improved Stance-Breaking	8850750	
+8850800	Improved Physical Damage Negation	400030	
+8850850	Improved Physical Damage Negation	400030	
+8850900	Improved Affinity Damage Negation	400040	
+8850950	Improved Affinity Damage Negation	400040	
+8851000	All Resistances Up	400050	
+8851050	All Resistances Up	400050	
+8851100	Improved Poise	8851100	
+8851150	Improved Poise	8851150	
+8851200	Improved Sorceries & Incantations	8851200	
+8851250	Improved Sorceries & Incantations	8851250	
+8851300	Increased Sorcery & Incantation Duration	8851300	
+8851350	Increased Sorcery & Incantation Duration	8851350	
+8851800	Improved Thrusting Counterattack	8851800	
+8851850	Improved Thrusting Counterattack	8851850	
+8851900	Improved Flask HP Restoration	400060	
+8851950	Improved Flask HP Restoration	400060	
+8852000	More Runes From Defeated Enemies	8852000	
+8852050	More Runes From Defeated Enemies	8852050	
+8880000	Ice Storm upon Charge Attacks	8880000	
+8880200	Black Flames upon Charge Attacks	8880200	
+8880300	Phantom Attack upon Charge Attacks	8880300	
+8881000	Holy Shockwave upon Charge Attacks	8881000	
+8881200	Luring Enemies upon Charge Attacks	8881200	
+8881500	Magma upon Charge Attacks	8881500	
+8882100	Lightning upon Charge Attacks	8882100	
+8882500	Charge Attacks Invoke Sleep Mist	8882500	
+8883000	Projectiles Launched upon Charge Attacks	8883000	
+8883100	Lightning upon Precision Aiming	8883100	
+8883200	Poison Mist upon Precision Aiming	8883200	
+8883300	Rot Mist upon Precision Aiming	8883300	
+8883400	Bloodflies upon Precision Aiming	8883400	
+8884200	Shielding Creates Holy Ground	8884200	
+8884300	Broken Stance Activates Endure	8884300	
+8885000	Flask Healing Also Restores FP	8885000	
+8885100	Failing to Cast Spell Restores FP	8885100	
+8885200	Guarding Ups Sorceries & Incantations	8885200	
+8990000	Improved Magic Attack Power	200	
+8990010	Improved Magic Attack Power	200	
+8990020	Improved Magic Attack Power	200	
+8990030	Improved Magic Attack Power	200	
+8990040	Improved Magic Attack Power	200	
+8990050	Improved Magic Attack Power	200	
+8990100	Improved Magic Attack Power	200	
+8990110	Improved Magic Attack Power	200	
+8990120	Improved Magic Attack Power	200	
+8990130	Improved Magic Attack Power	200	
+8990140	Improved Magic Attack Power	200	
+8990150	Improved Magic Attack Power	200	
+8990200	Improved Magic Attack Power	200	
+8990210	Improved Magic Attack Power	200	
+8990220	Improved Magic Attack Power	200	
+8990230	Improved Magic Attack Power	200	
+8990240	Improved Magic Attack Power	200	
+8990250	Improved Magic Attack Power	200	
+9021400	Power of Night and Flame	100	
+9030900	Power of Dark Moon	100	
+9031000	Power of the Greater Will	100	
+9031400	Power of the Blasphemous	100	
+9031500	Power of House Marais	100	
+9031700	Power of the Golden Order	100	
+9040200	Power of Destined Death	100	
+9040500	Power of the Starscourge	100	
+9040800	Power of Destruction	100	
+9041000	Power of Vengeance	100	
+9060400	Power of the Dragonlord	100	
+9071000	Power of Despair	100	
+9081000	Power of the Omen King	100	
+9090200	Power of the Undefeated	100	
+9111500	Power of the Queen	100	
+9122000	Power of the Blasphemous	100	
+9130300	Power of the Lightless Void	100	
+9150400	Power of the Golden Lineage	100	
+9151100	Power of the Ancestral Spirit	100	
+9160900	Power of the Great Ancient Dragon	100	
+9170100	Power of the Blood Lord	100	
+9200600	Power of the Giant	100	
+9210600	Power of the Flying Dragon	100	
+9230500	Power of the First Lord	100	
+9330900	Power of Full Moon	100	
+9420000	Power of the General	100	
+9990000	null	-1	
+9990100	The Wylder's Grief	100	
+9990101	The Wylder's Grief	100	
+9990102	The Wylder's Grief	100	
+9990103	The Wylder's Grief	100	
+9990104	The Wylder's Grief	100	
+9990105	The Wylder's Grief	100	
+9990106	The Wylder's Grief	100	
+9990107	The Wylder's Grief	100	
+9990108	The Wylder's Grief	100	
+9990109	The Wylder's Grief	100	
+9990110	The Wylder's Grief	100	
+9990111	The Wylder's Grief	100	
+9990112	The Wylder's Grief	100	
+9990113	The Wylder's Grief	100	
+9990114	The Wylder's Grief	100	
+9990115	The Wylder's Grief	100	
+9990116	The Wylder's Grief	100	
+9990117	The Wylder's Grief	100	
+9990118	The Wylder's Grief	100	
+9990119	The Wylder's Grief	100	
+9990120	The Wylder's Grief	100	
+9990121	The Wylder's Grief	100	
+9990122	The Wylder's Grief	100	
+9990123	The Wylder's Grief	100	
+9990124	The Wylder's Grief	100	
+9990125	The Wylder's Grief	100	
+9990126	The Wylder's Grief	100	
+9990127	The Wylder's Grief	100	
+9990128	The Wylder's Grief	100	
+9990129	The Wylder's Grief	100	
+9990130	The Wylder's Grief	100	
+9990131	The Wylder's Grief	100	
+9990132	The Wylder's Grief	100	
+9990133	The Wylder's Grief	100	
+9990134	The Wylder's Grief	100	
+9990135	The Wylder's Grief	100	
+9990136	The Wylder's Grief	100	
+9990137	The Wylder's Grief	100	
+9990138	The Wylder's Grief	100	
+9990139	The Wylder's Grief	100	
+9990140	The Wylder's Grief	100	
+9990141	The Wylder's Grief	100	
+9990142	The Wylder's Grief	100	
+9990143	The Wylder's Grief	100	
+9990144	The Wylder's Grief	100	
+9990145	The Wylder's Grief	100	
+9990146	The Wylder's Grief	100	
+9990147	The Wylder's Grief	100	
+9990148	The Wylder's Grief	100	
+9990149	The Wylder's Grief	100	
+9990150	The Wylder's Grief	100	
+9990151	The Wylder's Grief	100	
+9990152	The Wylder's Grief	100	
+9990153	The Wylder's Grief	100	
+9990154	The Wylder's Grief	100	
+9990155	The Wylder's Grief	100	
+9990156	The Wylder's Grief	100	
+9990157	The Wylder's Grief	100	
+9990158	The Wylder's Grief	100	
+9990159	The Wylder's Grief	100	
+9990160	The Wylder's Grief	100	
+9990161	The Wylder's Grief	100	
+9990162	The Wylder's Grief	100	
+9990163	The Wylder's Grief	100	
+9990164	The Wylder's Grief	100	
+9990165	The Wylder's Grief	100	
+9990166	The Wylder's Grief	100	
+9990167	The Wylder's Grief	100	
+9990168	The Wylder's Grief	100	
+9990169	The Wylder's Grief	100	
+9990170	The Wylder's Grief	100	
+9990171	The Wylder's Grief	100	
+9990172	The Wylder's Grief	100	
+9990173	The Wylder's Grief	100	
+9990174	The Wylder's Grief	100	
+9990175	The Wylder's Grief	100	
+9990176	The Wylder's Grief	100	
+9990177	The Wylder's Grief	100	
+9990178	The Wylder's Grief	100	
+9990179	The Wylder's Grief	100	
+9990180	The Wylder's Grief	100	
+9990181	The Wylder's Grief	100	
+9990182	The Wylder's Grief	100	
+9990183	The Wylder's Grief	100	
+9990184	The Wylder's Grief	100	
+9990185	The Wylder's Grief	100	
+9990186	The Wylder's Grief	100	
+9990187	The Wylder's Grief	100	
+9990188	The Wylder's Grief	100	
+9990189	The Wylder's Grief	100	
+9990190	The Wylder's Grief	100	
+9990191	The Wylder's Grief	100	
+9990192	The Wylder's Grief	100	
+9990193	The Wylder's Grief	100	
+9990194	The Wylder's Grief	100	
+9990195	The Wylder's Grief	100	
+9990196	The Wylder's Grief	100	
+9990197	The Wylder's Grief	100	
+9990198	The Wylder's Grief	100	
+9990199	The Wylder's Grief	100	
+9990200	The Guardian's Grief	100	
+9990201	The Guardian's Grief	100	
+9990202	The Guardian's Grief	100	
+9990203	The Guardian's Grief	100	
+9990204	The Guardian's Grief	100	
+9990205	The Guardian's Grief	100	
+9990206	The Guardian's Grief	100	
+9990207	The Guardian's Grief	100	
+9990208	The Guardian's Grief	100	
+9990209	The Guardian's Grief	100	
+9990210	The Guardian's Grief	100	
+9990211	The Guardian's Grief	100	
+9990212	The Guardian's Grief	100	
+9990213	The Guardian's Grief	100	
+9990214	The Guardian's Grief	100	
+9990215	The Guardian's Grief	100	
+9990216	The Guardian's Grief	100	
+9990217	The Guardian's Grief	100	
+9990218	The Guardian's Grief	100	
+9990219	The Guardian's Grief	100	
+9990220	The Guardian's Grief	100	
+9990221	The Guardian's Grief	100	
+9990222	The Guardian's Grief	100	
+9990223	The Guardian's Grief	100	
+9990224	The Guardian's Grief	100	
+9990225	The Guardian's Grief	100	
+9990226	The Guardian's Grief	100	
+9990227	The Guardian's Grief	100	
+9990228	The Guardian's Grief	100	
+9990229	The Guardian's Grief	100	
+9990230	The Guardian's Grief	100	
+9990231	The Guardian's Grief	100	
+9990232	The Guardian's Grief	100	
+9990233	The Guardian's Grief	100	
+9990234	The Guardian's Grief	100	
+9990235	The Guardian's Grief	100	
+9990236	The Guardian's Grief	100	
+9990237	The Guardian's Grief	100	
+9990238	The Guardian's Grief	100	
+9990239	The Guardian's Grief	100	
+9990240	The Guardian's Grief	100	
+9990241	The Guardian's Grief	100	
+9990242	The Guardian's Grief	100	
+9990243	The Guardian's Grief	100	
+9990244	The Guardian's Grief	100	
+9990245	The Guardian's Grief	100	
+9990246	The Guardian's Grief	100	
+9990247	The Guardian's Grief	100	
+9990248	The Guardian's Grief	100	
+9990249	The Guardian's Grief	100	
+9990250	The Guardian's Grief	100	
+9990251	The Guardian's Grief	100	
+9990252	The Guardian's Grief	100	
+9990253	The Guardian's Grief	100	
+9990254	The Guardian's Grief	100	
+9990255	The Guardian's Grief	100	
+9990256	The Guardian's Grief	100	
+9990257	The Guardian's Grief	100	
+9990258	The Guardian's Grief	100	
+9990259	The Guardian's Grief	100	
+9990260	The Guardian's Grief	100	
+9990261	The Guardian's Grief	100	
+9990262	The Guardian's Grief	100	
+9990263	The Guardian's Grief	100	
+9990264	The Guardian's Grief	100	
+9990265	The Guardian's Grief	100	
+9990266	The Guardian's Grief	100	
+9990267	The Guardian's Grief	100	
+9990268	The Guardian's Grief	100	
+9990269	The Guardian's Grief	100	
+9990270	The Guardian's Grief	100	
+9990271	The Guardian's Grief	100	
+9990272	The Guardian's Grief	100	
+9990273	The Guardian's Grief	100	
+9990274	The Guardian's Grief	100	
+9990275	The Guardian's Grief	100	
+9990276	The Guardian's Grief	100	
+9990277	The Guardian's Grief	100	
+9990278	The Guardian's Grief	100	
+9990279	The Guardian's Grief	100	
+9990280	The Guardian's Grief	100	
+9990281	The Guardian's Grief	100	
+9990282	The Guardian's Grief	100	
+9990283	The Guardian's Grief	100	
+9990284	The Guardian's Grief	100	
+9990285	The Guardian's Grief	100	
+9990286	The Guardian's Grief	100	
+9990287	The Guardian's Grief	100	
+9990288	The Guardian's Grief	100	
+9990289	The Guardian's Grief	100	
+9990290	The Guardian's Grief	100	
+9990291	The Guardian's Grief	100	
+9990292	The Guardian's Grief	100	
+9990293	The Guardian's Grief	100	
+9990294	The Guardian's Grief	100	
+9990295	The Guardian's Grief	100	
+9990296	The Guardian's Grief	100	
+9990297	The Guardian's Grief	100	
+9990298	The Guardian's Grief	100	
+9990299	The Guardian's Grief	100	
+9990300	The Ironeye's Grief	100	
+9990301	The Ironeye's Grief	100	
+9990302	The Ironeye's Grief	100	
+9990303	The Ironeye's Grief	100	
+9990304	The Ironeye's Grief	100	
+9990305	The Ironeye's Grief	100	
+9990306	The Ironeye's Grief	100	
+9990307	The Ironeye's Grief	100	
+9990308	The Ironeye's Grief	100	
+9990309	The Ironeye's Grief	100	
+9990310	The Ironeye's Grief	100	
+9990311	The Ironeye's Grief	100	
+9990312	The Ironeye's Grief	100	
+9990313	The Ironeye's Grief	100	
+9990314	The Ironeye's Grief	100	
+9990315	The Ironeye's Grief	100	
+9990316	The Ironeye's Grief	100	
+9990317	The Ironeye's Grief	100	
+9990318	The Ironeye's Grief	100	
+9990319	The Ironeye's Grief	100	
+9990320	The Ironeye's Grief	100	
+9990321	The Ironeye's Grief	100	
+9990322	The Ironeye's Grief	100	
+9990323	The Ironeye's Grief	100	
+9990324	The Ironeye's Grief	100	
+9990325	The Ironeye's Grief	100	
+9990326	The Ironeye's Grief	100	
+9990327	The Ironeye's Grief	100	
+9990328	The Ironeye's Grief	100	
+9990329	The Ironeye's Grief	100	
+9990330	The Ironeye's Grief	100	
+9990331	The Ironeye's Grief	100	
+9990332	The Ironeye's Grief	100	
+9990333	The Ironeye's Grief	100	
+9990334	The Ironeye's Grief	100	
+9990335	The Ironeye's Grief	100	
+9990336	The Ironeye's Grief	100	
+9990337	The Ironeye's Grief	100	
+9990338	The Ironeye's Grief	100	
+9990339	The Ironeye's Grief	100	
+9990340	The Ironeye's Grief	100	
+9990341	The Ironeye's Grief	100	
+9990342	The Ironeye's Grief	100	
+9990343	The Ironeye's Grief	100	
+9990344	The Ironeye's Grief	100	
+9990345	The Ironeye's Grief	100	
+9990346	The Ironeye's Grief	100	
+9990347	The Ironeye's Grief	100	
+9990348	The Ironeye's Grief	100	
+9990349	The Ironeye's Grief	100	
+9990350	The Ironeye's Grief	100	
+9990351	The Ironeye's Grief	100	
+9990352	The Ironeye's Grief	100	
+9990353	The Ironeye's Grief	100	
+9990354	The Ironeye's Grief	100	
+9990355	The Ironeye's Grief	100	
+9990356	The Ironeye's Grief	100	
+9990357	The Ironeye's Grief	100	
+9990358	The Ironeye's Grief	100	
+9990359	The Ironeye's Grief	100	
+9990360	The Ironeye's Grief	100	
+9990361	The Ironeye's Grief	100	
+9990362	The Ironeye's Grief	100	
+9990363	The Ironeye's Grief	100	
+9990364	The Ironeye's Grief	100	
+9990365	The Ironeye's Grief	100	
+9990366	The Ironeye's Grief	100	
+9990367	The Ironeye's Grief	100	
+9990368	The Ironeye's Grief	100	
+9990369	The Ironeye's Grief	100	
+9990370	The Ironeye's Grief	100	
+9990371	The Ironeye's Grief	100	
+9990372	The Ironeye's Grief	100	
+9990373	The Ironeye's Grief	100	
+9990374	The Ironeye's Grief	100	
+9990375	The Ironeye's Grief	100	
+9990376	The Ironeye's Grief	100	
+9990377	The Ironeye's Grief	100	
+9990378	The Ironeye's Grief	100	
+9990379	The Ironeye's Grief	100	
+9990380	The Ironeye's Grief	100	
+9990381	The Ironeye's Grief	100	
+9990382	The Ironeye's Grief	100	
+9990383	The Ironeye's Grief	100	
+9990384	The Ironeye's Grief	100	
+9990385	The Ironeye's Grief	100	
+9990386	The Ironeye's Grief	100	
+9990387	The Ironeye's Grief	100	
+9990388	The Ironeye's Grief	100	
+9990389	The Ironeye's Grief	100	
+9990390	The Ironeye's Grief	100	
+9990391	The Ironeye's Grief	100	
+9990392	The Ironeye's Grief	100	
+9990393	The Ironeye's Grief	100	
+9990394	The Ironeye's Grief	100	
+9990395	The Ironeye's Grief	100	
+9990396	The Ironeye's Grief	100	
+9990397	The Ironeye's Grief	100	
+9990398	The Ironeye's Grief	100	
+9990399	The Ironeye's Grief	100	
+9990400	The Duchess' Grief	100	
+9990401	The Duchess' Grief	100	
+9990402	The Duchess' Grief	100	
+9990403	The Duchess' Grief	100	
+9990404	The Duchess' Grief	100	
+9990405	The Duchess' Grief	100	
+9990406	The Duchess' Grief	100	
+9990407	The Duchess' Grief	100	
+9990408	The Duchess' Grief	100	
+9990409	The Duchess' Grief	100	
+9990410	The Duchess' Grief	100	
+9990411	The Duchess' Grief	100	
+9990412	The Duchess' Grief	100	
+9990413	The Duchess' Grief	100	
+9990414	The Duchess' Grief	100	
+9990415	The Duchess' Grief	100	
+9990416	The Duchess' Grief	100	
+9990417	The Duchess' Grief	100	
+9990418	The Duchess' Grief	100	
+9990419	The Duchess' Grief	100	
+9990420	The Duchess' Grief	100	
+9990421	The Duchess' Grief	100	
+9990422	The Duchess' Grief	100	
+9990423	The Duchess' Grief	100	
+9990424	The Duchess' Grief	100	
+9990425	The Duchess' Grief	100	
+9990426	The Duchess' Grief	100	
+9990427	The Duchess' Grief	100	
+9990428	The Duchess' Grief	100	
+9990429	The Duchess' Grief	100	
+9990430	The Duchess' Grief	100	
+9990431	The Duchess' Grief	100	
+9990432	The Duchess' Grief	100	
+9990433	The Duchess' Grief	100	
+9990434	The Duchess' Grief	100	
+9990435	The Duchess' Grief	100	
+9990436	The Duchess' Grief	100	
+9990437	The Duchess' Grief	100	
+9990438	The Duchess' Grief	100	
+9990439	The Duchess' Grief	100	
+9990440	The Duchess' Grief	100	
+9990441	The Duchess' Grief	100	
+9990442	The Duchess' Grief	100	
+9990443	The Duchess' Grief	100	
+9990444	The Duchess' Grief	100	
+9990445	The Duchess' Grief	100	
+9990446	The Duchess' Grief	100	
+9990447	The Duchess' Grief	100	
+9990448	The Duchess' Grief	100	
+9990449	The Duchess' Grief	100	
+9990450	The Duchess' Grief	100	
+9990451	The Duchess' Grief	100	
+9990452	The Duchess' Grief	100	
+9990453	The Duchess' Grief	100	
+9990454	The Duchess' Grief	100	
+9990455	The Duchess' Grief	100	
+9990456	The Duchess' Grief	100	
+9990457	The Duchess' Grief	100	
+9990458	The Duchess' Grief	100	
+9990459	The Duchess' Grief	100	
+9990460	The Duchess' Grief	100	
+9990461	The Duchess' Grief	100	
+9990462	The Duchess' Grief	100	
+9990463	The Duchess' Grief	100	
+9990464	The Duchess' Grief	100	
+9990465	The Duchess' Grief	100	
+9990466	The Duchess' Grief	100	
+9990467	The Duchess' Grief	100	
+9990468	The Duchess' Grief	100	
+9990469	The Duchess' Grief	100	
+9990470	The Duchess' Grief	100	
+9990471	The Duchess' Grief	100	
+9990472	The Duchess' Grief	100	
+9990473	The Duchess' Grief	100	
+9990474	The Duchess' Grief	100	
+9990475	The Duchess' Grief	100	
+9990476	The Duchess' Grief	100	
+9990477	The Duchess' Grief	100	
+9990478	The Duchess' Grief	100	
+9990479	The Duchess' Grief	100	
+9990480	The Duchess' Grief	100	
+9990481	The Duchess' Grief	100	
+9990482	The Duchess' Grief	100	
+9990483	The Duchess' Grief	100	
+9990484	The Duchess' Grief	100	
+9990485	The Duchess' Grief	100	
+9990486	The Duchess' Grief	100	
+9990487	The Duchess' Grief	100	
+9990488	The Duchess' Grief	100	
+9990489	The Duchess' Grief	100	
+9990490	The Duchess' Grief	100	
+9990491	The Duchess' Grief	100	
+9990492	The Duchess' Grief	100	
+9990493	The Duchess' Grief	100	
+9990494	The Duchess' Grief	100	
+9990495	The Duchess' Grief	100	
+9990496	The Duchess' Grief	100	
+9990497	The Duchess' Grief	100	
+9990498	The Duchess' Grief	100	
+9990499	The Duchess' Grief	100	
+9990500	The Raider's Grief	100	
+9990501	The Raider's Grief	100	
+9990502	The Raider's Grief	100	
+9990503	The Raider's Grief	100	
+9990504	The Raider's Grief	100	
+9990505	The Raider's Grief	100	
+9990506	The Raider's Grief	100	
+9990507	The Raider's Grief	100	
+9990508	The Raider's Grief	100	
+9990509	The Raider's Grief	100	
+9990510	The Raider's Grief	100	
+9990511	The Raider's Grief	100	
+9990512	The Raider's Grief	100	
+9990513	The Raider's Grief	100	
+9990514	The Raider's Grief	100	
+9990515	The Raider's Grief	100	
+9990516	The Raider's Grief	100	
+9990517	The Raider's Grief	100	
+9990518	The Raider's Grief	100	
+9990519	The Raider's Grief	100	
+9990520	The Raider's Grief	100	
+9990521	The Raider's Grief	100	
+9990522	The Raider's Grief	100	
+9990523	The Raider's Grief	100	
+9990524	The Raider's Grief	100	
+9990525	The Raider's Grief	100	
+9990526	The Raider's Grief	100	
+9990527	The Raider's Grief	100	
+9990528	The Raider's Grief	100	
+9990529	The Raider's Grief	100	
+9990530	The Raider's Grief	100	
+9990531	The Raider's Grief	100	
+9990532	The Raider's Grief	100	
+9990533	The Raider's Grief	100	
+9990534	The Raider's Grief	100	
+9990535	The Raider's Grief	100	
+9990536	The Raider's Grief	100	
+9990537	The Raider's Grief	100	
+9990538	The Raider's Grief	100	
+9990539	The Raider's Grief	100	
+9990540	The Raider's Grief	100	
+9990541	The Raider's Grief	100	
+9990542	The Raider's Grief	100	
+9990543	The Raider's Grief	100	
+9990544	The Raider's Grief	100	
+9990545	The Raider's Grief	100	
+9990546	The Raider's Grief	100	
+9990547	The Raider's Grief	100	
+9990548	The Raider's Grief	100	
+9990549	The Raider's Grief	100	
+9990550	The Raider's Grief	100	
+9990551	The Raider's Grief	100	
+9990552	The Raider's Grief	100	
+9990553	The Raider's Grief	100	
+9990554	The Raider's Grief	100	
+9990555	The Raider's Grief	100	
+9990556	The Raider's Grief	100	
+9990557	The Raider's Grief	100	
+9990558	The Raider's Grief	100	
+9990559	The Raider's Grief	100	
+9990560	The Raider's Grief	100	
+9990561	The Raider's Grief	100	
+9990562	The Raider's Grief	100	
+9990563	The Raider's Grief	100	
+9990564	The Raider's Grief	100	
+9990565	The Raider's Grief	100	
+9990566	The Raider's Grief	100	
+9990567	The Raider's Grief	100	
+9990568	The Raider's Grief	100	
+9990569	The Raider's Grief	100	
+9990570	The Raider's Grief	100	
+9990571	The Raider's Grief	100	
+9990572	The Raider's Grief	100	
+9990573	The Raider's Grief	100	
+9990574	The Raider's Grief	100	
+9990575	The Raider's Grief	100	
+9990576	The Raider's Grief	100	
+9990577	The Raider's Grief	100	
+9990578	The Raider's Grief	100	
+9990579	The Raider's Grief	100	
+9990580	The Raider's Grief	100	
+9990581	The Raider's Grief	100	
+9990582	The Raider's Grief	100	
+9990583	The Raider's Grief	100	
+9990584	The Raider's Grief	100	
+9990585	The Raider's Grief	100	
+9990586	The Raider's Grief	100	
+9990587	The Raider's Grief	100	
+9990588	The Raider's Grief	100	
+9990589	The Raider's Grief	100	
+9990590	The Raider's Grief	100	
+9990591	The Raider's Grief	100	
+9990592	The Raider's Grief	100	
+9990593	The Raider's Grief	100	
+9990594	The Raider's Grief	100	
+9990595	The Raider's Grief	100	
+9990596	The Raider's Grief	100	
+9990597	The Raider's Grief	100	
+9990598	The Raider's Grief	100	
+9990599	The Raider's Grief	100	
+9990600	The Revenant's Grief	100	
+9990601	The Revenant's Grief	100	
+9990602	The Revenant's Grief	100	
+9990603	The Revenant's Grief	100	
+9990604	The Revenant's Grief	100	
+9990605	The Revenant's Grief	100	
+9990606	The Revenant's Grief	100	
+9990607	The Revenant's Grief	100	
+9990608	The Revenant's Grief	100	
+9990609	The Revenant's Grief	100	
+9990610	The Revenant's Grief	100	
+9990611	The Revenant's Grief	100	
+9990612	The Revenant's Grief	100	
+9990613	The Revenant's Grief	100	
+9990614	The Revenant's Grief	100	
+9990615	The Revenant's Grief	100	
+9990616	The Revenant's Grief	100	
+9990617	The Revenant's Grief	100	
+9990618	The Revenant's Grief	100	
+9990619	The Revenant's Grief	100	
+9990620	The Revenant's Grief	100	
+9990621	The Revenant's Grief	100	
+9990622	The Revenant's Grief	100	
+9990623	The Revenant's Grief	100	
+9990624	The Revenant's Grief	100	
+9990625	The Revenant's Grief	100	
+9990626	The Revenant's Grief	100	
+9990627	The Revenant's Grief	100	
+9990628	The Revenant's Grief	100	
+9990629	The Revenant's Grief	100	
+9990630	The Revenant's Grief	100	
+9990631	The Revenant's Grief	100	
+9990632	The Revenant's Grief	100	
+9990633	The Revenant's Grief	100	
+9990634	The Revenant's Grief	100	
+9990635	The Revenant's Grief	100	
+9990636	The Revenant's Grief	100	
+9990637	The Revenant's Grief	100	
+9990638	The Revenant's Grief	100	
+9990639	The Revenant's Grief	100	
+9990640	The Revenant's Grief	100	
+9990641	The Revenant's Grief	100	
+9990642	The Revenant's Grief	100	
+9990643	The Revenant's Grief	100	
+9990644	The Revenant's Grief	100	
+9990645	The Revenant's Grief	100	
+9990646	The Revenant's Grief	100	
+9990647	The Revenant's Grief	100	
+9990648	The Revenant's Grief	100	
+9990649	The Revenant's Grief	100	
+9990650	The Revenant's Grief	100	
+9990651	The Revenant's Grief	100	
+9990652	The Revenant's Grief	100	
+9990653	The Revenant's Grief	100	
+9990654	The Revenant's Grief	100	
+9990655	The Revenant's Grief	100	
+9990656	The Revenant's Grief	100	
+9990657	The Revenant's Grief	100	
+9990658	The Revenant's Grief	100	
+9990659	The Revenant's Grief	100	
+9990660	The Revenant's Grief	100	
+9990661	The Revenant's Grief	100	
+9990662	The Revenant's Grief	100	
+9990663	The Revenant's Grief	100	
+9990664	The Revenant's Grief	100	
+9990665	The Revenant's Grief	100	
+9990666	The Revenant's Grief	100	
+9990667	The Revenant's Grief	100	
+9990668	The Revenant's Grief	100	
+9990669	The Revenant's Grief	100	
+9990670	The Revenant's Grief	100	
+9990671	The Revenant's Grief	100	
+9990672	The Revenant's Grief	100	
+9990673	The Revenant's Grief	100	
+9990674	The Revenant's Grief	100	
+9990675	The Revenant's Grief	100	
+9990676	The Revenant's Grief	100	
+9990677	The Revenant's Grief	100	
+9990678	The Revenant's Grief	100	
+9990679	The Revenant's Grief	100	
+9990680	The Revenant's Grief	100	
+9990681	The Revenant's Grief	100	
+9990682	The Revenant's Grief	100	
+9990683	The Revenant's Grief	100	
+9990684	The Revenant's Grief	100	
+9990685	The Revenant's Grief	100	
+9990686	The Revenant's Grief	100	
+9990687	The Revenant's Grief	100	
+9990688	The Revenant's Grief	100	
+9990689	The Revenant's Grief	100	
+9990690	The Revenant's Grief	100	
+9990691	The Revenant's Grief	100	
+9990692	The Revenant's Grief	100	
+9990693	The Revenant's Grief	100	
+9990694	The Revenant's Grief	100	
+9990695	The Revenant's Grief	100	
+9990696	The Revenant's Grief	100	
+9990697	The Revenant's Grief	100	
+9990698	The Revenant's Grief	100	
+9990699	The Revenant's Grief	100	
+9990700	The Recluse's Grief	100	
+9990701	The Recluse's Grief	100	
+9990702	The Recluse's Grief	100	
+9990703	The Recluse's Grief	100	
+9990704	The Recluse's Grief	100	
+9990705	The Recluse's Grief	100	
+9990706	The Recluse's Grief	100	
+9990707	The Recluse's Grief	100	
+9990708	The Recluse's Grief	100	
+9990709	The Recluse's Grief	100	
+9990710	The Recluse's Grief	100	
+9990711	The Recluse's Grief	100	
+9990712	The Recluse's Grief	100	
+9990713	The Recluse's Grief	100	
+9990714	The Recluse's Grief	100	
+9990715	The Recluse's Grief	100	
+9990716	The Recluse's Grief	100	
+9990717	The Recluse's Grief	100	
+9990718	The Recluse's Grief	100	
+9990719	The Recluse's Grief	100	
+9990720	The Recluse's Grief	100	
+9990721	The Recluse's Grief	100	
+9990722	The Recluse's Grief	100	
+9990723	The Recluse's Grief	100	
+9990724	The Recluse's Grief	100	
+9990725	The Recluse's Grief	100	
+9990726	The Recluse's Grief	100	
+9990727	The Recluse's Grief	100	
+9990728	The Recluse's Grief	100	
+9990729	The Recluse's Grief	100	
+9990730	The Recluse's Grief	100	
+9990731	The Recluse's Grief	100	
+9990732	The Recluse's Grief	100	
+9990733	The Recluse's Grief	100	
+9990734	The Recluse's Grief	100	
+9990735	The Recluse's Grief	100	
+9990736	The Recluse's Grief	100	
+9990737	The Recluse's Grief	100	
+9990738	The Recluse's Grief	100	
+9990739	The Recluse's Grief	100	
+9990740	The Recluse's Grief	100	
+9990741	The Recluse's Grief	100	
+9990742	The Recluse's Grief	100	
+9990743	The Recluse's Grief	100	
+9990744	The Recluse's Grief	100	
+9990745	The Recluse's Grief	100	
+9990746	The Recluse's Grief	100	
+9990747	The Recluse's Grief	100	
+9990748	The Recluse's Grief	100	
+9990749	The Recluse's Grief	100	
+9990750	The Recluse's Grief	100	
+9990751	The Recluse's Grief	100	
+9990752	The Recluse's Grief	100	
+9990753	The Recluse's Grief	100	
+9990754	The Recluse's Grief	100	
+9990755	The Recluse's Grief	100	
+9990756	The Recluse's Grief	100	
+9990757	The Recluse's Grief	100	
+9990758	The Recluse's Grief	100	
+9990759	The Recluse's Grief	100	
+9990760	The Recluse's Grief	100	
+9990761	The Recluse's Grief	100	
+9990762	The Recluse's Grief	100	
+9990763	The Recluse's Grief	100	
+9990764	The Recluse's Grief	100	
+9990765	The Recluse's Grief	100	
+9990766	The Recluse's Grief	100	
+9990767	The Recluse's Grief	100	
+9990768	The Recluse's Grief	100	
+9990769	The Recluse's Grief	100	
+9990770	The Recluse's Grief	100	
+9990771	The Recluse's Grief	100	
+9990772	The Recluse's Grief	100	
+9990773	The Recluse's Grief	100	
+9990774	The Recluse's Grief	100	
+9990775	The Recluse's Grief	100	
+9990776	The Recluse's Grief	100	
+9990777	The Recluse's Grief	100	
+9990778	The Recluse's Grief	100	
+9990779	The Recluse's Grief	100	
+9990780	The Recluse's Grief	100	
+9990781	The Recluse's Grief	100	
+9990782	The Recluse's Grief	100	
+9990783	The Recluse's Grief	100	
+9990784	The Recluse's Grief	100	
+9990785	The Recluse's Grief	100	
+9990786	The Recluse's Grief	100	
+9990787	The Recluse's Grief	100	
+9990788	The Recluse's Grief	100	
+9990789	The Recluse's Grief	100	
+9990790	The Recluse's Grief	100	
+9990791	The Recluse's Grief	100	
+9990792	The Recluse's Grief	100	
+9990793	The Recluse's Grief	100	
+9990794	The Recluse's Grief	100	
+9990795	The Recluse's Grief	100	
+9990796	The Recluse's Grief	100	
+9990797	The Recluse's Grief	100	
+9990798	The Recluse's Grief	100	
+9990799	The Recluse's Grief	100	
+9990800	The Executor's Grief	100	
+9990801	The Executor's Grief	100	
+9990802	The Executor's Grief	100	
+9990803	The Executor's Grief	100	
+9990804	The Executor's Grief	100	
+9990805	The Executor's Grief	100	
+9990806	The Executor's Grief	100	
+9990807	The Executor's Grief	100	
+9990808	The Executor's Grief	100	
+9990809	The Executor's Grief	100	
+9990810	The Executor's Grief	100	
+9990811	The Executor's Grief	100	
+9990812	The Executor's Grief	100	
+9990813	The Executor's Grief	100	
+9990814	The Executor's Grief	100	
+9990815	The Executor's Grief	100	
+9990816	The Executor's Grief	100	
+9990817	The Executor's Grief	100	
+9990818	The Executor's Grief	100	
+9990819	The Executor's Grief	100	
+9990820	The Executor's Grief	100	
+9990821	The Executor's Grief	100	
+9990822	The Executor's Grief	100	
+9990823	The Executor's Grief	100	
+9990824	The Executor's Grief	100	
+9990825	The Executor's Grief	100	
+9990826	The Executor's Grief	100	
+9990827	The Executor's Grief	100	
+9990828	The Executor's Grief	100	
+9990829	The Executor's Grief	100	
+9990830	The Executor's Grief	100	
+9990831	The Executor's Grief	100	
+9990832	The Executor's Grief	100	
+9990833	The Executor's Grief	100	
+9990834	The Executor's Grief	100	
+9990835	The Executor's Grief	100	
+9990836	The Executor's Grief	100	
+9990837	The Executor's Grief	100	
+9990838	The Executor's Grief	100	
+9990839	The Executor's Grief	100	
+9990840	The Executor's Grief	100	
+9990841	The Executor's Grief	100	
+9990842	The Executor's Grief	100	
+9990843	The Executor's Grief	100	
+9990844	The Executor's Grief	100	
+9990845	The Executor's Grief	100	
+9990846	The Executor's Grief	100	
+9990847	The Executor's Grief	100	
+9990848	The Executor's Grief	100	
+9990849	The Executor's Grief	100	
+9990850	The Executor's Grief	100	
+9990851	The Executor's Grief	100	
+9990852	The Executor's Grief	100	
+9990853	The Executor's Grief	100	
+9990854	The Executor's Grief	100	
+9990855	The Executor's Grief	100	
+9990856	The Executor's Grief	100	
+9990857	The Executor's Grief	100	
+9990858	The Executor's Grief	100	
+9990859	The Executor's Grief	100	
+9990860	The Executor's Grief	100	
+9990861	The Executor's Grief	100	
+9990862	The Executor's Grief	100	
+9990863	The Executor's Grief	100	
+9990864	The Executor's Grief	100	
+9990865	The Executor's Grief	100	
+9990866	The Executor's Grief	100	
+9990867	The Executor's Grief	100	
+9990868	The Executor's Grief	100	
+9990869	The Executor's Grief	100	
+9990870	The Executor's Grief	100	
+9990871	The Executor's Grief	100	
+9990872	The Executor's Grief	100	
+9990873	The Executor's Grief	100	
+9990874	The Executor's Grief	100	
+9990875	The Executor's Grief	100	
+9990876	The Executor's Grief	100	
+9990877	The Executor's Grief	100	
+9990878	The Executor's Grief	100	
+9990879	The Executor's Grief	100	
+9990880	The Executor's Grief	100	
+9990881	The Executor's Grief	100	
+9990882	The Executor's Grief	100	
+9990883	The Executor's Grief	100	
+9990884	The Executor's Grief	100	
+9990885	The Executor's Grief	100	
+9990886	The Executor's Grief	100	
+9990887	The Executor's Grief	100	
+9990888	The Executor's Grief	100	
+9990889	The Executor's Grief	100	
+9990890	The Executor's Grief	100	
+9990891	The Executor's Grief	100	
+9990892	The Executor's Grief	100	
+9990893	The Executor's Grief	100	
+9990894	The Executor's Grief	100	
+9990895	The Executor's Grief	100	
+9990896	The Executor's Grief	100	
+9990897	The Executor's Grief	100	
+9990898	The Executor's Grief	100	
+9990899	The Executor's Grief	100	

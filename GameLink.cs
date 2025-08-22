@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32.SafeHandles;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -6,10 +7,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace NightreignRelicEditor
 {
-    class GameLink
+    class GameLink : IDisposable
     {
         public const uint PROCESS_ALL_ACCESS = 0x1F0FFF;
 
@@ -19,8 +21,8 @@ namespace NightreignRelicEditor
         private Process gameProcess = null;
         private IntPtr gameProcessHandle = IntPtr.Zero;
         private IntPtr gameBaseAddress = IntPtr.Zero;
-
         private int gameSize = 0;
+        private string gameVersion = "";
 
         private bool linkActive = false;
         private bool modulesFound = false;
@@ -42,20 +44,16 @@ namespace NightreignRelicEditor
         [DllImport("kernel32.dll")]
         private static extern bool CloseHandle(IntPtr hObject);
 
-        public IntPtr BaseAddress { get; set; }
-        public IntPtr ProcessHandle { get; set; }
-
-        public enum State
-        {
-            Inactive,
-            ProcessConnected,
-            ModuleFound,
-        }
+        System.Windows.Threading.DispatcherTimer monitorTimer = new System.Windows.Threading.DispatcherTimer();
 
         public GameLink(string process, string module)
         {
             processName = process;
             moduleName = module;
+
+            monitorTimer.Tick += monitorTimer_Tick;
+            monitorTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            
         }
 
         public bool CheckProcessRunning(string processName)
@@ -73,17 +71,13 @@ namespace NightreignRelicEditor
 
         public void InitGameLink()
         {
-            if (AttachProcess())
-            {
-                linkActive = true;
+            linkActive = AttachProcess();
 
-                if (LocateModules())
-                    modulesFound = true;
-            }
-            else
-            {
-                linkActive = false;
-            }
+            if (linkActive)
+                modulesFound = LocateModules();
+
+            if (modulesFound)
+                monitorTimer.Start();
         }
 
         private bool AttachProcess()
@@ -115,8 +109,8 @@ namespace NightreignRelicEditor
                     if (currentModuleName == moduleName)
                     {
                         gameBaseAddress = processModule.BaseAddress;
-                        BaseAddress = processModule.BaseAddress;
                         gameSize = processModule.ModuleMemorySize;
+                        gameVersion = processModule.FileVersionInfo.FileVersion;
                         return true;
                     }
                 }
@@ -127,24 +121,90 @@ namespace NightreignRelicEditor
             return false;
         }
 
-        public bool Connected()
+        private void monitorTimer_Tick(object? sender, EventArgs e)
         {
-            return linkActive && modulesFound;
+            try
+            {
+                Process nightreignProcess = Process.GetProcessById(gameProcess.Id);
+            }
+            catch (Exception f)
+            {
+                linkActive = false;
+                modulesFound = false;
+                gameProcess = null;
+                gameProcessHandle = IntPtr.Zero;
+                gameBaseAddress = IntPtr.Zero;
+                monitorTimer.Stop();
+            }
         }
 
-        public IntPtr GetProcessHandle()
+        public void Dispose()
         {
-            return gameProcessHandle;
+            Dispose(true);
         }
 
-        public IntPtr GetBaseAddress()
+        protected virtual void Dispose(bool disposing)
         {
-            return gameBaseAddress;
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                monitorTimer.Stop();
+
+                if (gameProcessHandle != IntPtr.Zero)
+                {
+                    try
+                    {
+                        CloseHandle(gameProcessHandle);
+                    }
+                    catch (Exception f)
+                    {
+                        Debug.Print(f.ToString());
+                    }
+                }
+
+                gameProcess = null;
+                monitorTimer = null;
+            }
+            disposed = true;
         }
 
-        public int GetMemorySize()
+        public bool Connected
         {
-            return gameSize;
+            get
+            {
+                return linkActive && modulesFound;
+            }
+        }
+
+        public IntPtr ProcessHandle
+        {
+            get
+            {
+                return gameProcessHandle;
+            }
+        }
+
+        public IntPtr BaseAddress
+        {
+            get
+            {
+                return gameBaseAddress;
+            }
+        }
+
+        public uint[] Version
+        {
+            get
+            {
+                string[] split = gameVersion.Split(".");
+
+                if (split.Length == 0)
+                    return new uint[] { 0, 0, 0 };
+
+                return new uint[3] { UInt32.Parse(split[0]), UInt32.Parse(split[1]), UInt32.Parse(split[2]) };
+            }
         }
 
         public IntPtr ResolvePointerChain(params nint[] pointers)
@@ -187,6 +247,12 @@ namespace NightreignRelicEditor
         {
             var data = ReadMemory(address, 8);
             return BitConverter.ToUInt64(data, 0);
+        }
+
+        public int ReadInt32(IntPtr address)
+        {
+            var data = ReadMemory(address, 4);
+            return BitConverter.ToInt32(data, 0);
         }
 
         public float ReadFloat(IntPtr address)

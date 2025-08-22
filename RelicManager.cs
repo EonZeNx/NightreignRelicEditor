@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Media3D;
 
 namespace NightreignRelicEditor
 {
@@ -20,16 +23,53 @@ namespace NightreignRelicEditor
         private const string processName = "nightreign";
         private const string moduleName = "nightreign.exe";
 
-        private uint[,] playerRelics = new uint[3, 3];
+        private IntPtr relicAddress = IntPtr.Zero;
+        private IntPtr gameDataManAddress = IntPtr.Zero;
 
-        public ConnectionStates ConnectionStatus { get; set; }
+        private nint relicBaseOffset = 0x2F4;
+
+        private List<RelicEffect>[] playerRelics = new List<RelicEffect>[3] { new List<RelicEffect>(), new List<RelicEffect>(), new List<RelicEffect>() };
+
+        public List<RelicEffect> relicEffects = new List<RelicEffect>();
+
+
+        private ConnectionStates connectionStatus;
+        public ConnectionStates ConnectionStatus
+        {
+            set
+            {
+                connectionStatus = value;
+            }
+
+            get
+            {
+                if (connectionStatus != ConnectionStates.Connected)
+                    return connectionStatus;
+
+                if (!nightreign.Connected)
+                    connectionStatus = ConnectionStates.ConnectionLost;
+
+                return connectionStatus;
+            }
+        }
+
+        public List<RelicEffect>[] PlayerRelics
+        {
+            get
+            {
+                return playerRelics;
+            }
+        }
+
 
         public RelicManager()
         {
             nightreign = new GameLink(processName, moduleName);
-
             LoadRelicEffects();
+        }
 
+        public void ConnectToNightreign()
+        {
             if (nightreign.CheckProcessRunning("easyanticheat_eos"))
             {
                 MessageBox.Show("EAC running");
@@ -39,8 +79,10 @@ namespace NightreignRelicEditor
             {
                 nightreign.InitGameLink();
 
-                if (nightreign.Connected())
+                if (nightreign.Connected)
                 {
+                    SetRelicOffsetByVersion(nightreign.Version);
+
                     if (LocateRelicAddress())
                         ConnectionStatus = ConnectionStates.Connected;
                     else
@@ -53,54 +95,23 @@ namespace NightreignRelicEditor
             }
         }
 
-        IntPtr relicAddress = IntPtr.Zero;
-        IntPtr gameDataManAddress = IntPtr.Zero;
-
-        uint relic1Offset;
-        uint relic2Offset;
-        uint relic3Offset;
-
-        public bool Connected()
-        {
-            return nightreign.Connected();
-        }
-
-
-        public enum ConnectionStates
-        {
-            NotConnected,
-            NightreignNotFound,
-            EACDetected,
-            ConnectedOffsetsNotFound,
-            Connected,
-        }
+        
 
         private bool LocateRelicAddress()
         {
-            using (AOBScanner scanner = new AOBScanner(nightreign.GetProcessHandle(),
-                                                 nightreign.GetBaseAddress(),
+            using (AOBScanner scanner = new AOBScanner(nightreign.ProcessHandle,
+                                                 nightreign.BaseAddress,
                                                  ".text"))
             {
-                IntPtr temp;
+                IntPtr address;
 
-                temp = scanner.FindAddress("8B 03 89 44 24 40 48 8B 0D ?? ?? ?? ?? 48 85 C9");   // CSGaitem
-                if (temp != IntPtr.Zero)
-                    relicAddress = (IntPtr)nightreign.ReadUInt64(temp + 13 + (IntPtr)nightreign.ReadUInt32(temp + 9));
+                address = scanner.FindAddress("8B 03 89 44 24 40 48 8B 0D ?? ?? ?? ?? 48 85 C9");   // CSGaitem
+                if (address != IntPtr.Zero)
+                    relicAddress = CalculateLocation(address, 9);
 
-                Debug.Print("CSGaitem " + temp.ToString("X") + " | " + relicAddress.ToString("X"));
-
-                temp = scanner.FindAddress("48 8B 05 ?? ?? ?? ?? 48 8B 70 08");   // GameDataMan
-                if (temp != IntPtr.Zero)
-                    gameDataManAddress = (IntPtr)nightreign.ReadUInt64(temp + 7 + (IntPtr)nightreign.ReadUInt32(temp + 3));
-
-                Debug.Print("GameDataMan " + temp.ToString("X") + " | " + gameDataManAddress.ToString("X"));
-
-                // Here for d ebug reasons, remove for release
-                relic1Offset = nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + 0x2F4) * 8 + 8;
-                relic2Offset = nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + 0x2F8) * 8 + 8;
-                relic3Offset = nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + 0x2FC) * 8 + 8;
-
-                Debug.Print("Relic offsets " + relic1Offset.ToString("X") + " " + relic2Offset.ToString("X") + " " + relic3Offset.ToString("X"));
+                address = scanner.FindAddress("48 8B 05 ?? ?? ?? ?? 48 8B 70 08");   // GameDataMan
+                if (address != IntPtr.Zero)
+                    gameDataManAddress = CalculateLocation(address);
             }
 
             if (relicAddress != IntPtr.Zero && gameDataManAddress != IntPtr.Zero)
@@ -109,7 +120,17 @@ namespace NightreignRelicEditor
             return false;
         }
 
-        public List<RelicEffect> relicEffects = new List<RelicEffect>();
+        private IntPtr CalculateLocation(IntPtr address, int offset = 3)
+        {
+            return (IntPtr)nightreign.ReadUInt64(address + offset + 4 + (IntPtr)nightreign.ReadInt32(address + offset));
+        }
+
+        private void SetRelicOffsetByVersion(uint[] version)
+        {
+            if (version[1] == 1)
+                relicBaseOffset = 0x2E8;
+            relicBaseOffset = 0x2F4;
+        }
 
         private void LoadRelicEffects()
         {
@@ -120,37 +141,31 @@ namespace NightreignRelicEditor
                 string resource = Assembly.GetExecutingAssembly().GetManifestResourceNames().Single(str => str.EndsWith("reliceffects.tsv"));
                 using (StreamReader sr = new StreamReader(assembly.GetManifestResourceStream(resource)))
                 {
-
                     while ((line = sr.ReadLine()) != null)
                     {
                         string[] split = line.Split("\t");
-                        if (split.Length == 2 || split.Length == 6)
+
+                        if (split.Length == 5)
                         {
                             RelicEffect re = new RelicEffect();
 
-                            re.EffectID = Convert.ToUInt32(split[0]);
+                            re.EffectId = UInt32.Parse(split[0]);
                             re.Description = split[1];
+                            re.Category = Int32.Parse(split[2]);
+                            re.OrderGroup = Int32.Parse(split[3]);
 
-                            if (split.Length == 6)
-                            {
-                                re.Category = Convert.ToUInt32(split[2]);
-                                re.Slot1Weight = Convert.ToUInt32(split[3]);
-                                re.Slot2Weight = Convert.ToUInt32(split[4]);
-                                re.Slot3Weight = Convert.ToUInt32(split[5]);
-                            }
-                            else
-                            {
-                                re.Category = 0;
-                            }
+                            if (UInt32.TryParse(split[4], out uint weight))
+                                re.Slot1Weight = weight;
 
                             relicEffects.Add(re);
                         }
+
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception f)
             {
-                //MessageBox.Show("fail?");
+                MessageBox.Show("Error loading relic effects - " + f.ToString());
             }
         }
 
@@ -159,113 +174,163 @@ namespace NightreignRelicEditor
             switch (relic)
             {
                 case 0:
-                    return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + 0x2F4) * 8 + 8; // +0x2E8 pre 1.02
+                    return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + relicBaseOffset) * 8 + 8;
                 case 1:
-                    return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + 0x2F8) * 8 + 8;
+                    return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + relicBaseOffset + 4) * 8 + 8;
                 case 2:
-                    return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + 0x2FC) * 8 + 8;
+                    return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + relicBaseOffset + 8) * 8 + 8;
             }
             return 0;
         }
 
-        public void SetRelicEffect(uint relic, uint slot, uint effect)
+        public void AddRelicEffect(uint relic, RelicEffect effect, bool sort = true)
         {
-            playerRelics[relic, slot] = effect;
+            if (playerRelics[relic].Count < 3)
+                playerRelics[relic].Add(effect);
+
+            if (sort)
+                playerRelics[relic] = playerRelics[relic].OrderBy(x => x.OrderGroup).ThenBy(x => x.EffectId).ToList();
         }
 
-        public uint GetRelicEffect(uint relic, uint slot)
+        public void RemoveRelicEffect(uint relic, uint slot)
         {
-            return playerRelics[relic, slot];
+            Debug.Print("relic " + relic + " slot " + slot);
+            if (slot < playerRelics[relic].Count)
+                playerRelics[relic].RemoveAt((int)slot);
         }
 
-        public void SetRelicSlotInGame(uint relic, uint slot, uint effect)
+        public uint GetRelicEffectId(uint relic, uint slot)
         {
-            uint relicOffset = GetRelicOffset(relic);
-            uint slotOffset = 0x18 + (slot * 4);
-
-            if (effect == 0)
-                effect = 0xFFFFFFFF;
-
-            nightreign.WriteUInt32((IntPtr)nightreign.ReadUInt64(relicAddress + (IntPtr)relicOffset) + (IntPtr)slotOffset, effect);
+            if (slot >= playerRelics[relic].Count)
+                return 0xFFFFFFFF;
+            return playerRelics[relic][(int)slot].EffectId;
         }
 
-        public uint GetRelicSlotInGame(uint relic, uint slot)
+        public void SetRelic(uint relic, uint[] effectId)
         {
-            uint relicOffset = GetRelicOffset(relic);
-            uint slotOffset = 0x18 + (slot * 4);
-
-            return nightreign.ReadUInt32((IntPtr)nightreign.ReadUInt64(relicAddress + (IntPtr)relicOffset) + (IntPtr)slotOffset);
-        }
-
-        enum RelicErrors
-        {
-            CharacterEffectInWrongSlot,
-            MultipleFromCategory,
-        }
-
-        public bool VerifyRelic(uint relic)
-        {
-            //uint[] slotEffect = new uint[3];
-            RelicEffect[] relicEffect = new RelicEffect[3];
-
-            //slotEffect[0] = GetRelicSlotEffectID(relic, 0);
-            //slotEffect[1] = GetRelicSlotEffectID(relic, 1);
-            //slotEffect[2] = GetRelicSlotEffectID(relic, 2);
-
-            
+            playerRelics[relic].Clear();
 
             for (uint x = 0; x < 3; x++)
             {
-                uint effectID = GetRelicSlotEffectID(relic, x);
+                RelicEffect? effect = null;
 
-                foreach (RelicEffect re in relicEffects)
+                if (effectId[x] != 0xFFFFFFFF)
+                    effect = relicEffects.FirstOrDefault(i => i.EffectId == effectId[x]);
+
+                if (effect != null)
+                    AddRelicEffect(relic, effect);
+            }
+        }
+
+        public void SetRelicInGame(uint relic)
+        {
+            nint relicOffset = (nint)GetRelicOffset(relic);
+            nint slotOffset = 0x18;
+
+            for (uint slot = 0; slot < 3; slot++)
+                nightreign.WriteUInt32((IntPtr)nightreign.ReadUInt64(relicAddress + relicOffset) + (IntPtr)(slot * 4) + slotOffset, GetRelicEffectId(relic, slot));
+        }
+
+        public void GetRelicFromGame(uint relic)
+        {
+            uint[] effectId = new uint[3];
+            nint relicOffset = (nint)GetRelicOffset(relic);
+            nint slotOffset = 0x18;
+
+            for (uint slot = 0; slot < 3; slot++)
+                effectId[slot] = nightreign.ReadUInt32((IntPtr)nightreign.ReadUInt64(relicAddress + (IntPtr)relicOffset) + (IntPtr)(slot * 4) + slotOffset);
+
+            SetRelic(relic, effectId);
+        }
+
+        //
+        // Verification
+        //
+
+        public bool VerifyEffectIsRelicEffect(RelicEffect effect, bool includeUnique = false)
+        {
+
+            if (effect.Slot1Weight != 0)
+                return true;
+
+            if ( includeUnique && ( (effect.EffectId >= 7000000 && effect.EffectId < 8000000) || (effect.EffectId < 100000) ) )
+                return true;
+
+            return false;
+
+        }
+
+        public RelicErrors[] VerifyRelic(uint relic)
+        {
+            Debug.Print("Verifying relic " + relic);
+
+            RelicErrors[] validator = new RelicErrors[3];
+
+            for (int x = 0; x < playerRelics[relic].Count; x++)
+            {
+                validator[x] = RelicErrors.Legitimate;
+
+                Debug.Print(playerRelics[relic][x].Slot1Weight + "");
+
+                if (playerRelics[relic][x].Slot1Weight == 0)
                 {
-                    if (effectID == re.EffectID)
+                    if (VerifyEffectIsRelicEffect(playerRelics[relic][x], true))
+                        validator[x] = RelicErrors.UniqueRelicEffect;
+                    else
                     {
-                        relicEffect[x] = re;
-                        break;
+                        validator[x] = RelicErrors.NotRelicEffect;
+                        continue;
+                    }
+                }
+
+                
+                for (int y = 0; y < playerRelics[relic].Count; y++)
+                {
+                    if (x != y)
+                    {
+                        if (playerRelics[relic][x].Category == playerRelics[relic][y].Category)
+                        {
+                            validator[x] = RelicErrors.MultipleFromCategory;
+                            break;
+                        }
                     }
                 }
             }
-
-            return true;
+            return validator;
         }
 
-        public uint GetRelicSlotEffectID(uint relic, uint slot)
+        public string GetEffectDescription(uint relic, uint slot)
         {
-            uint relicOffset = GetRelicOffset(relic);
-            uint slotOffset = 0x18 + (slot * 4);
-
-            return nightreign.ReadUInt32((IntPtr)nightreign.ReadUInt64(relicAddress + (IntPtr)relicOffset) + (IntPtr)slotOffset);
-        }
-
-        //public string GetEffectDescription(uint effectID)
-        public (string description, bool valid) GetEffectDescription(uint effectID)
-        {
-            if (effectID == 0xFFFFFFFF)
-                return ("-", true);
-
-            foreach (RelicEffect re in relicEffects)
-            {
-                if (effectID == re.EffectID)
-                {
-                    bool valid = true;
-                    if (re.Category == 0)
-                        valid = false;
-                    return (re.Description, valid);
-                }
-            }
-            return (effectID.ToString(), false);
+            if (slot < playerRelics[relic].Count)
+                return playerRelics[relic][(int)slot].Description;
+            return "-";
         }
     }
 
     class RelicEffect
     {
-        public uint EffectID { get; set; }
+        public uint EffectId { get; set; }
         public string Description { get; set; }
-        public uint Category { get; set; }
+        public int Category { get; set; }
+        public int OrderGroup { get; set; }
         public uint Slot1Weight { get; set; }
-        public uint Slot2Weight { get; set; }
-        public uint Slot3Weight { get; set; }
+    }
+
+    public enum ConnectionStates
+    {
+        NotConnected,
+        NightreignNotFound,
+        EACDetected,
+        ConnectedOffsetsNotFound,
+        Connected,
+        ConnectionLost,
+    }
+
+    public enum RelicErrors
+    {
+        Legitimate,
+        MultipleFromCategory,           // More than one effect from the same category
+        UniqueRelicEffect,              // Effects that only appear on unique relics
+        NotRelicEffect,                 // Effects that should never appear on relics
     }
 }

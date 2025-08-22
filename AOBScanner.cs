@@ -44,7 +44,6 @@ namespace NightreignRelicEditor
                         sectionSize.Add(section.SizeOfRawData);
                         sectionData.Add(new byte[section.SizeOfRawData]);
                         NtReadVirtualMemory(processHandle, baseAddress + section.VirtualAddress, sectionData[sectionData.Count - 1], (uint)section.SizeOfRawData, ref bytesRead);
-                        Debug.Print("AOBScanner found section " + sectionName);
                     }
                 }
             }
@@ -53,7 +52,6 @@ namespace NightreignRelicEditor
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -63,7 +61,6 @@ namespace NightreignRelicEditor
 
             if (disposing)
             {
-                Debug.Print("Disposing");
                 sectionAddress.Clear();
                 sectionAddress = null;
                 sectionSize.Clear();
@@ -74,7 +71,20 @@ namespace NightreignRelicEditor
             disposed = true;
         }
 
-        public IntPtr FindAddress(string patternSource, int section = 0, int startOffset = 0)
+        public IntPtr FindAddress(string patternSource, int startOffset = 0)
+        {
+            IntPtr returnValue = IntPtr.Zero;
+            for (int x = 0; x <= sectionAddress.Count; x++)
+            {
+                returnValue = FindAddressInSection(patternSource, x, startOffset);
+
+                if (returnValue != IntPtr.Zero)
+                    break;
+            }
+            return returnValue;
+        }
+
+        public IntPtr FindAddressInSection(string patternSource, int section = 0, int startOffset = 0)
         {
             if (section >= sectionAddress.Count)
                 return IntPtr.Zero;
@@ -83,9 +93,7 @@ namespace NightreignRelicEditor
             int indexResult = ScanMemory(searchPattern, section, startOffset);
 
             if (indexResult != -1)
-            {
                 return moduleBaseAddress + indexResult + sectionAddress[section];
-            }
 
             return IntPtr.Zero;
         }
@@ -130,13 +138,11 @@ namespace NightreignRelicEditor
                     while (matching)
                     {
                         if (j >= searchPattern.Length)
-                        {
                             return i;
-                        }
+
                         if (!searchPattern[j].isWildcard && searchPattern[j].patternByte != sectionData[section][i + j])
-                        {
                             matching = false;
-                        }
+
                         j++;
                     }
                 }
