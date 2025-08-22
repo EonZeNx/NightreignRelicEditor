@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NightreignRelicEditor"
         mc:Ignorable="d"
-        Title="Nightreign Relic Editor" Height="434" Width="1069" ResizeMode="NoResize">
+        Title="Nightreign Relic Editor" Height="489" Width="1100" ResizeMode="NoResize">
     <StackPanel Orientation="Horizontal">
-        <Grid Width="550">
-            <TabControl>
+        <Grid Width="546">
+            <TabControl Margin="0,0,0,0">
                 <TabItem Header="Relic Effects">
                     <Grid>
                         <TextBox x:Name="textboxFilterEffects" Margin="44,10,85,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="textboxFilterEffects_TextChanged" Height="22"/>
                         <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="Filter:"/></TextBlock>
-                        <CheckBox x:Name="checkboxShowUnique" Content="Show unique relic effects" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" IsChecked="False" Checked="ToggleShowUniqueEffects" Unchecked="ToggleShowUniqueEffects"/>
-                        <Button Content="Clear" HorizontalAlignment="Left" Margin="464,11,0,0" VerticalAlignment="Top" Width="70" Click="Button_ClearEffectFilter"/>
-                        <ListView x:Name="listviewRelicEffects" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,57,10,35">
+                        <CheckBox x:Name="checkboxShowUnique" Content="Show unique relic effects" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" IsChecked="False" Checked="ToggleShowUniqueEffects" Unchecked="ToggleShowUniqueEffects"/>
+                        <Button Content="Clear" HorizontalAlignment="Left" Margin="460,11,0,0" VerticalAlignment="Top" Width="70" Click="Button_ClearEffectFilter"/>
+                        <ListView x:Name="listviewRelicEffects" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,62,10,10" MouseRightButtonDown="Listview_RightClickRelicEffects">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Id" Width="60" DisplayMemberBinding="{Binding Path=EffectId}"/>
@@ -24,28 +24,51 @@
                                     <GridViewColumn Header="Order" Width="60" DisplayMemberBinding="{Binding Path=OrderGroup}"/>
                                 </GridView>
                             </ListView.View>
+                            <ListView.ContextMenu>
+                                <ContextMenu Name="ItemContextMenu">
+                                    <MenuItem Header="Add to relic 1" Click="Button_AddRelicEffect1"/>
+                                    <MenuItem Header="Add to relic 2" Click="Button_AddRelicEffect2"/>
+                                    <MenuItem Header="Add to relic 3" Click="Button_AddRelicEffect3"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
                         </ListView>
-                        <Button Content="Relic 1" HorizontalAlignment="Left" Margin="54,0,0,10" VerticalAlignment="Bottom" Width="70" Click="Button_AddRelicEffect1"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,12" TextWrapping="Wrap" VerticalAlignment="Bottom"><Run Language="en-au" Text="Add to:"/></TextBlock>
-                        <Button Content="Relic 2" HorizontalAlignment="Left" Margin="129,0,0,10" VerticalAlignment="Bottom" Width="70" Click="Button_AddRelicEffect2"/>
-                        <Button Content="Relic 3" HorizontalAlignment="Left" Margin="204,0,0,10" VerticalAlignment="Bottom" Width="70" Click="Button_AddRelicEffect3"/>
+                        <Button Content="Relic 1" HorizontalAlignment="Right" Margin="0,37,160,0" VerticalAlignment="Top" Width="70" Click="Button_AddRelicEffect1"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="265,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="Add to:"/></TextBlock>
+                        <Button Content="Relic 2" HorizontalAlignment="Right" Margin="0,37,85,0" VerticalAlignment="Top" Width="70" Click="Button_AddRelicEffect2"/>
+                        <Button Content="Relic 3" HorizontalAlignment="Left" Margin="460,37,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="Button_AddRelicEffect3"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Presets">
-                    <Grid>
-                        <Button Content="Load" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="70" Click="Button_LoadPreset"/>
-                        <Button Content="Save" HorizontalAlignment="Left" Margin="85,10,0,0" VerticalAlignment="Top" Width="70" Click="Button_SaveNewPreset"/>
-                        <Button Content="Delete" HorizontalAlignment="Left" Margin="310,10,0,0" VerticalAlignment="Top" Width="70" Click="Button_DeletePreset"/>
-                        <Button Content="Rename" HorizontalAlignment="Left" Margin="235,10,0,0" VerticalAlignment="Top" Width="70" Click="Button_RenamePreset"/>
-                        <ListBox x:Name="listboxPresets" d:ItemsSource="{d:SampleData ItemCount=15}" Margin="10,87,10,10" SelectedIndex="0">
+                    <Grid Margin="0,0,0,0">
+                        <Button Content="Load" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_LoadPreset" Height="20"/>
+                        <Button Content="Save" HorizontalAlignment="Left" Margin="85,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_SaveNewPreset" Height="20"/>
+                        <Button Content="Update" HorizontalAlignment="Left" Margin="160,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_UpdatePreset" Height="20"/>
+                        <Button Content="Delete" HorizontalAlignment="Left" Margin="310,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_DeletePreset" Height="20"/>
+                        <Button Content="Rename" HorizontalAlignment="Center" Margin="0,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_RenamePreset" Height="20"/>
+                        <Button Content="Move Up" HorizontalAlignment="Left" Margin="385,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_MoveUpPreset" Height="20"/>
+                        <Button Content="Move Down" HorizontalAlignment="Left" Margin="460,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_MoveDownPreset" Height="20"/>
+
+
+                        <Button Content="Clear" HorizontalAlignment="Left" Margin="460,11,0,0" VerticalAlignment="Top" Width="70" Click="Button_ClearPresetFilter" Height="20"/>
+
+                        <ListBox x:Name="listboxPresets" d:ItemsSource="{d:SampleData ItemCount=15}" Margin="10,62,10,10" SelectedIndex="0">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Name}" />
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Load" Click="Button_LoadPreset"/>
+                                    <MenuItem Header="Update" Click="Button_UpdatePreset"/>
+                                    <MenuItem Header="Rename" Click="Button_RenamePreset"/>
+                                    <MenuItem Header="Delete" Click="Button_DeletePreset"/>
+                                    <MenuItem Header="Move Up" Click="Button_MoveUpPreset"/>
+                                    <MenuItem Header="Move Down" Click="Button_MoveDownPreset"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
                         </ListBox>
-                        <TextBlock HorizontalAlignment="Left" Margin="10,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="Filter:"/></TextBlock>
-                        <ComboBox x:Name="comboboxFilterPresets" HorizontalAlignment="Left" Margin="44,60,0,0" VerticalAlignment="Top" Width="415" Height="22" IsEditable="True" TextBoxBase.TextChanged="comboboxFilterPresets_TextChanged">
+                        <ComboBox x:Name="comboboxFilterPresets" HorizontalAlignment="Left" Margin="44,10,85,0" VerticalAlignment="Top" Width="411" Height="22" IsEditable="True" TextBoxBase.TextChanged="comboboxFilterPresets_TextChanged">
                             <ComboBoxItem>Duchess</ComboBoxItem>
                             <ComboBoxItem>Executor</ComboBoxItem>
                             <ComboBoxItem>Guardian</ComboBoxItem>
@@ -55,10 +78,8 @@
                             <ComboBoxItem>Revenant</ComboBoxItem>
                             <ComboBoxItem>Wylder</ComboBoxItem>
                         </ComboBox>
-                        <Button Content="Move Up" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="70" Click="Button_MoveUpPreset"/>
-                        <Button Content="Move Down" HorizontalAlignment="Left" Margin="85,35,0,0" VerticalAlignment="Top" Width="70" Click="Button_MoveDownPreset"/>
-                        <Button Content="Update" HorizontalAlignment="Left" Margin="160,10,0,0" VerticalAlignment="Top" Width="70" Click="Button_UpdatePreset"/>
-                        <Button Content="Clear" HorizontalAlignment="Left" Margin="464,61,0,0" VerticalAlignment="Top" Width="70" Click="Button_ClearPresetFilter"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="Filter:"/></TextBlock>
+
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -91,7 +112,7 @@
 
             <Button x:Name="buttonSetRelicsInGame" Content="Set relics in game" HorizontalAlignment="Left" Margin="10,298,0,0" VerticalAlignment="Top" Width="200" Click="Button_SetRelicsInGame"/>
             <Button x:Name="buttonImportRelicsFromGame" Content="Import relic data from game" HorizontalAlignment="Left" Margin="215,298,0,0" VerticalAlignment="Top" Width="200" Click="Button_GetRelicsFromGame"/>
-            
+
             <TextBlock HorizontalAlignment="Left" Margin="10,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold"><Run Language="en-au" Text="Status:"/></TextBlock>
             <TextBlock x:Name="textConnectionStatus" HorizontalAlignment="Left" Margin="53,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="352"><Run Language="en-au" Text="Not connected"/></TextBlock>
 

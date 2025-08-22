@@ -356,7 +356,12 @@ public partial class MainWindow : Window
 
     private void Button_MoveUpPreset(object sender, RoutedEventArgs e)
     {
-        int index = FindPresetIndex(listboxPresets.SelectedItem as RelicPreset);
+        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
+
+        if (preset == null)
+            return;
+
+        int index = FindPresetIndex(preset);
 
         if (index == 0)
             return;
@@ -367,7 +372,12 @@ public partial class MainWindow : Window
 
     private void Button_MoveDownPreset(object sender, RoutedEventArgs e)
     {
-        int index = FindPresetIndex(listboxPresets.SelectedItem as RelicPreset);
+        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
+
+        if (preset == null)
+            return;
+
+        int index = FindPresetIndex(preset);
 
         if (index == relicPresets.Count - 1)
             return;
@@ -378,29 +388,102 @@ public partial class MainWindow : Window
 
     private void Button_LoadPreset(object sender, RoutedEventArgs e)
     {
-        LoadPreset();
+        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
+
+        if (preset == null)
+            return;
+
+        for (uint x = 0; x < 3; x++)
+        {
+            if ((bool)activeRelics[x].IsChecked)
+            {
+                uint[] effectId = new uint[3];
+
+                for (uint y = 0; y < 3; y++)
+                    effectId[y] = preset.EffectId[x, y];
+
+                relicManager.SetRelic(x, effectId);
+                UpdateRelicUIElements(x);
+            }
+        }
     }
 
     private void Button_SaveNewPreset(object sender, RoutedEventArgs e)
     {
-        SaveNewPreset();
+        string name = Microsoft.VisualBasic.Interaction.InputBox("Description", "Enter name for preset");
+
+        if (string.IsNullOrEmpty(name))
+            return;
+
+        RelicPreset relic = new RelicPreset(name);
+
+        for (uint x = 0; x < 3; x++)
+        {
+            for (uint y = 0; y < 3; y++)
+            {
+                relic.EffectId[x, y] = relicManager.GetRelicEffectId(x, y);
+            }
+        }
+        relicPresets.Add(relic);
+
+        SavePresetFile();
     }
 
     private void Button_UpdatePreset(object sender, RoutedEventArgs e)
     {
-        UpdatePreset();
+        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
+
+        if (preset == null)
+            return;
+
+        MessageBoxResult result = MessageBox.Show("Update preset " + preset.Name + " with new effects?", "Corfirm Update", MessageBoxButton.YesNo);
+
+        if (result == MessageBoxResult.No)
+            return;
+
+        for (uint x = 0; x < 3; x++)
+        {
+            for (uint y = 0; y < 3; y++)
+            {
+                preset.EffectId[x, y] = relicManager.GetRelicEffectId(x, y);
+            }
+        }
+
+        SavePresetFile();
     }
 
     private void Button_RenamePreset(object sender, RoutedEventArgs e)
     {
-        RenamePreset();
+        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
+
+        if (preset == null)
+            return;
+
+        string name = Microsoft.VisualBasic.Interaction.InputBox("Description", "Enter name for preset", preset.Name);
+
+        if (string.IsNullOrEmpty(name) || name == preset.Name)
+            return;
+
+        preset.Name = name;
+        listboxPresets.UpdateLayout();
+        SavePresetFile();
     }
 
     private void Button_DeletePreset(object sender, RoutedEventArgs e)
     {
-        DeletePreset();
-    }
+        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
 
+        if (preset == null)
+            return;
+
+        MessageBoxResult result = MessageBox.Show("Delete the preset " + preset.Name + "?", "Corfirm Delete", MessageBoxButton.YesNo);
+
+        if (result == MessageBoxResult.No)
+            return;
+
+        if (relicPresets.Remove(preset))
+            SavePresetFile();
+    }
 
     private void comboboxFilterPresets_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -526,89 +609,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void SaveNewPreset()
-    {
-        string name = Microsoft.VisualBasic.Interaction.InputBox("Description", "Enter name for preset");
-
-        if (string.IsNullOrEmpty(name))
-            return;
-
-        RelicPreset relic = new RelicPreset(name);
-
-        for (uint x = 0; x < 3; x++)
-        {
-            for (uint y = 0; y < 3; y++)
-            {
-                relic.EffectId[x, y] = relicManager.GetRelicEffectId(x, y);
-            }
-        }
-        relicPresets.Add(relic);
-
-        SavePresetFile();
-    }
-
-    private void LoadPreset()
-    {
-        RelicPreset relic = (RelicPreset)listboxPresets.SelectedItem;
-
-        if (relic == null)
-            return;
-
-        for (uint x = 0; x < 3; x++)
-        {
-            if ((bool)activeRelics[x].IsChecked)
-            {
-                uint[] effectId = new uint[3];
-
-                for (uint y = 0; y < 3; y++)
-                    effectId[y] = relic.EffectId[x, y];
-
-                relicManager.SetRelic(x, effectId);
-                UpdateRelicUIElements(x);
-            }
-        }
-    }
-
-    private void UpdatePreset()
-    {
-        MessageBoxResult result = MessageBox.Show("Update preset " + (listboxPresets.SelectedItem as RelicPreset).Name + " with new effects?", "Corfirm Update", MessageBoxButton.YesNo);
-
-        if (result == MessageBoxResult.No)
-            return;
-
-        for (uint x = 0; x < 3; x++)
-        {
-            for (uint y = 0; y < 3; y++)
-            {
-                (listboxPresets.SelectedItem as RelicPreset).EffectId[x, y] = relicManager.GetRelicEffectId(x, y);
-            }
-        }
-
-        SavePresetFile();
-    }
-
-    private void RenamePreset()
-    {
-        string name = Microsoft.VisualBasic.Interaction.InputBox("Description", "Enter name for preset", (listboxPresets.SelectedItem as RelicPreset).Name);
-
-        if (string.IsNullOrEmpty(name) || name == (listboxPresets.SelectedItem as RelicPreset).Name)
-            return;
-
-        (listboxPresets.SelectedItem as RelicPreset).Name = name;
-        listboxPresets.UpdateLayout();
-        SavePresetFile();
-    }
-
-    private void DeletePreset()
-    {
-        MessageBoxResult result = MessageBox.Show("Delete the preset " + (listboxPresets.SelectedItem as RelicPreset).Name + "?", "Corfirm Delete", MessageBoxButton.YesNo);
-
-        if (result == MessageBoxResult.No)
-            return;
-
-        if (relicPresets.Remove((RelicPreset)listboxPresets.SelectedItem))
-            SavePresetFile();
-    }
+    
 
     private int FindPresetIndex(RelicPreset rp)
     {
@@ -683,4 +684,24 @@ public partial class MainWindow : Window
             MessageBox.Show("Problem loading settings file.");
         }
     }
+
+    //
+    //
+    //
+
+    //
+
+    private void Listview_RightClickRelicEffects(object sender, MouseEventArgs e)
+    {
+        // Get the clicked item
+        var clickedItem = (sender as ListView)?.SelectedItem;
+
+        if (clickedItem != null)
+        {
+            // Show the context menu
+            ItemContextMenu.IsOpen = true;
+        }
+
+    }
+
 }

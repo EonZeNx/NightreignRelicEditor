@@ -61,6 +61,12 @@ namespace NightreignRelicEditor
 
             if (disposing)
             {
+                for (int x = 0; x < sectionData.Count; x++)
+                {
+                    Array.Clear(sectionData[x]);
+                    sectionData[x] = null;
+                }
+
                 sectionAddress.Clear();
                 sectionAddress = null;
                 sectionSize.Clear();
