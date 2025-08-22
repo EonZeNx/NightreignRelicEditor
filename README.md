@@ -13,13 +13,13 @@ Includes relic verification to ensure that any relic injected into the game is l
 
 ## How To Use
 <img width="1055" height="427" alt="nre" src="https://github.com/user-attachments/assets/a10cd89c-87ea-417d-8264-63ca0f239fdb" />
-Changing relics on the main window will not affect your game at all. Changes are only sent to the game once the "Set relics in game" button is pressed.
+Changing relics on the main window will not affect your game at all. Changes are only sent to the game once the *Set relics in game* button is pressed.
 
-Relic effects are selected from the listbox on the left. Click on one of the buttons at the bottom labelled "Relic 1/2/3" to add the effect to one of your relics. If the relic does not already have three effects, the effect will be added, and all effects on that relic will be ordered to match the order Nightreign places them. Relic effects will turn red if there is a verification issues, and holding your mouse on the red text will show a tooltip detailing what is wrong. Relics with red errors cannot be injected into the game.
+Relic effects are selected from the listbox on the left. The filter textbox can be used to help find specific effects. Click on one of the buttons at the bottom labelled *Add to Relic 1/2/3* to add the effect to one of your relics. If the relic does not already have three effects, the effect will be added, and all effects on that relic will be ordered to match the order Nightreign places them. Relic effects will turn red if there is a verification issues, and holding your mouse on the red text will show a tooltip detailing what is wrong. Relics with red errors cannot be injected into the game.
 
-If the "show unique relic effects" checkbox is marked, that will show effects that are on the special unique premade relics, such as "Critical Hits +1," which is only available on "Dark Night of the Baron." Orange errors are generally not allowed on relics for speedruns, but are allowed to inject in case you make a mistake and overwrite your existing unique relics.
+If the *Show unique relic effects* checkbox is marked, that will show effects that are on the special unique premade relics, such as *Critical Hits +1*, which is only available on *Dark Night of the Baron*. Orange errors are generally not allowed on relics for speedruns, but are allowed to inject in case you make a mistake and overwrite your existing unique relics.
 
-To remove an effect from a relic, click the "X" button next to the effect you wish to remove.
+To remove an effect from a relic, click the *X* button next to the effect you wish to remove.
 
 Once you are happy with your relic setups, first make sure that Nightreign is running with EAC disabled. Click the "Connect" button to connect to the game process, and the status text should change to "Connected" if succesful. Push the "Set relics in game" button to attempt to edit your in game relics. A final verification will be attempted, and a messagebox will tell you if a verification error occurred.
 
