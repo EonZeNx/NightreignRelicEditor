@@ -1,7 +1,7 @@
 # Nightreign Relic Editor
-This is a tool designed for speedrunners and challenge runners to quickly edit relics in Elden Ring: Nightreign. Currently in prerelease testing.
+This is a tool designed for speedrunners and challenge runners to quickly edit relics in Elden Ring: Nightreign. This is not a general purpose relic editor, it will not allow non-relic effects (such as Marais/Grafted) to be edited in game. Currently in prerelease testing.
 
-Please ensure that EAC is disable before using.
+Please ensure that EAC is disabled before using.
 
 Includes relic verification to ensure that any relic injected into the game is legally obtainable through the in-game random roll system, and therefore valid to be used during individual lord speedruns.
 
@@ -26,3 +26,10 @@ Once you are happy with your relic setups, first make sure that Nightreign is ru
 If you wish to modify your existing relic setup that is already in game, you can click the "Import relic data from game" button to show your in game relics in the program.
 
 The checkboxes next to the relic names can be unchecked if you want the program to ignore that specific relic when either putting your relics into the game, or pulling data from the game.
+
+## How Does Relic Verification Work?
+In the relic effect list, you can see that each effect has three columns associated with it labelled *Id*, *Category*, and *Order*.
+
+Nightreign orders effects on relic primarily based on the *Order* property, going in ascending numeric order. If two effects are in the same order group, then they will be sorted by *Id*, once again going in ascending numeric order. This is why character specific effects are always in the first slot, as all of them have their *Order* property set to 1.
+
+Each relic can only have one effect from each *Category* group. This mostly applies to effects that increase damage output, with most of those effects being under category 100. For example, the evergaol attack power relic, and *Physical Attack Up* both are both in category 100, and cannot appear on the same relic.
