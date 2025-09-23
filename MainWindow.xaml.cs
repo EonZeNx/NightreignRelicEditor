@@ -64,34 +64,42 @@ public partial class MainWindow : Window
 
         relicTextBlock = new TextBlock[3, 3]
         {
-            { textRelic1Slot1, textRelic1Slot2, textRelic1Slot3 },
+            // { textRelic1Slot1, textRelic1Slot2, textRelic1Slot3 },
             { textRelic2Slot1, textRelic2Slot2, textRelic2Slot3 },
             { textRelic3Slot1, textRelic3Slot2, textRelic3Slot3 },
+            { textRelic4Slot1, textRelic4Slot2, textRelic4Slot3 },
         };
 
         clearEffectButtons = new Button[3, 3]
         {
-            { buttonClearRelic1Slot1, buttonClearRelic1Slot2, buttonClearRelic1Slot3 },
+            // { buttonClearRelic1Slot1, buttonClearRelic1Slot2, buttonClearRelic1Slot3 },
             { buttonClearRelic2Slot1, buttonClearRelic2Slot2, buttonClearRelic2Slot3 },
             { buttonClearRelic3Slot1, buttonClearRelic3Slot2, buttonClearRelic3Slot3 },
+            { buttonClearRelic4Slot1, buttonClearRelic4Slot2, buttonClearRelic4Slot3 },
         };
 
         activeRelics = new CheckBox[]
         {
-            checkRelic1Active, checkRelic2Active, checkRelic3Active,
+            /*checkRelic1Active,*/ checkRelic2Active, checkRelic3Active, checkRelic4Active,
         };
 
-        buttonClearRelic1Slot1.Click += (sender, e) => RemoveRelicEffect(0, 0);
-        buttonClearRelic1Slot2.Click += (sender, e) => RemoveRelicEffect(0, 1);
-        buttonClearRelic1Slot3.Click += (sender, e) => RemoveRelicEffect(0, 2);
+        // buttonClearRelic1Slot1.Click += (sender, e) => RemoveRelicEffect(0, 0);
+        // buttonClearRelic1Slot2.Click += (sender, e) => RemoveRelicEffect(0, 1);
+        // buttonClearRelic1Slot3.Click += (sender, e) => RemoveRelicEffect(0, 2);
+        
         buttonClearRelic2Slot1.Click += (sender, e) => RemoveRelicEffect(1, 0);
         buttonClearRelic2Slot2.Click += (sender, e) => RemoveRelicEffect(1, 1);
         buttonClearRelic2Slot3.Click += (sender, e) => RemoveRelicEffect(1, 2);
+        
         buttonClearRelic3Slot1.Click += (sender, e) => RemoveRelicEffect(2, 0);
         buttonClearRelic3Slot2.Click += (sender, e) => RemoveRelicEffect(2, 1);
         buttonClearRelic3Slot3.Click += (sender, e) => RemoveRelicEffect(2, 2);
+        
+        buttonClearRelic4Slot1.Click += (sender, e) => RemoveRelicEffect(3, 0);
+        buttonClearRelic4Slot2.Click += (sender, e) => RemoveRelicEffect(3, 1);
+        buttonClearRelic4Slot3.Click += (sender, e) => RemoveRelicEffect(3, 2);
 
-        for (uint x = 0; x < 3; x++)
+        for (uint x = 1; x < 4; x++)
             UpdateRelicUIElements(x);
     }
 
@@ -281,7 +289,7 @@ public partial class MainWindow : Window
         if (relicManager.ConnectionStatus != ConnectionStates.Connected)
             return;
 
-        for (uint x = 0; x < 3; x++)
+        for (uint x = 0; x < activeRelics.Length; x++)
         {
             if (!(bool)activeRelics[x].IsChecked)
                 continue;
@@ -302,7 +310,7 @@ public partial class MainWindow : Window
             }
         }
 
-        for (uint relic = 0; relic < 3; relic++)
+        for (uint relic = 0; relic < activeRelics.Length; relic++)
         {
             if ((bool)activeRelics[relic].IsChecked)
             {
@@ -316,7 +324,7 @@ public partial class MainWindow : Window
         if (relicManager.ConnectionStatus != ConnectionStates.Connected)
             return;
 
-        for (uint x = 0; x < 3; x++)
+        for (uint x = 0; x < activeRelics.Length; x++)
         {
             if ((bool)activeRelics[x].IsChecked)
             {
@@ -348,6 +356,11 @@ public partial class MainWindow : Window
     private void Button_AddRelicEffect3(object sender, RoutedEventArgs e)
     {
         AddRelicEffectFromList(2);
+    }
+
+    private void Button_AddRelicEffect4(object sender, RoutedEventArgs e)
+    {
+        AddRelicEffectFromList(3);
     }
 
     //

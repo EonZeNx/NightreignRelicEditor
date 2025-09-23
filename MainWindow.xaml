@@ -5,16 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NightreignRelicEditor"
         mc:Ignorable="d"
-        Title="Nightreign Relic Editor" Height="489" Width="1100" ResizeMode="NoResize">
-    <StackPanel Orientation="Horizontal">
-        <Grid Width="546">
+        Title="Nightreign Relic Editor" Height="489" Width="1200" ResizeMode="CanResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0">
             <TabControl Margin="0,0,0,0">
                 <TabItem Header="Relic Effects">
                     <Grid>
                         <TextBox x:Name="textboxFilterEffects" Margin="44,10,85,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="textboxFilterEffects_TextChanged" Height="22"/>
                         <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="Filter:"/></TextBlock>
                         <CheckBox x:Name="checkboxShowUnique" Content="Show unique relic effects" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" IsChecked="False" Checked="ToggleShowUniqueEffects" Unchecked="ToggleShowUniqueEffects"/>
-                        <Button Content="Clear" HorizontalAlignment="Left" Margin="460,11,0,0" VerticalAlignment="Top" Width="70" Click="Button_ClearEffectFilter"/>
+                        <Button Content="Clear" HorizontalAlignment="Right" Margin="0,11,10,0" VerticalAlignment="Top" Width="70" Click="Button_ClearEffectFilter"/>
                         <ListView x:Name="listviewRelicEffects" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,62,10,10">
                             <ListView.View>
                                 <GridView>
@@ -22,6 +27,8 @@
                                     <GridViewColumn Header="Effect" Width="310" DisplayMemberBinding="{Binding Path=Description}"/>
                                     <GridViewColumn Header="Category" Width="60" DisplayMemberBinding="{Binding Path=Category}"/>
                                     <GridViewColumn Header="Order" Width="60" DisplayMemberBinding="{Binding Path=OrderGroup}"/>
+                                    <GridViewColumn Header="Depth?" Width="60" DisplayMemberBinding="{Binding Path=IsDeepEffect}"/>
+                                    <GridViewColumn Header="Curse?" Width="60" DisplayMemberBinding="{Binding Path=IsCurse}"/>
                                 </GridView>
                             </ListView.View>
                             <ListView.ContextMenu>
@@ -29,13 +36,15 @@
                                     <MenuItem Header="Add to relic 1" Click="Button_AddRelicEffect1"/>
                                     <MenuItem Header="Add to relic 2" Click="Button_AddRelicEffect2"/>
                                     <MenuItem Header="Add to relic 3" Click="Button_AddRelicEffect3"/>
+                                    <MenuItem Header="Add to relic 4" Click="Button_AddRelicEffect4"/>
                                 </ContextMenu>
                             </ListView.ContextMenu>
                         </ListView>
-                        <Button Content="Relic 1" HorizontalAlignment="Right" Margin="0,37,160,0" VerticalAlignment="Top" Width="70" Click="Button_AddRelicEffect1"/>
                         <TextBlock HorizontalAlignment="Left" Margin="265,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="Add to:"/></TextBlock>
-                        <Button Content="Relic 2" HorizontalAlignment="Right" Margin="0,37,85,0" VerticalAlignment="Top" Width="70" Click="Button_AddRelicEffect2"/>
-                        <Button Content="Relic 3" HorizontalAlignment="Left" Margin="460,37,0,0" VerticalAlignment="Top" Width="70" Height="20" Click="Button_AddRelicEffect3"/>
+                        <Button Content="Relic 1" HorizontalAlignment="Right" Margin="0,37,280,0" VerticalAlignment="Top" Width="80" Click="Button_AddRelicEffect1"/>
+                        <Button Content="Relic 2" HorizontalAlignment="Right" Margin="0,37,190,0" VerticalAlignment="Top" Width="80" Click="Button_AddRelicEffect2"/>
+                        <Button Content="Relic 3" HorizontalAlignment="Right" Margin="0,37,95,0" VerticalAlignment="Top" Width="80" Click="Button_AddRelicEffect3"/>
+                        <Button Content="D. Relic 1" HorizontalAlignment="Right" Margin="0,37,10,0" VerticalAlignment="Top" Width="80" Click="Button_AddRelicEffect4"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Presets">
@@ -83,42 +92,131 @@
                     </Grid>
                 </TabItem>
             </TabControl>
-
         </Grid>
-        <Grid>
-            <CheckBox x:Name="checkRelic1Active" Content="Relic 1" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Bold"/>
-            <TextBlock x:Name="textRelic1Slot1" HorizontalAlignment="Left" Margin="35,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="-"/></TextBlock>
-            <TextBlock x:Name="textRelic1Slot2" HorizontalAlignment="Left" Margin="35,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="-"/></TextBlock>
-            <TextBlock x:Name="textRelic1Slot3" HorizontalAlignment="Left" Margin="35,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="-"/></TextBlock>
-            <Button x:Name="buttonClearRelic1Slot1" Content="x" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="20"/>
-            <Button x:Name="buttonClearRelic1Slot2" Content="x" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Width="20"/>
-            <Button x:Name="buttonClearRelic1Slot3" Content="x" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="20"/>
+        
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <local:RelicData Grid.Row="0" Grid.ColumnSpan="2" RelicManager="{Binding relicManager}" RelicSlot="0"/>
+            
+            <!-- Relic 2 -->
+            <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>   <!-- Buttons -->
+                    <ColumnDefinition Width="*"/>      <!-- Text -->
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>     <!-- Header -->
+                    <RowDefinition Height="Auto"/>     <!-- Slot 1 -->
+                    <RowDefinition Height="Auto"/>     <!-- Slot 2 -->
+                    <RowDefinition Height="Auto"/>     <!-- Slot 3 -->
+                </Grid.RowDefinitions>
 
-            <CheckBox x:Name="checkRelic2Active" Content="Relic 2" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Bold"/>
-            <TextBlock x:Name="textRelic2Slot1" HorizontalAlignment="Left" Margin="37,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="-"/></TextBlock>
-            <TextBlock x:Name="textRelic2Slot2" HorizontalAlignment="Left" Margin="37,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="-"/></TextBlock>
-            <TextBlock x:Name="textRelic2Slot3" HorizontalAlignment="Left" Margin="37,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="-"/></TextBlock>
-            <Button x:Name="buttonClearRelic2Slot1" Content="x" HorizontalAlignment="Left" Margin="10,127,0,0" VerticalAlignment="Top" Width="20"/>
-            <Button x:Name="buttonClearRelic2Slot2" Content="x" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" Width="20"/>
-            <Button x:Name="buttonClearRelic2Slot3" Content="x" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Width="20"/>
+                <CheckBox x:Name="checkRelic2Active"
+                          Grid.Row="0" Grid.ColumnSpan="2"
+                          Content="Relic 2" IsChecked="True" FontWeight="Bold"/>
 
-            <CheckBox x:Name="checkRelic3Active" Content="Relic 3" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" IsChecked="True" FontWeight="Bold"/>
-            <TextBlock x:Name="textRelic3Slot1" HorizontalAlignment="Left" Margin="37,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="-"/></TextBlock>
-            <TextBlock x:Name="textRelic3Slot2" HorizontalAlignment="Left" Margin="37,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="-"/></TextBlock>
-            <TextBlock x:Name="textRelic3Slot3" HorizontalAlignment="Left" Margin="37,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="-"/></TextBlock>
-            <Button x:Name="buttonClearRelic3Slot1" Content="x" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Width="20"/>
-            <Button x:Name="buttonClearRelic3Slot2" Content="x" HorizontalAlignment="Left" Margin="10,248,0,0" VerticalAlignment="Top" Width="20"/>
-            <Button x:Name="buttonClearRelic3Slot3" Content="x" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" Width="20"/>
+                <Button x:Name="buttonClearRelic2Slot1" Grid.Row="1" Grid.Column="0" Content="x" Width="20" Margin="0,0,5,0"/>
+                <TextBlock x:Name="textRelic2Slot1" Grid.Row="1" Grid.Column="1" Text="-" TextWrapping="Wrap"/>
 
-            <Button x:Name="buttonSetRelicsInGame" Content="Set relics in game" HorizontalAlignment="Left" Margin="10,298,0,0" VerticalAlignment="Top" Width="200" Click="Button_SetRelicsInGame"/>
-            <Button x:Name="buttonImportRelicsFromGame" Content="Import relic data from game" HorizontalAlignment="Left" Margin="215,298,0,0" VerticalAlignment="Top" Width="200" Click="Button_GetRelicsFromGame"/>
+                <Button x:Name="buttonClearRelic2Slot2" Grid.Row="2" Grid.Column="0" Content="x" Width="20" Margin="0,0,5,0"/>
+                <TextBlock x:Name="textRelic2Slot2" Grid.Row="2" Grid.Column="1" Text="-" TextWrapping="Wrap"/>
 
-            <TextBlock HorizontalAlignment="Left" Margin="10,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold"><Run Language="en-au" Text="Status:"/></TextBlock>
-            <TextBlock x:Name="textConnectionStatus" HorizontalAlignment="Left" Margin="53,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="352"><Run Language="en-au" Text="Not connected"/></TextBlock>
+                <Button x:Name="buttonClearRelic2Slot3" Grid.Row="3" Grid.Column="0" Content="x" Width="20" Margin="0,0,5,0"/>
+                <TextBlock x:Name="textRelic2Slot3" Grid.Row="3" Grid.Column="1" Text="-" TextWrapping="Wrap"/>
+            </Grid>
 
-            <Button x:Name="buttonConnect" Content="Connect" HorizontalAlignment="Left" Margin="10,344,0,0" VerticalAlignment="Top" Width="100" Click="Button_Connect"/>
-            <CheckBox x:Name="checkboxAutoconnect" Content="Auto-connect at startup" HorizontalAlignment="Left" Margin="10,369,0,0" VerticalAlignment="Top"/>
+            <!-- Relic 3 -->
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <CheckBox x:Name="checkRelic3Active"
+                          Grid.Row="0" Grid.ColumnSpan="2"
+                          Content="Relic 3" IsChecked="True" FontWeight="Bold"/>
+
+                <Button x:Name="buttonClearRelic3Slot1" Grid.Row="1" Grid.Column="0" Content="x" Width="20" Margin="0,0,5,0"/>
+                <TextBlock x:Name="textRelic3Slot1" Grid.Row="1" Grid.Column="1" Text="-" TextWrapping="Wrap"/>
+
+                <Button x:Name="buttonClearRelic3Slot2" Grid.Row="2" Grid.Column="0" Content="x" Width="20" Margin="0,0,5,0"/>
+                <TextBlock x:Name="textRelic3Slot2" Grid.Row="2" Grid.Column="1" Text="-" TextWrapping="Wrap"/>
+
+                <Button x:Name="buttonClearRelic3Slot3" Grid.Row="3" Grid.Column="0" Content="x" Width="20" Margin="0,0,5,0"/>
+                <TextBlock x:Name="textRelic3Slot3" Grid.Row="3" Grid.Column="1" Text="-" TextWrapping="Wrap"/>
+            </Grid>
+
+            <!-- Relic 4 -->
+            <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <CheckBox x:Name="checkRelic4Active"
+                          Grid.Row="0" Grid.ColumnSpan="2"
+                          Content="Relic 4" IsChecked="True" FontWeight="Bold"/>
+
+                <Button x:Name="buttonClearRelic4Slot1" Grid.Row="1" Grid.Column="0" Content="x" Width="20" Margin="0,0,5,0"/>
+                <TextBlock x:Name="textRelic4Slot1" Grid.Row="1" Grid.Column="1" Text="-" TextWrapping="Wrap"/>
+
+                <Button x:Name="buttonClearRelic4Slot2" Grid.Row="2" Grid.Column="0" Content="x" Width="20" Margin="0,0,5,0"/>
+                <TextBlock x:Name="textRelic4Slot2" Grid.Row="2" Grid.Column="1" Text="-" TextWrapping="Wrap"/>
+
+                <Button x:Name="buttonClearRelic4Slot3" Grid.Row="3" Grid.Column="0" Content="x" Width="20" Margin="0,0,5,0"/>
+                <TextBlock x:Name="textRelic4Slot3" Grid.Row="3" Grid.Column="1" Text="-" TextWrapping="Wrap"/>
+            </Grid>
+
+            
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0" x:Name="buttonSetRelicsInGame" Content="Set relics in game" Click="Button_SetRelicsInGame"/>
+                <Button Grid.Row="0" Grid.Column="1" x:Name="buttonImportRelicsFromGame" Content="Import relic data from game" Click="Button_GetRelicsFromGame"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" FontWeight="Bold"><Run Language="en-au" Text="Status:"/></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="0" x:Name="textConnectionStatus" TextWrapping="Wrap"><Run Language="en-au" Text="Not connected"/></TextBlock>
+
+                <Button Grid.Row="3" Grid.Column="0" x:Name="buttonConnect" Content="Connect" Click="Button_Connect"/>
+                <CheckBox Grid.Row="4" Grid.Column="0" x:Name="checkboxAutoconnect" Content="Auto-connect at startup"/>
+            </Grid>
         </Grid>
 
-    </StackPanel>
+    </Grid>
 </Window>
