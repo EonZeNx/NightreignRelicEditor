@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.Dynamic;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media.Effects;
-using System.Windows.Media.Media3D;
 
-namespace NightreignRelicEditor;
+namespace NightreignRelicEditor.Models;
 
 public class RelicManager
 {
@@ -28,18 +17,15 @@ public class RelicManager
 
     private nint relicBaseOffset = 0x2F4;
 
-    private List<RelicEffect>[] playerRelics = new List<RelicEffect>[] { new(), new(), new(), new() };
+    private List<RelicEffect>[] playerRelics = new List<RelicEffect>[] { new(), new(), new() };
 
-    public List<RelicEffect> relicEffects = new List<RelicEffect>();
+    public List<RelicEffect> AllRelicEffects = [];
 
 
     private ConnectionStates connectionStatus;
     public ConnectionStates ConnectionStatus
     {
-        set
-        {
-            connectionStatus = value;
-        }
+        set => connectionStatus = value;
 
         get
         {
@@ -74,24 +60,22 @@ public class RelicManager
         {
             MessageBox.Show("EAC running");
             ConnectionStatus = ConnectionStates.EACDetected;
+            
+            return;
+        }
+        
+        nightreign.InitGameLink();
+
+        if (nightreign.Connected)
+        {
+            SetRelicOffsetByVersion(nightreign.Version);
+
+            ConnectionStatus = LocateRelicAddress()
+                ? ConnectionStates.Connected : ConnectionStates.ConnectedOffsetsNotFound;
         }
         else
         {
-            nightreign.InitGameLink();
-
-            if (nightreign.Connected)
-            {
-                SetRelicOffsetByVersion(nightreign.Version);
-
-                if (LocateRelicAddress())
-                    ConnectionStatus = ConnectionStates.Connected;
-                else
-                    ConnectionStatus = ConnectionStates.ConnectedOffsetsNotFound;
-            }
-            else
-            {
-                ConnectionStatus = ConnectionStates.NightreignNotFound;
-            }
+            ConnectionStatus = ConnectionStates.NightreignNotFound;
         }
     }
 
@@ -157,7 +141,7 @@ public class RelicManager
                         if (UInt32.TryParse(split[4], out uint weight))
                             re.Slot1Weight = weight;
 
-                        relicEffects.Add(re);
+                        AllRelicEffects.Add(re);
                     }
 
                 }
@@ -217,7 +201,7 @@ public class RelicManager
             RelicEffect? effect = null;
 
             if (effectId[x] != 0xFFFFFFFF)
-                effect = relicEffects.FirstOrDefault(i => i.EffectId == effectId[x]);
+                effect = AllRelicEffects.FirstOrDefault(i => i.EffectId == effectId[x]);
 
             if (effect != null)
                 AddRelicEffect(relic, effect);
@@ -307,34 +291,4 @@ public class RelicManager
             return playerRelics[relic][(int)slot].Description;
         return "-";
     }
-}
-
-public class RelicEffect
-{
-    public uint EffectId { get; set; }
-    public string Description { get; set; }
-    public int Category { get; set; }
-    public int OrderGroup { get; set; }
-    public uint Slot1Weight { get; set; }
-
-    public bool IsDeepEffect => EffectId is >= 6_000_000 and < 7_000_000;
-    public bool IsCurse => EffectId is >= 6_820_000 and < 7_000_000;
-}
-
-public enum ConnectionStates
-{
-    NotConnected,
-    NightreignNotFound,
-    EACDetected,
-    ConnectedOffsetsNotFound,
-    Connected,
-    ConnectionLost,
-}
-
-public enum RelicErrors
-{
-    Legitimate,
-    MultipleFromCategory,           // More than one effect from the same category
-    UniqueRelicEffect,              // Effects that only appear on unique relics
-    NotRelicEffect,                 // Effects that should never appear on relics
 }

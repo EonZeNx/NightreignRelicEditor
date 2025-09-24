@@ -2,23 +2,14 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
+using NightreignRelicEditor.Models;
 
-namespace NightreignRelicEditor;
+namespace NightreignRelicEditor.Views;
 
 public partial class MainWindow : Window
 {
@@ -51,7 +42,7 @@ public partial class MainWindow : Window
 
     private void InitUI()
     {
-        listviewRelicEffects.ItemsSource = relicManager.relicEffects;
+        listviewRelicEffects.ItemsSource = relicManager.AllRelicEffects;
         listboxPresets.ItemsSource = relicPresets;
         FilterRelicEffectsBox();
         SetUIConnectionStatus();
@@ -62,42 +53,27 @@ public partial class MainWindow : Window
             buttonImportRelicsFromGame.IsEnabled = false;
         }
 
-        relicTextBlock = new TextBlock[3, 3]
-        {
-            // { textRelic1Slot1, textRelic1Slot2, textRelic1Slot3 },
-            { textRelic2Slot1, textRelic2Slot2, textRelic2Slot3 },
-            { textRelic3Slot1, textRelic3Slot2, textRelic3Slot3 },
-            { textRelic4Slot1, textRelic4Slot2, textRelic4Slot3 },
-        };
+        relicTextBlock = new TextBlock[,] { };
 
-        clearEffectButtons = new Button[3, 3]
-        {
-            // { buttonClearRelic1Slot1, buttonClearRelic1Slot2, buttonClearRelic1Slot3 },
-            { buttonClearRelic2Slot1, buttonClearRelic2Slot2, buttonClearRelic2Slot3 },
-            { buttonClearRelic3Slot1, buttonClearRelic3Slot2, buttonClearRelic3Slot3 },
-            { buttonClearRelic4Slot1, buttonClearRelic4Slot2, buttonClearRelic4Slot3 },
-        };
+        clearEffectButtons = new Button[,] { };
 
-        activeRelics = new CheckBox[]
-        {
-            /*checkRelic1Active,*/ checkRelic2Active, checkRelic3Active, checkRelic4Active,
-        };
+        activeRelics = new CheckBox[] { };
 
         // buttonClearRelic1Slot1.Click += (sender, e) => RemoveRelicEffect(0, 0);
         // buttonClearRelic1Slot2.Click += (sender, e) => RemoveRelicEffect(0, 1);
         // buttonClearRelic1Slot3.Click += (sender, e) => RemoveRelicEffect(0, 2);
-        
-        buttonClearRelic2Slot1.Click += (sender, e) => RemoveRelicEffect(1, 0);
-        buttonClearRelic2Slot2.Click += (sender, e) => RemoveRelicEffect(1, 1);
-        buttonClearRelic2Slot3.Click += (sender, e) => RemoveRelicEffect(1, 2);
-        
-        buttonClearRelic3Slot1.Click += (sender, e) => RemoveRelicEffect(2, 0);
-        buttonClearRelic3Slot2.Click += (sender, e) => RemoveRelicEffect(2, 1);
-        buttonClearRelic3Slot3.Click += (sender, e) => RemoveRelicEffect(2, 2);
-        
-        buttonClearRelic4Slot1.Click += (sender, e) => RemoveRelicEffect(3, 0);
-        buttonClearRelic4Slot2.Click += (sender, e) => RemoveRelicEffect(3, 1);
-        buttonClearRelic4Slot3.Click += (sender, e) => RemoveRelicEffect(3, 2);
+        //
+        // buttonClearRelic2Slot1.Click += (sender, e) => RemoveRelicEffect(1, 0);
+        // buttonClearRelic2Slot2.Click += (sender, e) => RemoveRelicEffect(1, 1);
+        // buttonClearRelic2Slot3.Click += (sender, e) => RemoveRelicEffect(1, 2);
+        //
+        // buttonClearRelic3Slot1.Click += (sender, e) => RemoveRelicEffect(2, 0);
+        // buttonClearRelic3Slot2.Click += (sender, e) => RemoveRelicEffect(2, 1);
+        // buttonClearRelic3Slot3.Click += (sender, e) => RemoveRelicEffect(2, 2);
+        //
+        // buttonClearRelic4Slot1.Click += (sender, e) => RemoveRelicEffect(3, 0);
+        // buttonClearRelic4Slot2.Click += (sender, e) => RemoveRelicEffect(3, 1);
+        // buttonClearRelic4Slot3.Click += (sender, e) => RemoveRelicEffect(3, 2);
 
         for (uint x = 1; x < 4; x++)
             UpdateRelicUIElements(x);
@@ -199,19 +175,19 @@ public partial class MainWindow : Window
 
     private void UpdateRelicUIElements(uint relic)
     {
-        for (uint x = 0; x < 3; x++)
-        {
-            relicTextBlock[relic, x].Text = relicManager.GetEffectDescription(relic, x);
-
-            uint effectId = relicManager.GetRelicEffectId(relic, x);
-
-            if (effectId == 0xFFFFFFFF)
-                clearEffectButtons[relic, x].Visibility = Visibility.Hidden;
-            else
-                clearEffectButtons[relic, x].Visibility = Visibility.Visible;
-        }
-
-        VerifyRelic(relic);
+        // for (uint x = 0; x < 3; x++)
+        // {
+        //     relicTextBlock[relic, x].Text = relicManager.GetEffectDescription(relic, x);
+        //
+        //     uint effectId = relicManager.GetRelicEffectId(relic, x);
+        //
+        //     if (effectId == 0xFFFFFFFF)
+        //         clearEffectButtons[relic, x].Visibility = Visibility.Hidden;
+        //     else
+        //         clearEffectButtons[relic, x].Visibility = Visibility.Visible;
+        // }
+        //
+        // VerifyRelic(relic);
     }
 
     //
@@ -270,7 +246,7 @@ public partial class MainWindow : Window
 
     public void FilterRelicEffectsBox()
     {
-        ICollectionView view = CollectionViewSource.GetDefaultView(relicManager.relicEffects);
+        ICollectionView view = CollectionViewSource.GetDefaultView(relicManager.AllRelicEffects);
         view.Filter = (entry) =>
         {
             RelicEffect re = (RelicEffect)entry;
