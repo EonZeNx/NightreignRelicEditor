@@ -17,7 +17,17 @@ public class RelicManager
 
     private nint relicBaseOffset = 0x2F4;
 
-    private List<RelicEffect>[] playerRelics = new List<RelicEffect>[] { new(), new(), new() };
+    private List<RelicEffect>[] playerRelics = new List<RelicEffect>[]
+    {
+        new(), new(), new(),
+        new(), new(), new(),
+    };
+
+    public Relic[] CharacterRelics { get; private set; } =
+    [
+        new(), new(), new(),
+        new(), new(), new()
+    ];
 
     public List<RelicEffect> AllRelicEffects = [];
 
@@ -83,13 +93,11 @@ public class RelicManager
 
     private bool LocateRelicAddress()
     {
-        using (AOBScanner scanner = new AOBScanner(nightreign.ProcessHandle,
+        using (var scanner = new AOBScanner(nightreign.ProcessHandle,
                    nightreign.BaseAddress,
                    ".text"))
         {
-            IntPtr address;
-
-            address = scanner.FindAddress("8B 03 89 44 24 40 48 8B 0D ?? ?? ?? ?? 48 85 C9");   // CSGaitem
+            var address = scanner.FindAddress("8B 03 89 44 24 40 48 8B 0D ?? ?? ?? ?? 48 85 C9"); // CSGaitem
             if (address != IntPtr.Zero)
                 relicAddress = CalculateLocation(address, 9);
 
@@ -98,10 +106,7 @@ public class RelicManager
                 gameDataManAddress = CalculateLocation(address);
         }
 
-        if (relicAddress != IntPtr.Zero && gameDataManAddress != IntPtr.Zero)
-            return true;
-
-        return false;
+        return relicAddress != IntPtr.Zero && gameDataManAddress != IntPtr.Zero;
     }
 
     private IntPtr CalculateLocation(IntPtr address, int offset = 3)
@@ -113,6 +118,7 @@ public class RelicManager
     {
         if (version[1] == 1)
             relicBaseOffset = 0x2E8;
+        
         relicBaseOffset = 0x2F4;
     }
 
@@ -122,111 +128,163 @@ public class RelicManager
         {
             string line;
             var assembly = Assembly.GetExecutingAssembly();
-            string resource = Assembly.GetExecutingAssembly().GetManifestResourceNames().Single(str => str.EndsWith("reliceffects.tsv"));
-            using (StreamReader sr = new StreamReader(assembly.GetManifestResourceStream(resource)))
+            var resource = Assembly.GetExecutingAssembly().GetManifestResourceNames().Single(str => str.EndsWith("reliceffects.tsv"));
+            using var sr = new StreamReader(assembly.GetManifestResourceStream(resource));
+            while ((line = sr.ReadLine()) != null)
             {
-                while ((line = sr.ReadLine()) != null)
+                var split = line.Split("\t");
+
+                if (split.Length != 5)
+                    continue;
+                
+                var re = new RelicEffect
                 {
-                    string[] split = line.Split("\t");
+                    Id = uint.Parse(split[0]),
+                    Description = split[1],
+                    Category = int.Parse(split[2]),
+                    OrderGroup = int.Parse(split[3])
+                };
 
-                    if (split.Length == 5)
-                    {
-                        RelicEffect re = new RelicEffect();
+                if (uint.TryParse(split[4], out var weight))
+                    re.Slot1Weight = weight;
 
-                        re.EffectId = UInt32.Parse(split[0]);
-                        re.Description = split[1];
-                        re.Category = Int32.Parse(split[2]);
-                        re.OrderGroup = Int32.Parse(split[3]);
-
-                        if (UInt32.TryParse(split[4], out uint weight))
-                            re.Slot1Weight = weight;
-
-                        AllRelicEffects.Add(re);
-                    }
-
-                }
+                AllRelicEffects.Add(re);
             }
         }
         catch (Exception f)
         {
-            MessageBox.Show("Error loading relic effects - " + f.ToString());
+            MessageBox.Show($"Error loading relic effects - {f}");
         }
     }
 
-    private uint GetRelicOffset(uint relic)
+    private uint GetRelicOffset(uint relicSlot)
     {
-        switch (relic)
-        {
-            case 0:
-                return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + relicBaseOffset) * 8 + 8;
-            case 1:
-                return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + relicBaseOffset + 4) * 8 + 8;
-            case 2:
-                return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + relicBaseOffset + 8) * 8 + 8;
-            case 3:
-                return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + relicBaseOffset + 12) * 8 + 8;
-        }
-        return 0;
+        return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + relicBaseOffset + (IntPtr)(4 * relicSlot)) * 8 + 8;
     }
 
-    public void AddRelicEffect(uint relic, RelicEffect effect, bool sort = true)
+    public void AddRelicEffect(uint relicSlot, RelicEffect effect, bool sort = true)
     {
-        if (playerRelics[relic].Count < 3)
-            playerRelics[relic].Add(effect);
+        if (relicSlot >= CharacterRelics.Length)
+            return;
+        
+        Debug.Print($"Adding {effect.Id} to relic {relicSlot}");
+        CharacterRelics[relicSlot].AddEffect(effect, effect.IsCurse);
 
         if (sort)
-            playerRelics[relic] = playerRelics[relic].OrderBy(x => x.OrderGroup).ThenBy(x => x.EffectId).ToList();
+            CharacterRelics[relicSlot].SortEffects();
+    }
+    
+    public void SetRelicEffect(uint relicSlot, uint effectSlot, RelicEffect effect, bool isCurse = false, bool sort = false)
+    {
+        if (relicSlot >= CharacterRelics.Length)
+            return;
+        
+        Debug.Print($"Setting {effect.Id}{(isCurse ? " (curse)" : "")} to relic {relicSlot}");
+        
+        CharacterRelics[relicSlot].SetEffect(effect, effectSlot, isCurse);
+
+        if (sort)
+            CharacterRelics[relicSlot].SortEffects();
     }
 
-    public void RemoveRelicEffect(uint relic, uint slot)
+    public void RemoveRelicEffect(uint relicSlot, uint effectSlot, bool isCurse = false)
     {
-        Debug.Print("relic " + relic + " slot " + slot);
-        if (slot < playerRelics[relic].Count)
-            playerRelics[relic].RemoveAt((int)slot);
+        if (relicSlot >= CharacterRelics.Length)
+            return;
+        
+        if (effectSlot >= CharacterRelics[relicSlot].Effects.Count)
+            return;
+        
+        Debug.Print($"Removing effect slot {effectSlot} from relic {relicSlot}");
+        CharacterRelics[relicSlot].RemoveEffect((int) effectSlot, isCurse);
     }
 
-    public uint GetRelicEffectId(uint relic, uint slot)
+    public uint GetRelicEffectId(uint relicSlot, uint effectSlot, bool isCurse = false)
     {
-        if (slot >= playerRelics[relic].Count)
+        if (relicSlot >= CharacterRelics.Length)
             return 0xFFFFFFFF;
-        return playerRelics[relic][(int)slot].EffectId;
+        
+        if (effectSlot >= CharacterRelics[relicSlot].Effects.Count)
+            return 0xFFFFFFFF;
+        
+        var effect = CharacterRelics[relicSlot].Effects[(int)effectSlot];
+        return (isCurse ? effect.Curse : effect.Effect).Id;
     }
 
-    public void SetRelic(uint relic, uint[] effectId)
+    public string GetRelicEffectDescription(uint relicSlot, uint effectSlot, bool isCurse = false)
     {
-        playerRelics[relic].Clear();
+        if (relicSlot >= CharacterRelics.Length)
+            return "-";
+        
+        if (effectSlot >= CharacterRelics[relicSlot].Effects.Count)
+            return "-";
+        
+        var effect = CharacterRelics[relicSlot].Effects[(int)effectSlot];
+        return (isCurse ? effect.Curse : effect.Effect).Description;
+    }
 
-        for (uint x = 0; x < 3; x++)
+    public void SetRelic(uint relicSlot, RelicEffectSlot[] effects)
+    {
+        if (relicSlot >= CharacterRelics.Length)
+            return;
+
+        CharacterRelics[relicSlot].ClearSlot();
+
+        for (uint i = 0; i < 3; i += 1)
         {
-            RelicEffect? effect = null;
-
-            if (effectId[x] != 0xFFFFFFFF)
-                effect = AllRelicEffects.FirstOrDefault(i => i.EffectId == effectId[x]);
-
+            var effect = AllRelicEffects.FirstOrDefault(x => x.Id == effects[i].Effect.Id);
             if (effect != null)
-                AddRelicEffect(relic, effect);
+            {
+                SetRelicEffect(relicSlot, i, effect);
+            }
+
+            var curse = AllRelicEffects.FirstOrDefault(x => x.Id == effects[i].Curse.Id);
+            if (curse != null)
+            {
+                SetRelicEffect(relicSlot, i, curse, true);
+            }
+        }
+        
+        CharacterRelics[relicSlot].SortEffects();
+    }
+
+    public void SetRelicInGame(uint relicSlot)
+    {
+        var relicOffset = (nint)GetRelicOffset(relicSlot);
+        const IntPtr slotOffset = 0x18;
+
+        for (uint effectSlot = 0; effectSlot < 3; effectSlot += 1)
+        {
+            var preRelicOffset = relicAddress + relicOffset;
+            var readPointer = (IntPtr) nightreign.ReadUInt64(preRelicOffset);
+            var offset = readPointer + (IntPtr) (effectSlot * 4) + slotOffset;
+            
+            nightreign.WriteUInt32(offset, GetRelicEffectId(relicSlot, effectSlot));
+            nightreign.WriteUInt32(offset + 0x28, GetRelicEffectId(relicSlot, effectSlot, true));
         }
     }
 
-    public void SetRelicInGame(uint relic)
+    public void GetRelicFromGame(uint relicSlot)
     {
-        nint relicOffset = (nint)GetRelicOffset(relic);
-        nint slotOffset = 0x18;
+        var relicOffset = (nint) GetRelicOffset(relicSlot);
+        const IntPtr slotOffset = 0x18;
 
-        for (uint slot = 0; slot < 3; slot++)
-            nightreign.WriteUInt32((IntPtr)nightreign.ReadUInt64(relicAddress + relicOffset) + (IntPtr)(slot * 4) + slotOffset, GetRelicEffectId(relic, slot));
-    }
+        var effects = new RelicEffectSlot[] { new(), new(), new() };
+        for (uint effectSlot = 0; effectSlot < 3; effectSlot += 1)
+        {
+            var preRelicOffset = relicAddress + relicOffset;
+            var readPointer = (IntPtr) nightreign.ReadUInt64(preRelicOffset);
+            var offset = readPointer + (IntPtr) ((effectSlot) * 4) + slotOffset;
+            var curseOffset = offset + 0x28;
+            
+            var effectId = nightreign.ReadUInt32(offset);
+            effects[effectSlot].Effect.Id = effectId;
+            
+            var curseId = nightreign.ReadUInt32(curseOffset);
+            effects[effectSlot].Curse.Id = curseId;
+        }
 
-    public void GetRelicFromGame(uint relic)
-    {
-        uint[] effectId = new uint[3];
-        nint relicOffset = (nint)GetRelicOffset(relic);
-        nint slotOffset = 0x18;
-
-        for (uint slot = 0; slot < 3; slot++)
-            effectId[slot] = nightreign.ReadUInt32((IntPtr)nightreign.ReadUInt64(relicAddress + (IntPtr)relicOffset) + (IntPtr)(slot * 4) + slotOffset);
-
-        SetRelic(relic, effectId);
+        SetRelic(relicSlot, effects);
     }
 
     //
@@ -235,60 +293,54 @@ public class RelicManager
 
     public bool VerifyEffectIsRelicEffect(RelicEffect effect, bool includeUnique = false)
     {
-
         if (effect.Slot1Weight != 0)
             return true;
 
-        if (effect.EffectId is >= 6_000_000 and < 8_000_000 || (includeUnique && effect.EffectId < 100_000))
+        if (effect.Id is >= 6_000_000 and < 8_000_000 || (includeUnique && effect.Id < 100_000))
             return true;
 
         return false;
 
     }
 
-    public RelicErrors[] VerifyRelic(uint relic)
+    public RelicErrors[] VerifyRelic(uint relicSlot)
     {
-        Debug.Print("Verifying relic " + relic);
+        Debug.Print($"Verifying relic {relicSlot}");
 
-        RelicErrors[] validator = new RelicErrors[3];
+        var validator = new RelicErrors[6];
 
-        for (int x = 0; x < playerRelics[relic].Count; x++)
+        for (var i = 0; i < CharacterRelics[relicSlot].Effects.Count; i++)
         {
-            validator[x] = RelicErrors.Legitimate;
+            var effect = CharacterRelics[relicSlot].Effects[i].Effect;
+            validator[i] = RelicErrors.Legitimate;
 
-            Debug.Print(playerRelics[relic][x].Slot1Weight + "");
+            Debug.Print( $"{effect.Id}: {effect.Description}");
 
-            if (!playerRelics[relic][x].IsDeepEffect && playerRelics[relic][x].Slot1Weight == 0)
+            if (!effect.IsDeepEffect && effect.Slot1Weight == 0)
             {
-                if (VerifyEffectIsRelicEffect(playerRelics[relic][x], true))
-                    validator[x] = RelicErrors.UniqueRelicEffect;
+                if (VerifyEffectIsRelicEffect(effect, true))
+                    validator[i] = RelicErrors.UniqueRelicEffect;
                 else
                 {
-                    validator[x] = RelicErrors.NotRelicEffect;
+                    validator[i] = RelicErrors.NotRelicEffect;
                     continue;
                 }
             }
 
                 
-            for (int y = 0; y < playerRelics[relic].Count; y++)
+            for (var j = 0; j < CharacterRelics[relicSlot].Effects.Count; j++)
             {
-                if (x != y)
-                {
-                    if (playerRelics[relic][x].Category == playerRelics[relic][y].Category)
-                    {
-                        validator[x] = RelicErrors.MultipleFromCategory;
-                        break;
-                    }
-                }
+                if (i == j)
+                    continue;
+                
+                var other =  CharacterRelics[relicSlot].Effects[j].Effect;
+                if (other.Category != effect.Category)
+                    continue;
+                
+                validator[i] = RelicErrors.MultipleFromCategory;
+                break;
             }
         }
         return validator;
-    }
-
-    public string GetEffectDescription(uint relic, uint slot)
-    {
-        if (slot < playerRelics[relic].Count)
-            return playerRelics[relic][(int)slot].Description;
-        return "-";
     }
 }

@@ -8,25 +8,28 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using NightreignRelicEditor.Models;
+using NightreignRelicEditor.ViewModels;
+using NightreignRelicEditor.Views.Controls;
 
 namespace NightreignRelicEditor.Views;
 
 public partial class MainWindow : Window
 {
-    private RelicManager relicManager;
     TextBlock[,] relicTextBlock;
     Button[,] clearEffectButtons;
     CheckBox[] activeRelics;
+    private RelicData[] allRelics;
+
+    private MainWindowViewModel viewModel;
 
     System.Windows.Threading.DispatcherTimer monitorTimer = new System.Windows.Threading.DispatcherTimer();
 
     public MainWindow()
     {
         InitializeComponent();
-
         
-
-        relicManager = new RelicManager();
+        viewModel = (MainWindowViewModel) DataContext;
+        
         InitUI();
         LoadSettingsFile();
         LoadPresetFile();
@@ -42,12 +45,12 @@ public partial class MainWindow : Window
 
     private void InitUI()
     {
-        listviewRelicEffects.ItemsSource = relicManager.AllRelicEffects;
+        listviewRelicEffects.ItemsSource = viewModel.RelicManager.AllRelicEffects;
         listboxPresets.ItemsSource = relicPresets;
         FilterRelicEffectsBox();
         SetUIConnectionStatus();
 
-        if (relicManager.ConnectionStatus != ConnectionStates.Connected)
+        if (viewModel.RelicManager.ConnectionStatus != ConnectionStates.Connected)
         {
             buttonSetRelicsInGame.IsEnabled = false;
             buttonImportRelicsFromGame.IsEnabled = false;
@@ -82,9 +85,9 @@ public partial class MainWindow : Window
     private void Connect()
     {
         buttonConnect.IsEnabled = false;
-        relicManager.ConnectToNightreign();
+        viewModel.RelicManager.ConnectToNightreign();
 
-        if (relicManager.ConnectionStatus == ConnectionStates.Connected)            
+        if (viewModel.RelicManager.ConnectionStatus == ConnectionStates.Connected)            
             monitorTimer.Start();
         else
             buttonConnect.IsEnabled = true;
@@ -94,7 +97,7 @@ public partial class MainWindow : Window
 
     private void monitorTimer_Tick(object? sender, EventArgs e)
     {
-        ConnectionStates cs = relicManager.ConnectionStatus;
+        ConnectionStates cs = viewModel.RelicManager.ConnectionStatus;
 
         if (cs != ConnectionStates.Connected)
         {
@@ -105,7 +108,7 @@ public partial class MainWindow : Window
 
     private void SetUIConnectionStatus()
     {
-        if (relicManager.ConnectionStatus == ConnectionStates.Connected)
+        if (viewModel.RelicManager.ConnectionStatus == ConnectionStates.Connected)
         {
             buttonConnect.IsEnabled = false;
             buttonSetRelicsInGame.IsEnabled = true;
@@ -123,7 +126,7 @@ public partial class MainWindow : Window
             textConnectionStatus.Foreground = Brushes.Red;
         }
 
-        switch (relicManager.ConnectionStatus)
+        switch (viewModel.RelicManager.ConnectionStatus)
         {
             
             case ConnectionStates.EACDetected:
@@ -160,7 +163,7 @@ public partial class MainWindow : Window
 
     private void AddRelicEffect(uint relic, RelicEffect effect)
     {
-        relicManager.AddRelicEffect(relic, effect);
+        viewModel.RelicManager.AddRelicEffect(relic, effect);
         UpdateRelicUIElements(relic);
         
     }
@@ -168,13 +171,15 @@ public partial class MainWindow : Window
     private void RemoveRelicEffect(uint relic, uint slot)
     {
         Debug.Print("relic " + relic + " slot " + slot);
-        relicManager.RemoveRelicEffect(relic, slot);
+        viewModel.RelicManager.RemoveRelicEffect(relic, slot);
         UpdateRelicUIElements(relic);
 
     }
 
     private void UpdateRelicUIElements(uint relic)
     {
+        var relicDataElement = (RelicData?) FindName($"RelicDataSlot{relic}");
+        relicDataElement?.UpdateUIElements();
         // for (uint x = 0; x < 3; x++)
         // {
         //     relicTextBlock[relic, x].Text = relicManager.GetEffectDescription(relic, x);
@@ -196,7 +201,7 @@ public partial class MainWindow : Window
 
     private void VerifyRelic(uint relic)
     {
-        RelicErrors[] errors = relicManager.VerifyRelic(relic);
+        RelicErrors[] errors = viewModel.RelicManager.VerifyRelic(relic);
 
         for (uint slot = 0; slot < 3; slot++)
         {
@@ -246,13 +251,13 @@ public partial class MainWindow : Window
 
     public void FilterRelicEffectsBox()
     {
-        ICollectionView view = CollectionViewSource.GetDefaultView(relicManager.AllRelicEffects);
+        ICollectionView view = CollectionViewSource.GetDefaultView(viewModel.RelicManager.AllRelicEffects);
         view.Filter = (entry) =>
         {
             RelicEffect re = (RelicEffect)entry;
 
             return re.Description.ToLower().Contains(textboxFilterEffects.Text.ToLower())
-                        & relicManager.VerifyEffectIsRelicEffect(re, (bool)checkboxShowUnique.IsChecked);
+                        & viewModel.RelicManager.VerifyEffectIsRelicEffect(re, (bool)checkboxShowUnique.IsChecked);
         };
     }
 
@@ -262,7 +267,7 @@ public partial class MainWindow : Window
 
     private void Button_SetRelicsInGame(object sender, RoutedEventArgs e)
     {
-        if (relicManager.ConnectionStatus != ConnectionStates.Connected)
+        if (viewModel.RelicManager.ConnectionStatus != ConnectionStates.Connected)
             return;
 
         for (uint x = 0; x < activeRelics.Length; x++)
@@ -270,7 +275,7 @@ public partial class MainWindow : Window
             if (!(bool)activeRelics[x].IsChecked)
                 continue;
 
-            RelicErrors[] error = relicManager.VerifyRelic(x);
+            RelicErrors[] error = viewModel.RelicManager.VerifyRelic(x);
 
             for (uint y = 0; y < 3; y++)
             {
@@ -290,23 +295,20 @@ public partial class MainWindow : Window
         {
             if ((bool)activeRelics[relic].IsChecked)
             {
-                relicManager.SetRelicInGame(relic);
+                viewModel.RelicManager.SetRelicInGame(relic);
             }
         }
     }
 
     private void Button_GetRelicsFromGame(object sender, RoutedEventArgs e)
     {
-        if (relicManager.ConnectionStatus != ConnectionStates.Connected)
+        if (viewModel.RelicManager.ConnectionStatus != ConnectionStates.Connected)
             return;
 
-        for (uint x = 0; x < activeRelics.Length; x++)
+        for (uint x = 0; x < 6; x++)
         {
-            if ((bool)activeRelics[x].IsChecked)
-            {
-                relicManager.GetRelicFromGame(x);
-                UpdateRelicUIElements(x);
-            }
+            viewModel.RelicManager.GetRelicFromGame(x);
+            UpdateRelicUIElements(x);
         }
     }
 
@@ -391,7 +393,7 @@ public partial class MainWindow : Window
                 for (uint y = 0; y < 3; y++)
                     effectId[y] = preset.EffectId[x, y];
 
-                relicManager.SetRelic(x, effectId);
+                // viewModel.RelicManager.SetRelic(x, effectId);
                 UpdateRelicUIElements(x);
             }
         }
@@ -410,7 +412,7 @@ public partial class MainWindow : Window
         {
             for (uint y = 0; y < 3; y++)
             {
-                relic.EffectId[x, y] = relicManager.GetRelicEffectId(x, y);
+                relic.EffectId[x, y] = viewModel.RelicManager.GetRelicEffectId(x, y);
             }
         }
         relicPresets.Add(relic);
@@ -434,7 +436,7 @@ public partial class MainWindow : Window
         {
             for (uint y = 0; y < 3; y++)
             {
-                preset.EffectId[x, y] = relicManager.GetRelicEffectId(x, y);
+                preset.EffectId[x, y] = viewModel.RelicManager.GetRelicEffectId(x, y);
             }
         }
 

@@ -10,7 +10,7 @@ partial class RelicData : UserControl
 {
     public static readonly DependencyProperty RelicManagerProperty =
         DependencyProperty.Register(nameof(RelicManager), typeof(RelicManager), typeof(RelicData), new PropertyMetadata(null));
-    public RelicManager RelicManager
+    public RelicManager? RelicManager
     {
         get => (RelicManager) GetValue(RelicManagerProperty);
         set => SetValue(RelicManagerProperty, value);
@@ -24,11 +24,14 @@ partial class RelicData : UserControl
         get => (uint) GetValue(RelicSlotProperty);
         set => SetValue(RelicSlotProperty, value);
     }
+
+    // slot 4 - 6 inclusive
+    public bool IsDeepRelic => RelicSlot > 2;
+    public string RelicName => $"{(IsDeepRelic ? "Deep " : "")}Relic {RelicSlot + 1}";
     
-    public string RelicName => $"Relic {RelicSlot + 1}";
     
-    
-    protected TextBlock[] relicTextBlock;
+    protected TextBlock[] relicEffectTextBlocks;
+    protected TextBlock[] relicCurseTextBlocks;
     protected Button[] clearEffectButtons;
     
     
@@ -36,16 +39,20 @@ partial class RelicData : UserControl
     {
         InitializeComponent();
         
-        relicTextBlock = [textSlot1, textSlot2, textSlot3];
-        clearEffectButtons = [buttonClearSlot1, buttonClearSlot2, buttonClearSlot3];
+        relicEffectTextBlocks = [textSlot1, textSlot2, textSlot3];
+        relicCurseTextBlocks = [textSlot1Curse, textSlot2Curse, textSlot3Curse];
+        clearEffectButtons = [buttonSlot1Clear, buttonSlot2Clear, buttonSlot3Clear];
         
-        buttonClearSlot1.Click += (sender, e) => RemoveRelicEffect(0);
-        buttonClearSlot2.Click += (sender, e) => RemoveRelicEffect(1);
-        buttonClearSlot3.Click += (sender, e) => RemoveRelicEffect(2);
+        buttonSlot1Clear.Click += (sender, e) => RemoveRelicEffect(0);
+        buttonSlot2Clear.Click += (sender, e) => RemoveRelicEffect(1);
+        buttonSlot3Clear.Click += (sender, e) => RemoveRelicEffect(2);
     }
     
     private void RemoveRelicEffect(uint slot)
     {
+        if (RelicManager is null)
+            return;
+        
         Debug.Print("relic " + RelicSlot + " slot " + slot);
         RelicManager.RemoveRelicEffect(RelicSlot, slot);
         UpdateUIElements();
@@ -54,6 +61,9 @@ partial class RelicData : UserControl
 
     private void VerifyRelic()
     {
+        if (RelicManager is null)
+            return;
+        
         var errors = RelicManager.VerifyRelic(RelicSlot);
 
         for (uint slot = 0; slot < 3; slot++)
@@ -61,8 +71,8 @@ partial class RelicData : UserControl
             switch (errors[slot])
             {
                 case RelicErrors.Legitimate:
-                    relicTextBlock[slot].Foreground = Brushes.Black;
-                    relicTextBlock[slot].ToolTip = null;
+                    relicEffectTextBlocks[slot].Foreground = Brushes.Black;
+                    relicEffectTextBlocks[slot].ToolTip = null;
                     break;
                 case RelicErrors.NotRelicEffect:
                     SetTextVerify(slot, "Effect is not a valid relic effect.", Brushes.Red);
@@ -79,15 +89,19 @@ partial class RelicData : UserControl
     
     private void SetTextVerify(uint slot, string errorText, Brush colour)
     {
-        relicTextBlock[slot].Foreground = colour;
-        relicTextBlock[slot].ToolTip = errorText;
+        relicEffectTextBlocks[slot].Foreground = colour;
+        relicEffectTextBlocks[slot].ToolTip = errorText;
     }
     
     public void UpdateUIElements()
     {
+        if (RelicManager is null)
+            return;
+        
         for (uint x = 0; x < 3; x++)
         {
-            relicTextBlock[x].Text = RelicManager.GetEffectDescription(RelicSlot, x);
+            relicEffectTextBlocks[x].Text = RelicManager.GetRelicEffectDescription(RelicSlot, x);
+            relicCurseTextBlocks[x].Text = RelicManager.GetRelicEffectDescription(RelicSlot, x, true);
 
             var effectId = RelicManager.GetRelicEffectId(RelicSlot, x);
 

@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NightreignRelicEditor"
         xmlns:controls="clr-namespace:NightreignRelicEditor.Views.Controls"
+        xmlns:viewModels="clr-namespace:NightreignRelicEditor.ViewModels"
         mc:Ignorable="d"
         Title="Nightreign Relic Editor" Width="1400" Height="700" ResizeMode="CanResize">
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -24,7 +28,7 @@
                         <ListView x:Name="listviewRelicEffects" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,62,10,10">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Id" Width="60" DisplayMemberBinding="{Binding Path=EffectId}"/>
+                                    <GridViewColumn Header="Id" Width="60" DisplayMemberBinding="{Binding Path=Id}"/>
                                     <GridViewColumn Header="Effect" Width="310" DisplayMemberBinding="{Binding Path=Description}"/>
                                     <GridViewColumn Header="Category" Width="60" DisplayMemberBinding="{Binding Path=Category}"/>
                                     <GridViewColumn Header="Order" Width="60" DisplayMemberBinding="{Binding Path=OrderGroup}"/>
@@ -113,21 +117,25 @@
                 </Grid.RowDefinitions>
                 
                 
-                <controls:RelicData RelicManager="{Binding relicManager}" RelicSlot="0"
+                <controls:RelicData x:Name="RelicDataSlot0"
+                                    RelicManager="{Binding RelicManager}" RelicSlot="0"
                                     Grid.Row="0" Grid.Column="0"/>
-                <controls:RelicData RelicManager="{Binding relicManager}" RelicSlot="3"
-                                    Grid.Row="0" Grid.Column="1"/>
-                
-                
-                <controls:RelicData RelicManager="{Binding relicManager}" RelicSlot="1"
+                <controls:RelicData x:Name="RelicDataSlot1"
+                                    RelicManager="{Binding RelicManager}" RelicSlot="1"
                                     Grid.Row="1" Grid.Column="0"/>
-                <controls:RelicData RelicManager="{Binding relicManager}" RelicSlot="4"
-                                    Grid.Row="1" Grid.Column="1"/>
-                
-                
-                <controls:RelicData RelicManager="{Binding relicManager}" RelicSlot="2"
+                <controls:RelicData x:Name="RelicDataSlot2"
+                                    RelicManager="{Binding RelicManager}" RelicSlot="2"
                                     Grid.Row="2" Grid.Column="0"/>
-                <controls:RelicData RelicManager="{Binding relicManager}" RelicSlot="5"
+                
+                
+                <controls:RelicData x:Name="RelicDataSlot3"
+                                    RelicManager="{Binding RelicManager}" RelicSlot="3"
+                                    Grid.Row="0" Grid.Column="1"/>
+                <controls:RelicData x:Name="RelicDataSlot4"
+                                    RelicManager="{Binding RelicManager}" RelicSlot="4"
+                                    Grid.Row="1" Grid.Column="1"/>
+                <controls:RelicData x:Name="RelicDataSlot5"
+                                    RelicManager="{Binding RelicManager}" RelicSlot="5"
                                     Grid.Row="2" Grid.Column="1"/>
 
                 
