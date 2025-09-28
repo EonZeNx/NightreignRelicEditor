@@ -16,7 +16,6 @@ partial class RelicData : UserControl
         set => SetValue(RelicManagerProperty, value);
     }
     
-    
     public static readonly DependencyProperty RelicSlotProperty =
         DependencyProperty.Register(nameof(RelicSlot), typeof(uint), typeof(RelicData), new PropertyMetadata(uint.MinValue));
     public uint RelicSlot

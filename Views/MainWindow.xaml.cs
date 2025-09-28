@@ -46,9 +46,9 @@ public partial class MainWindow : Window
 
     private void InitUI()
     {
-        listviewRelicEffects.ItemsSource = viewModel.RelicManager.AllRelicEffects;
+        // listviewRelicEffects.ItemsSource = viewModel.RelicManager.AllRelicEffects;
         listboxPresets.ItemsSource = relicPresets;
-        FilterRelicEffectsBox();
+        // FilterRelicEffectsBox();
         SetUIConnectionStatus();
 
         if (viewModel.RelicManager.ConnectionStatus != ConnectionStates.Connected)
@@ -140,10 +140,10 @@ public partial class MainWindow : Window
 
     private void AddRelicEffectFromList(uint relic)
     {
-        RelicEffect selected = (RelicEffect)listviewRelicEffects.SelectedItem;
-
-        if (selected != null)
-            AddRelicEffect(relic, selected);
+        // RelicEffect selected = (RelicEffect) listviewRelicEffects.SelectedItem;
+        //
+        // if (selected != null)
+        //     AddRelicEffect(relic, selected);
     }
 
     private void AddRelicEffect(uint relic, RelicEffect effect)
@@ -202,36 +202,6 @@ public partial class MainWindow : Window
         relicTextBlock[relic, slot].ToolTip = errorText;
     }
 
-    //
-    // Filter Relic Effects
-    //
-
-    private void textboxFilterEffects_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        FilterRelicEffectsBox();
-    }
-
-    private void ToggleShowUniqueEffects(object sender, RoutedEventArgs e)
-    {
-        FilterRelicEffectsBox();
-    }
-
-    private void Button_ClearEffectFilter(object sender, RoutedEventArgs e)
-    {
-        textboxFilterEffects.Text = "";
-    }
-
-    public void FilterRelicEffectsBox()
-    {
-        ICollectionView view = CollectionViewSource.GetDefaultView(viewModel.RelicManager.AllRelicEffects);
-        view.Filter = (entry) =>
-        {
-            RelicEffect re = (RelicEffect)entry;
-
-            return re.Description.ToLower().Contains(textboxFilterEffects.Text.ToLower())
-                        & viewModel.RelicManager.VerifyEffectIsRelicEffect(re, (bool)checkboxShowUnique.IsChecked);
-        };
-    }
 
     //
     // Main UI Buttons

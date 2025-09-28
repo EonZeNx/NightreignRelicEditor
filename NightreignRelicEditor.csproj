@@ -37,4 +37,8 @@
     <Folder Include="Resources\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="WPFConverters" Version="1.0.1" />
+  </ItemGroup>
+
 </Project>

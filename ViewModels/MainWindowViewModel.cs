@@ -18,8 +18,16 @@ public class MainWindowViewModel : INotifyPropertyChanged
         set { relicManager = value; OnPropertyChanged(); }
     }
 
+    private (int, int) selectedRelicEffectSlot;
+    public (int, int) SelectedRelicEffectSlot
+    {
+        get => selectedRelicEffectSlot;
+        set { selectedRelicEffectSlot = value; OnPropertyChanged(); }
+    }
+
     public MainWindowViewModel()
     {
         relicManager = new RelicManager();
+        selectedRelicEffectSlot = (0, 0);
     }
 }
