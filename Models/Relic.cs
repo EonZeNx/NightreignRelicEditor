@@ -5,8 +5,16 @@ public class Relic
     public List<RelicEffectSlot> Effects { get; set; } = [new(), new(), new()];
     public bool IsDeepRelic { get; set; } = false;
 
+    public Relic(bool isDeepRelic = false)
+    {
+        IsDeepRelic = isDeepRelic;
+    }
+
     public bool AddEffect(RelicEffect effect,  bool isCurse = false)
     {
+        if (!IsDeepRelic && (effect.IsCurse || isCurse))
+            return false;
+        
         if (Effects.Count >= 3)
             return false;
 
@@ -30,6 +38,9 @@ public class Relic
 
     public bool SetEffect(RelicEffect effect, uint slot, bool isCurse = false)
     {
+        if (!IsDeepRelic && (effect.IsCurse || isCurse))
+            return false;
+        
         if (slot >= Effects.Count)
             Effects.Add(new RelicEffectSlot());
         

@@ -26,7 +26,7 @@ public class RelicManager
     public Relic[] CharacterRelics { get; private set; } =
     [
         new(), new(), new(),
-        new(), new(), new()
+        new(true), new(true), new(true)
     ];
 
     public List<RelicEffect> AllRelicEffects = [];
