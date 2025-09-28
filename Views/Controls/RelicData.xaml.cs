@@ -25,6 +25,8 @@ partial class RelicData : UserControl
         set => SetValue(RelicSlotProperty, value);
     }
 
+    public bool IsActive { get; set; } = true;
+
     // slot 4 - 6 inclusive
     public bool IsDeepRelic => RelicSlot > 2;
     public string RelicName => $"{(IsDeepRelic ? "Deep " : "")}Relic {RelicSlot + 1}";

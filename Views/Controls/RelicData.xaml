@@ -22,55 +22,55 @@
             </Grid.RowDefinitions>
 
             <!-- Header -->
-            <CheckBox x:Name="checkRelic1Active"
-                      Grid.Row="0" Grid.ColumnSpan="3"
+            <CheckBox x:Name="checkboxRelic1Active"
+                      Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2"
                       Content="{Binding RelicName, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                      IsChecked="True"
+                      IsChecked="{Binding IsActive, RelativeSource={RelativeSource AncestorType=UserControl}}"
                       FontWeight="Bold" />
 
             <!-- Slot 1 -->
             <Button x:Name="buttonSlot1Clear"
-                    Grid.Row="1" Grid.Column="0"
-                    Content="x" Width="20" Margin="0,0,5,0"/>
-            <TextBlock x:Name="textSlot1"
+                    Grid.Row="1" Grid.Column="0" Margin="2"
+                    Content="x" Width="20"/>
+            <TextBlock x:Name="textSlot1" Margin="2"
                        Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                        Text="-" TextWrapping="Wrap"/>
             
             <Button x:Name="buttonSlot1CurseClear"
-                    Grid.Row="2" Grid.Column="1"
-                    Content="x" Width="20" Margin="0,0,5,0"/>
+                    Grid.Row="2" Grid.Column="1" Margin="2"
+                    Content="x" Width="20"/>
             <TextBlock x:Name="textSlot1Curse"
-                       Grid.Row="2" Grid.Column="2"
+                       Grid.Row="2" Grid.Column="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
 
             <!-- Slot 2 -->
             <Button x:Name="buttonSlot2Clear"
-                    Grid.Row="3" Grid.Column="0"
-                    Content="x" Width="20" Margin="0,0,5,0"/>
+                    Grid.Row="3" Grid.Column="0" Margin="2"
+                    Content="x" Width="20"/>
             <TextBlock x:Name="textSlot2"
-                       Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                       Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
             
             <Button x:Name="buttonSlot2CurseClear"
-                    Grid.Row="4" Grid.Column="1"
-                    Content="x" Width="20" Margin="0,0,5,0"/>
+                    Grid.Row="4" Grid.Column="1" Margin="2"
+                    Content="x" Width="20"/>
             <TextBlock x:Name="textSlot2Curse"
-                       Grid.Row="4" Grid.Column="2"
+                       Grid.Row="4" Grid.Column="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
 
             <!-- Slot 3 -->
             <Button x:Name="buttonSlot3Clear"
-                    Grid.Row="5" Grid.Column="0"
-                    Content="x" Width="20" Margin="0,0,5,0"/>
+                    Grid.Row="5" Grid.Column="0" Margin="2"
+                    Content="x" Width="20"/>
             <TextBlock x:Name="textSlot3"
-                       Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
+                       Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
             
             <Button x:Name="buttonSlot3CurseClear"
-                    Grid.Row="6" Grid.Column="1"
-                    Content="x" Width="20" Margin="0,0,5,0"/>
+                    Grid.Row="6" Grid.Column="1" Margin="2"
+                    Content="x" Width="20"/>
             <TextBlock x:Name="textSlot3Curse"
-                       Grid.Row="6" Grid.Column="2"
+                       Grid.Row="6" Grid.Column="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
         </Grid>
     </Border>

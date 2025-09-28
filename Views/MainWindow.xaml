@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:NightreignRelicEditor.Views.Controls"
         xmlns:viewModels="clr-namespace:NightreignRelicEditor.ViewModels"
         mc:Ignorable="d"
-        Title="Nightreign Relic Editor" Width="1400" Height="700" ResizeMode="CanResize">
+        Title="Nightreign Relic Editor" Width="1400" Height="800" ResizeMode="CanResize">
     <Window.DataContext>
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>

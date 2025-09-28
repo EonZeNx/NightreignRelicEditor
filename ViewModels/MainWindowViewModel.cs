@@ -6,19 +6,20 @@ namespace NightreignRelicEditor.ViewModels;
 
 public class MainWindowViewModel : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-    void OnPropertyChanged([CallerMemberName] string name = null) =>
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void OnPropertyChanged([CallerMemberName] string? name = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     
-    private RelicManager _relicManager;
+    private RelicManager relicManager;
     public RelicManager RelicManager
     {
-        get => _relicManager;
-        set { _relicManager = value; OnPropertyChanged(); }
+        get => relicManager;
+        set { relicManager = value; OnPropertyChanged(); }
     }
 
     public MainWindowViewModel()
     {
-        RelicManager = new RelicManager();
+        relicManager = new RelicManager();
     }
 }

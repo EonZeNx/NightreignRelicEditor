@@ -21,6 +21,7 @@ public partial class MainWindow : Window
     private RelicData[] allRelics;
 
     private MainWindowViewModel viewModel;
+    private const int relicSlotCount = 6;
 
     System.Windows.Threading.DispatcherTimer monitorTimer = new System.Windows.Threading.DispatcherTimer();
 
@@ -62,23 +63,7 @@ public partial class MainWindow : Window
 
         activeRelics = new CheckBox[] { };
 
-        // buttonClearRelic1Slot1.Click += (sender, e) => RemoveRelicEffect(0, 0);
-        // buttonClearRelic1Slot2.Click += (sender, e) => RemoveRelicEffect(0, 1);
-        // buttonClearRelic1Slot3.Click += (sender, e) => RemoveRelicEffect(0, 2);
-        //
-        // buttonClearRelic2Slot1.Click += (sender, e) => RemoveRelicEffect(1, 0);
-        // buttonClearRelic2Slot2.Click += (sender, e) => RemoveRelicEffect(1, 1);
-        // buttonClearRelic2Slot3.Click += (sender, e) => RemoveRelicEffect(1, 2);
-        //
-        // buttonClearRelic3Slot1.Click += (sender, e) => RemoveRelicEffect(2, 0);
-        // buttonClearRelic3Slot2.Click += (sender, e) => RemoveRelicEffect(2, 1);
-        // buttonClearRelic3Slot3.Click += (sender, e) => RemoveRelicEffect(2, 2);
-        //
-        // buttonClearRelic4Slot1.Click += (sender, e) => RemoveRelicEffect(3, 0);
-        // buttonClearRelic4Slot2.Click += (sender, e) => RemoveRelicEffect(3, 1);
-        // buttonClearRelic4Slot3.Click += (sender, e) => RemoveRelicEffect(3, 2);
-
-        for (uint x = 1; x < 4; x++)
+        for (uint x = 1; x < relicSlotCount; x++)
             UpdateRelicUIElements(x);
     }
 
@@ -180,19 +165,6 @@ public partial class MainWindow : Window
     {
         var relicDataElement = (RelicData?) FindName($"RelicDataSlot{relic}");
         relicDataElement?.UpdateUIElements();
-        // for (uint x = 0; x < 3; x++)
-        // {
-        //     relicTextBlock[relic, x].Text = relicManager.GetEffectDescription(relic, x);
-        //
-        //     uint effectId = relicManager.GetRelicEffectId(relic, x);
-        //
-        //     if (effectId == 0xFFFFFFFF)
-        //         clearEffectButtons[relic, x].Visibility = Visibility.Hidden;
-        //     else
-        //         clearEffectButtons[relic, x].Visibility = Visibility.Visible;
-        // }
-        //
-        // VerifyRelic(relic);
     }
 
     //
@@ -269,17 +241,18 @@ public partial class MainWindow : Window
     {
         if (viewModel.RelicManager.ConnectionStatus != ConnectionStates.Connected)
             return;
-
-        for (uint x = 0; x < activeRelics.Length; x++)
+        
+        for (uint i = 0; i < relicSlotCount; i++)
         {
-            if (!(bool)activeRelics[x].IsChecked)
+            var relicDataElement = (RelicData?) FindName($"RelicDataSlot{i}");
+            if (relicDataElement is { IsActive: false })
                 continue;
 
-            RelicErrors[] error = viewModel.RelicManager.VerifyRelic(x);
+            var errors = viewModel.RelicManager.VerifyRelic(i);
 
-            for (uint y = 0; y < 3; y++)
+            foreach (var error in errors)
             {
-                switch (error[y])
+                switch (error)
                 {
                     case RelicErrors.NotRelicEffect:
                         MessageBox.Show("Cannot inject relic with illegal effects.");
@@ -291,12 +264,13 @@ public partial class MainWindow : Window
             }
         }
 
-        for (uint relic = 0; relic < activeRelics.Length; relic++)
+        for (uint i = 0; i < relicSlotCount; i++)
         {
-            if ((bool)activeRelics[relic].IsChecked)
-            {
-                viewModel.RelicManager.SetRelicInGame(relic);
-            }
+            var relicDataElement = (RelicData?) FindName($"RelicDataSlot{i}");
+            if (relicDataElement is { IsActive: false })
+                continue;
+            
+            viewModel.RelicManager.SetRelicInGame(i);
         }
     }
 
