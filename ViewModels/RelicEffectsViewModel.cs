@@ -33,7 +33,7 @@ public class RelicEffectsViewModel : INotifyPropertyChanged
     public int SelectedRelicSlot
     {
         get => selectedRelicSlot;
-        set { selectedRelicSlot = value; OnPropertyChanged(); }
+        set { selectedRelicSlot = value; OnPropertyChanged(); OnPropertyChanged(nameof(CanSetEffect)); }
     }
     
     
@@ -51,8 +51,11 @@ public class RelicEffectsViewModel : INotifyPropertyChanged
     public int SelectedRelicEffectSlot
     {
         get => selectedRelicEffectSlot;
-        set { selectedRelicEffectSlot = value; OnPropertyChanged(); }
+        set { selectedRelicEffectSlot = value; OnPropertyChanged(); OnPropertyChanged(nameof(CanSetEffect)); }
     }
+
+
+    public bool CanSetEffect => (SelectedRelicSlot < 3 && SelectedRelicEffectSlot < 3) || SelectedRelicSlot >= 3;
 
     public RelicEffectsViewModel()
     {

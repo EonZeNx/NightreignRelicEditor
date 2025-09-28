@@ -54,7 +54,8 @@
                       SelectedValuePath="Value"
                       SelectedValue="{Binding SelectedRelicEffectSlot, Mode=TwoWay}"/>
             <Button Content="Set!" Width="80"
-                    Click="Button_AddRelicEffect1"/>
+                    IsEnabled="{Binding CanSetEffect}"
+                    Click="Button_SetRelicEffect"/>
         </StackPanel>
     </Grid>
 </UserControl>

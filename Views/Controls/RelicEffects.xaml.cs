@@ -11,18 +11,19 @@ public partial class RelicEffects : UserControl
     public static readonly DependencyProperty RelicManagerProperty =
         DependencyProperty.Register(nameof(RelicManager), typeof(RelicManager), typeof(RelicEffects), new PropertyMetadata(null, OnRelicManagerChanged));
 
-    private static void OnRelicManagerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is RelicEffects { DataContext: RelicEffectsViewModel vm })
-            vm.RelicManager = (RelicManager) e.NewValue;
-    }
-
     public RelicManager? RelicManager
     {
         get => (RelicManager) GetValue(RelicManagerProperty);
         set => SetValue(RelicManagerProperty, value);
     }
     
+    private static void OnRelicManagerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is RelicEffects { DataContext: RelicEffectsViewModel vm })
+            vm.RelicManager = (RelicManager) e.NewValue;
+    }
+
+
     public RelicEffects()
     {
         InitializeComponent();
@@ -30,6 +31,7 @@ public partial class RelicEffects : UserControl
         Loaded += (s, e) => AfterInit();
     }
 
+    
     protected void AfterInit()
     {
         listviewRelicEffects.ItemsSource = RelicManager?.AllRelicEffects;
@@ -67,32 +69,7 @@ public partial class RelicEffects : UserControl
     }
 
     
-    private void Button_AddRelicEffect1(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Button_AddRelicEffect2(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Button_AddRelicEffect3(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Button_AddRelicEffect4(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Button_AddRelicEffect5(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Button_AddRelicEffect6(object sender, RoutedEventArgs e)
+    private void Button_SetRelicEffect(object sender, RoutedEventArgs e)
     {
         throw new NotImplementedException();
     }
