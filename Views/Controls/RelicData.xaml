@@ -13,64 +13,67 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>     <!-- Relic header -->
-                <RowDefinition Height="Auto"/>     <!-- Slot 1 -->
-                <RowDefinition Height="Auto"/>     <!-- Slot 1 curse -->
-                <RowDefinition Height="Auto"/>     <!-- Slot 2 -->
-                <RowDefinition Height="Auto"/>     <!-- Slot 2 curse -->
-                <RowDefinition Height="Auto"/>     <!-- Slot 3 -->
-                <RowDefinition Height="Auto"/>     <!-- Slot 3 curse -->
+                <RowDefinition Height="Auto"/>     <!-- Header -->
+                <RowDefinition Height="Auto"/>     <!-- Effect 1 -->
+                <RowDefinition Height="Auto"/>     <!-- Curse 1 -->
+                <RowDefinition Height="Auto"/>     <!-- Effect 2 -->
+                <RowDefinition Height="Auto"/>     <!-- Curse 2 -->
+                <RowDefinition Height="Auto"/>     <!-- Effect 3 -->
+                <RowDefinition Height="Auto"/>     <!-- Curse 3 -->
             </Grid.RowDefinitions>
 
             <!-- Header -->
-            <CheckBox x:Name="checkboxRelic1Active"
+            <CheckBox x:Name="CheckboxRelicActive"
                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="2"
                       Content="{Binding RelicName, RelativeSource={RelativeSource AncestorType=UserControl}}"
                       IsChecked="{Binding IsActive, RelativeSource={RelativeSource AncestorType=UserControl}}"
                       FontWeight="Bold" />
 
-            <!-- Slot 1 -->
-            <Button x:Name="buttonSlot1Clear"
+            <!-- Effect 1 -->
+            <Button x:Name="ButtonClearEffect1"
                     Grid.Row="1" Grid.Column="0" Margin="2"
                     Content="x" Width="20"/>
-            <TextBlock x:Name="textSlot1"
+            <TextBlock x:Name="TextBlockEffect1"
                        Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
             
-            <Button x:Name="buttonSlot1CurseClear"
+            <!-- Curse 1 -->
+            <Button x:Name="ButtonClearCurse1"
                     Grid.Row="2" Grid.Column="1" Margin="2"
                     Content="x" Width="20"/>
-            <TextBlock x:Name="textSlot1Curse"
+            <TextBlock x:Name="TextBlockCurse1"
                        Grid.Row="2" Grid.Column="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
 
-            <!-- Slot 2 -->
-            <Button x:Name="buttonSlot2Clear"
+            <!-- Effect 2 -->
+            <Button x:Name="ButtonClearEffect2"
                     Grid.Row="3" Grid.Column="0" Margin="2"
                     Content="x" Width="20"/>
-            <TextBlock x:Name="textSlot2"
+            <TextBlock x:Name="TextBlockEffect2"
                        Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
             
-            <Button x:Name="buttonSlot2CurseClear"
+            <!-- Curse 2 -->
+            <Button x:Name="ButtonClearCurse2"
                     Grid.Row="4" Grid.Column="1" Margin="2"
                     Content="x" Width="20"/>
-            <TextBlock x:Name="textSlot2Curse"
+            <TextBlock x:Name="TextBlockCurse2"
                        Grid.Row="4" Grid.Column="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
 
-            <!-- Slot 3 -->
-            <Button x:Name="buttonSlot3Clear"
+            <!-- Effect 3 -->
+            <Button x:Name="ButtonClearEffect3"
                     Grid.Row="5" Grid.Column="0" Margin="2"
                     Content="x" Width="20"/>
-            <TextBlock x:Name="textSlot3"
+            <TextBlock x:Name="TextBlockEffect3"
                        Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
             
-            <Button x:Name="buttonSlot3CurseClear"
+            <!-- Curse 3 -->
+            <Button x:Name="ButtonClearCurse3"
                     Grid.Row="6" Grid.Column="1" Margin="2"
                     Content="x" Width="20"/>
-            <TextBlock x:Name="textSlot3Curse"
+            <TextBlock x:Name="TextBlockCurse3"
                        Grid.Row="6" Grid.Column="2" Margin="2"
                        Text="-" TextWrapping="Wrap"/>
         </Grid>

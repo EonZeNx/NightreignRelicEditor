@@ -179,15 +179,14 @@ public class RelicManager
         if (relicSlot >= CharacterRelics.Length)
             return;
         
-        Debug.Print($"Setting {effect.Id}{(isCurse ? " (curse)" : "")} to relic {relicSlot}");
-        
+        Debug.Print($"Setting {(isCurse ? "curse" : "effect")} {effect.Id} ({effect.Description}) to relic {relicSlot}");
         CharacterRelics[relicSlot].SetEffect(effect, effectSlot, isCurse);
 
         if (sort)
             CharacterRelics[relicSlot].SortEffects();
     }
 
-    public void RemoveRelicEffect(uint relicSlot, uint effectSlot, bool isCurse = false)
+    public void RemoveRelicEffect(uint relicSlot, uint effectSlot, bool isCurse = false, bool sort = false)
     {
         if (relicSlot >= CharacterRelics.Length)
             return;
@@ -195,8 +194,10 @@ public class RelicManager
         if (effectSlot >= CharacterRelics[relicSlot].Effects.Count)
             return;
         
-        Debug.Print($"Removing effect slot {effectSlot} from relic {relicSlot}");
+        Debug.Print($"Removing {(isCurse ? "curse" : "effect")} {effectSlot} from relic {relicSlot} ");
         CharacterRelics[relicSlot].RemoveEffect((int) effectSlot, isCurse);
+        if (sort)
+            CharacterRelics[relicSlot].SortEffects();
     }
 
     public uint GetRelicEffectId(uint relicSlot, uint effectSlot, bool isCurse = false)
@@ -296,7 +297,7 @@ public class RelicManager
         if (effect.Slot1Weight != 0)
             return true;
 
-        if (effect.Id is >= 6_000_000 and < 8_000_000 || (includeUnique && effect.Id < 100_000))
+        if (effect.Id is >= 6_000_000 and < 8_000_000 || (includeUnique && effect.Id < 100_000) || effect.Id == 0xFFFFFFFF)
             return true;
 
         return false;
@@ -315,6 +316,9 @@ public class RelicManager
             validator[i] = RelicErrors.Legitimate;
 
             Debug.Print( $"{effect.Id}: {effect.Description}");
+
+            if (effect.Id == 0xFFFFFFFF)
+                continue; // empty should always be valid
 
             if (!effect.IsDeepEffect && effect.Slot1Weight == 0)
             {
