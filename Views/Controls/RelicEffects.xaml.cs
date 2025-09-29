@@ -57,13 +57,44 @@ public partial class RelicEffects : UserControl
     
     public void FilterRelicEffectsBox()
     {
+        var filterText = textboxFilterEffects.Text;
+        
+        // additional filter for curses
+        Func<RelicEffect, bool> curseFilter = _ => true;
+        if (filterText.Contains("curse:1"))
+        {
+            filterText = filterText.Replace("curse:1 ", "").Replace(" curse:1", "").Replace("curse:1", "");
+            curseFilter = x => x.IsCurse;
+        }
+        else if (filterText.Contains("curse:0"))
+        {
+            filterText = filterText.Replace("curse:0 ", "").Replace(" curse:0", "").Replace("curse:0", "");
+            curseFilter = x => !x.IsCurse;
+        }
+        
+        // additional filter for depth
+        Func<RelicEffect, bool> depthFilter = _ => true;
+        if (filterText.Contains("depth:1"))
+        {
+            filterText = filterText.Replace("depth:1 ", "").Replace(" depth:1", "").Replace("depth:1", "");
+            depthFilter = x => x.IsDeepEffect;
+        }
+        else if (filterText.Contains("depth:0"))
+        {
+            filterText = filterText.Replace("depth:0 ", "").Replace(" depth:0", "").Replace("depth:0", "");
+            depthFilter = x => !x.IsDeepEffect;
+        }
+
+        Func<RelicEffect, bool> descriptionFilter = x => x.Description.ToLower().Contains(filterText.ToLower());
+        
         var view = CollectionViewSource.GetDefaultView(RelicManager.AllRelicEffects);
         view.Filter = (entry) =>
         {
-            var re = (RelicEffect) entry;
+            var effect = (RelicEffect) entry;
 
-            return re.Description.ToLower().Contains(textboxFilterEffects.Text.ToLower())
-                   & RelicManager.VerifyEffectIsRelicEffect(re, (checkboxShowUnique.IsChecked ?? false));
+            return (filterText.Length == 0 || descriptionFilter(effect))
+                   & RelicManager.VerifyEffectIsRelicEffect(effect, (checkboxShowUnique.IsChecked ?? false)) 
+                   & curseFilter(effect) & depthFilter(effect);
         };
     }
 
