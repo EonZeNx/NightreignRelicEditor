@@ -15,15 +15,13 @@ namespace NightreignRelicEditor.Views;
 
 public partial class MainWindow : Window
 {
-    TextBlock[,] relicTextBlock;
-    Button[,] clearEffectButtons;
-    CheckBox[] activeRelics;
+    private CheckBox[] activeRelics;
     private RelicData[] allRelics;
 
     private MainWindowViewModel viewModel;
     private const int relicSlotCount = 6;
 
-    System.Windows.Threading.DispatcherTimer monitorTimer = new System.Windows.Threading.DispatcherTimer();
+    System.Windows.Threading.DispatcherTimer monitorTimer = new();
 
     public MainWindow()
     {
@@ -69,10 +67,6 @@ public partial class MainWindow : Window
             buttonImportRelicsFromGame.IsEnabled = false;
         }
 
-        relicTextBlock = new TextBlock[,] { };
-
-        clearEffectButtons = new Button[,] { };
-
         activeRelics = new CheckBox[] { };
 
         for (uint x = 1; x < relicSlotCount; x++)
@@ -94,13 +88,13 @@ public partial class MainWindow : Window
 
     private void monitorTimer_Tick(object? sender, EventArgs e)
     {
-        ConnectionStates cs = viewModel.RelicManager.ConnectionStatus;
+        var cs = viewModel.RelicManager.ConnectionStatus;
 
-        if (cs != ConnectionStates.Connected)
-        {
-            monitorTimer.Stop();
-            SetUIConnectionStatus();
-        }
+        if (cs == ConnectionStates.Connected)
+            return;
+        
+        monitorTimer.Stop();
+        SetUIConnectionStatus();
     }
 
     private void SetUIConnectionStatus()
@@ -158,62 +152,12 @@ public partial class MainWindow : Window
         //     AddRelicEffect(relic, selected);
     }
 
-    private void AddRelicEffect(uint relic, RelicEffect effect)
-    {
-        viewModel.RelicManager.AddRelicEffect(relic, effect);
-        UpdateRelicUIElements(relic);
-        
-    }
-
-    private void RemoveRelicEffect(uint relic, uint slot)
-    {
-        Debug.Print("relic " + relic + " slot " + slot);
-        viewModel.RelicManager.RemoveRelicEffect(relic, slot);
-        UpdateRelicUIElements(relic);
-
-    }
 
     private void UpdateRelicUIElements(uint relic)
     {
         var relicDataElement = (RelicData?) FindName($"RelicDataSlot{relic}");
         relicDataElement?.UpdateUIElements();
     }
-
-    //
-    // Verification
-    //
-
-    private void VerifyRelic(uint relic)
-    {
-        RelicErrors[] errors = viewModel.RelicManager.VerifyRelic(relic);
-
-        for (uint slot = 0; slot < 3; slot++)
-        {
-            switch (errors[slot])
-            {
-                case RelicErrors.Legitimate:
-                    relicTextBlock[relic, slot].Foreground = Brushes.Black;
-                    relicTextBlock[relic, slot].ToolTip = null;
-                    break;
-                case RelicErrors.NotRelicEffect:
-                    SetTextVerify(relic, slot, "Effect is not a valid relic effect.", Brushes.Red);
-                    break;
-                case RelicErrors.MultipleFromCategory:
-                    SetTextVerify(relic, slot, "This effect has the same category as another effect in this relic.", Brushes.Red);
-                    break;
-                case RelicErrors.UniqueRelicEffect:
-                    SetTextVerify(relic, slot, "Relic effect is only for special unique relics.", Brushes.Orange);
-                    break;
-            }
-        }
-    }
-
-    private void SetTextVerify(uint relic, uint slot, string errorText, Brush colour)
-    {
-        relicTextBlock[relic, slot].Foreground = colour;
-        relicTextBlock[relic, slot].ToolTip = errorText;
-    }
-
 
     //
     // Main UI Buttons
@@ -271,30 +215,6 @@ public partial class MainWindow : Window
     private void Button_Connect(object sender, RoutedEventArgs e)
     {
         Connect();
-    }
-
-    //
-    // Relic effect tab UI
-    //
-
-    private void Button_AddRelicEffect1(object sender, RoutedEventArgs e)
-    {
-        AddRelicEffectFromList(0);
-    }
-
-    private void Button_AddRelicEffect2(object sender, RoutedEventArgs e)
-    {
-        AddRelicEffectFromList(1);
-    }
-
-    private void Button_AddRelicEffect3(object sender, RoutedEventArgs e)
-    {
-        AddRelicEffectFromList(2);
-    }
-
-    private void Button_AddRelicEffect4(object sender, RoutedEventArgs e)
-    {
-        AddRelicEffectFromList(3);
     }
 
     //

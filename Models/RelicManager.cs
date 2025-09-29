@@ -7,21 +7,14 @@ namespace NightreignRelicEditor.Models;
 
 public class RelicManager
 {
+    private const string ProcessName = "nightreign";
+    private const string ModuleName = "nightreign.exe";
+    
     private GameLink nightreign;
-
-    private const string processName = "nightreign";
-    private const string moduleName = "nightreign.exe";
 
     private IntPtr relicAddress = IntPtr.Zero;
     private IntPtr gameDataManAddress = IntPtr.Zero;
-
     private nint relicBaseOffset = 0x2F4;
-
-    private List<RelicEffect>[] playerRelics = new List<RelicEffect>[]
-    {
-        new(), new(), new(),
-        new(), new(), new(),
-    };
 
     public Relic[] CharacterRelics { get; private set; } =
     [
@@ -49,18 +42,9 @@ public class RelicManager
         }
     }
 
-    public List<RelicEffect>[] PlayerRelics
-    {
-        get
-        {
-            return playerRelics;
-        }
-    }
-
-
     public RelicManager()
     {
-        nightreign = new GameLink(processName, moduleName);
+        nightreign = new GameLink(ProcessName, ModuleName);
         LoadRelicEffects();
     }
 
@@ -162,18 +146,6 @@ public class RelicManager
         return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + relicBaseOffset + (IntPtr)(4 * relicSlot)) * 8 + 8;
     }
 
-    public void AddRelicEffect(uint relicSlot, RelicEffect effect, bool sort = true)
-    {
-        if (relicSlot >= CharacterRelics.Length)
-            return;
-        
-        Debug.Print($"Adding {effect.Id} to relic {relicSlot}");
-        CharacterRelics[relicSlot].AddEffect(effect, effect.IsCurse);
-
-        if (sort)
-            CharacterRelics[relicSlot].SortEffects();
-    }
-    
     public void SetRelicEffect(uint relicSlot, uint effectSlot, RelicEffect effect, bool isCurse = false, bool sort = false)
     {
         if (relicSlot >= CharacterRelics.Length)
