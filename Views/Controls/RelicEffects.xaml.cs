@@ -36,11 +36,11 @@ public partial class RelicEffects : UserControl
     
     protected void AfterInit()
     {
-        listviewRelicEffects.ItemsSource = RelicManager.AllRelicEffects;
+        ListViewRelicEffects.ItemsSource = RelicManager.AllRelicEffects;
         FilterRelicEffectsBox();
     }
 
-    private void TextboxFilterEffects_OnTextChanged(object sender, TextChangedEventArgs e)
+    private void TextboxEffectsFilter_OnTextChanged(object sender, TextChangedEventArgs e)
     {
         FilterRelicEffectsBox();
     }
@@ -52,12 +52,12 @@ public partial class RelicEffects : UserControl
 
     private void ClearEffectFilter(object sender, RoutedEventArgs e)
     {
-        textboxFilterEffects.Text = "";
+        TextboxEffectsFilter.Text = "";
     }
     
     public void FilterRelicEffectsBox()
     {
-        var filterText = textboxFilterEffects.Text;
+        var filterText = TextboxEffectsFilter.Text;
         
         // additional filter for curses
         Func<RelicEffect, bool> curseFilter = _ => true;
@@ -93,7 +93,7 @@ public partial class RelicEffects : UserControl
             var effect = (RelicEffect) entry;
 
             return (filterText.Length == 0 || descriptionFilter(effect))
-                   & RelicManager.VerifyEffectIsRelicEffect(effect, (checkboxShowUnique.IsChecked ?? false)) 
+                   & RelicManager.VerifyEffectIsRelicEffect(effect, (CheckboxShowUnique.IsChecked ?? false)) 
                    & curseFilter(effect) & depthFilter(effect);
         };
     }
@@ -101,7 +101,7 @@ public partial class RelicEffects : UserControl
     
     private void Button_SetRelicEffect(object sender, RoutedEventArgs e)
     {
-        var selected = (RelicEffect) listviewRelicEffects.SelectedItem;
+        var selected = (RelicEffect) ListViewRelicEffects.SelectedItem;
 
         if (selected == null)
             return;
