@@ -30,6 +30,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         
         viewModel = (MainWindowViewModel) DataContext;
+        RelicEffects.RelicManager = viewModel.RelicManager;
         
         InitUI();
         LoadSettingsFile();
@@ -46,9 +47,20 @@ public partial class MainWindow : Window
 
     private void InitUI()
     {
-        // listviewRelicEffects.ItemsSource = viewModel.RelicManager.AllRelicEffects;
+        RelicEffects.RequestRefresh += (s, e) =>
+        {
+            RelicDataSlot0.UpdateUIElements();
+            RelicDataSlot1.UpdateUIElements();
+            RelicDataSlot2.UpdateUIElements();
+            RelicDataSlot3.UpdateUIElements();
+            RelicDataSlot4.UpdateUIElements();
+            RelicDataSlot5.UpdateUIElements();
+            
+            InvalidateVisual(); 
+            UpdateLayout();
+        };
+
         listboxPresets.ItemsSource = relicPresets;
-        // FilterRelicEffectsBox();
         SetUIConnectionStatus();
 
         if (viewModel.RelicManager.ConnectionStatus != ConnectionStates.Connected)

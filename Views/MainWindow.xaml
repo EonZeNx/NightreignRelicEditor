@@ -20,7 +20,8 @@
         <Grid Grid.Column="0">
             <TabControl Margin="0,0,0,0">
                 <TabItem Header="Relic Effects">
-                    <controls:RelicEffects RelicManager="{Binding RelicManager}"/>
+                    <!-- this is always null (skill issue), setting it in constructor too -->
+                    <controls:RelicEffects x:Name="RelicEffects" RelicManager="{Binding RelicManager}"/>
                 </TabItem>
                 <TabItem Header="Presets">
                     <Grid Margin="0,0,0,0">

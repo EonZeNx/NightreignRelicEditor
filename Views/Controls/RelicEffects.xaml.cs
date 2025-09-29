@@ -9,20 +9,22 @@ namespace NightreignRelicEditor.Views.Controls;
 public partial class RelicEffects : UserControl
 {
     public static readonly DependencyProperty RelicManagerProperty =
-        DependencyProperty.Register(nameof(RelicManager), typeof(RelicManager), typeof(RelicEffects), new PropertyMetadata(null, OnRelicManagerChanged));
+        DependencyProperty.Register(nameof(RelicManager), typeof(RelicManager), typeof(RelicEffects), new FrameworkPropertyMetadata(defaultValue: null));
 
-    public RelicManager? RelicManager
+    public RelicManager RelicManager
     {
         get => (RelicManager) GetValue(RelicManagerProperty);
         set => SetValue(RelicManagerProperty, value);
     }
     
-    private static void OnRelicManagerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is RelicEffects { DataContext: RelicEffectsViewModel vm })
-            vm.RelicManager = (RelicManager) e.NewValue;
-    }
 
+    public event EventHandler? RequestRefresh;
+
+    private void RefreshUI()
+    {
+        RequestRefresh?.Invoke(this, EventArgs.Empty);
+    }
+    
 
     public RelicEffects()
     {
@@ -34,7 +36,7 @@ public partial class RelicEffects : UserControl
     
     protected void AfterInit()
     {
-        listviewRelicEffects.ItemsSource = RelicManager?.AllRelicEffects;
+        listviewRelicEffects.ItemsSource = RelicManager.AllRelicEffects;
         FilterRelicEffectsBox();
     }
 
@@ -55,9 +57,6 @@ public partial class RelicEffects : UserControl
     
     public void FilterRelicEffectsBox()
     {
-        if (RelicManager is null)
-            return;
-        
         var view = CollectionViewSource.GetDefaultView(RelicManager.AllRelicEffects);
         view.Filter = (entry) =>
         {
@@ -71,6 +70,18 @@ public partial class RelicEffects : UserControl
     
     private void Button_SetRelicEffect(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        var selected = (RelicEffect) listviewRelicEffects.SelectedItem;
+
+        if (selected == null)
+            return;
+        
+        var viewModel = (RelicEffectsViewModel) DataContext;
+
+        var isCurse = viewModel.RelicEffectSlots
+            .First(x => viewModel.SelectedRelicEffectSlot == x.Value)
+            .Name.ToLower().Contains("curse");
+        
+        RelicManager.SetRelicEffect((uint) viewModel.SelectedRelicSlot, (uint) viewModel.SelectedRelicEffectSlot, selected, isCurse, true);
+        RefreshUI();
     }
 }

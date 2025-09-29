@@ -11,13 +11,6 @@ public class RelicEffectsViewModel : INotifyPropertyChanged
 
     private void OnPropertyChanged([CallerMemberName] string? name = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
-    private RelicManager relicManager;
-    public RelicManager RelicManager
-    {
-        get => relicManager;
-        set { relicManager = value; OnPropertyChanged(); }
-    }
     
     public ObservableCollection<OptionItem<int>> RelicSlots =>
     [
@@ -59,7 +52,6 @@ public class RelicEffectsViewModel : INotifyPropertyChanged
 
     public RelicEffectsViewModel()
     {
-        relicManager =  new RelicManager();
         selectedRelicSlot = 0;
         selectedRelicEffectSlot = 0;
     }

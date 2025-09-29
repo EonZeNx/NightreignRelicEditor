@@ -43,10 +43,17 @@ partial class RelicData : UserControl
         relicEffectTextBlocks = [textSlot1, textSlot2, textSlot3];
         relicCurseTextBlocks = [textSlot1Curse, textSlot2Curse, textSlot3Curse];
         clearEffectButtons = [buttonSlot1Clear, buttonSlot2Clear, buttonSlot3Clear];
+
+        Loaded += (s, e) => AfterInit();
         
-        buttonSlot1Clear.Click += (sender, e) => RemoveRelicEffect(0);
-        buttonSlot2Clear.Click += (sender, e) => RemoveRelicEffect(1);
-        buttonSlot3Clear.Click += (sender, e) => RemoveRelicEffect(2);
+        buttonSlot1Clear.Click += (s, e) => RemoveRelicEffect(0);
+        buttonSlot2Clear.Click += (s, e) => RemoveRelicEffect(1);
+        buttonSlot3Clear.Click += (s, e) => RemoveRelicEffect(2);
+    }
+
+    private void AfterInit()
+    {
+        UpdateUIElements();
     }
     
     private void RemoveRelicEffect(uint slot)
