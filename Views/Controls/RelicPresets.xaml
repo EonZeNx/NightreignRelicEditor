@@ -5,20 +5,95 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:NightreignRelicEditor.Views.Controls"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Margin="0,0,0,0">
-        <Button Content="Load" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_LoadPreset" Height="20"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="85,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_SaveNewPreset" Height="20"/>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="160,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_UpdatePreset" Height="20"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="310,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_DeletePreset" Height="20"/>
-        <Button Content="Rename" HorizontalAlignment="Center" Margin="0,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_RenamePreset" Height="20"/>
-        <Button Content="Move Up" HorizontalAlignment="Left" Margin="385,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_MoveUpPreset" Height="20"/>
-        <Button Content="Move Down" HorizontalAlignment="Left" Margin="460,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_MoveDownPreset" Height="20"/>
+             d:DesignHeight="400" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Row="0" Grid.Column="0" 
+              HorizontalAlignment="Stretch" Margin="8, 8, 8, 4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       VerticalAlignment="Center" TextWrapping="Wrap" Margin="0, 0, 4, 0">
+                <Run Language="en-au" Text="Filter:"/>
+            </TextBlock>
+    
+            <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ComboboxFilterPresets" 
+                      HorizontalAlignment="Stretch" MinHeight="22" IsEditable="True" Margin="0, 0, 4, 0"
+                      TextBoxBase.TextChanged="comboboxFilterPresets_TextChanged">
+                <ComboBoxItem>Duchess</ComboBoxItem>
+                <ComboBoxItem>Executor</ComboBoxItem>
+                <ComboBoxItem>Guardian</ComboBoxItem>
+                <ComboBoxItem>Ironeye</ComboBoxItem>
+                <ComboBoxItem>Raider</ComboBoxItem>
+                <ComboBoxItem>Recluse</ComboBoxItem>
+                <ComboBoxItem>Revenant</ComboBoxItem>
+                <ComboBoxItem>Wylder</ComboBoxItem>
+            </ComboBox>
+    
+            <Button Grid.Row="0" Grid.Column="2" 
+                    Content="Clear" Width="80" MinHeight="22"
+                    Click="Button_ClearPresetFilter"/>
+        </Grid>
+        
+        <Grid Grid.Row="1" Grid.Column="0"
+              HorizontalAlignment="Stretch" Margin="8, 4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0"
+                    Content="Load" Width="80" MinHeight="22" Margin="0, 0, 4, 0"
+                    Click="Button_LoadPreset"/>
+            
+            <Button Grid.Column="1"
+                    Content="Save" Width="80" MinHeight="22" Margin="0, 0, 4, 0"
+                    Click="Button_SaveNewPreset"/>
+            
+            <Button Grid.Column="2"
+                    Content="Update" Width="80" MinHeight="22" Margin="0, 0, 4, 0"
+                    Click="Button_UpdatePreset"/>
+            
+            
+            
+            <Button Grid.Column="4"
+                    Content="Delete" Width="80" MinHeight="22" Margin="0, 0, 4, 0"
+                    Click="Button_DeletePreset"/>
+            
+            <Button Grid.Column="5"
+                    Content="Rename" Width="80" MinHeight="22" Margin="0, 0, 4, 0"
+                    Click="Button_RenamePreset"/>
+            
+            <Button Grid.Column="6"
+                    Content="↑" Width="20" MinHeight="22" Margin="0, 0, 4, 0"
+                    Click="Button_MoveUpPreset"/>
+            
+            <Button Grid.Column="7"
+                    Content="↓" Width="20" MinHeight="22"
+                    Click="Button_MoveDownPreset"/>
+        </Grid>
 
 
-        <Button Content="Clear" HorizontalAlignment="Left" Margin="460,11,0,0" VerticalAlignment="Top" Width="70" Click="Button_ClearPresetFilter" Height="20"/>
-
-        <ListBox x:Name="ListboxPresets" d:ItemsSource="{d:SampleData ItemCount=15}" Margin="10,62,10,10" SelectedIndex="0">
+        <ListBox Grid.Row="2" Grid.Column="0" x:Name="ListboxPresets"
+                 d:ItemsSource="{d:SampleData ItemCount=15}" SelectedIndex="0" Margin="8, 4, 8, 8">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
@@ -35,16 +110,5 @@
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
-        <ComboBox x:Name="ComboboxFilterPresets" HorizontalAlignment="Left" Margin="44,10,85,0" VerticalAlignment="Top" Width="411" Height="22" IsEditable="True" TextBoxBase.TextChanged="comboboxFilterPresets_TextChanged">
-            <ComboBoxItem>Duchess</ComboBoxItem>
-            <ComboBoxItem>Executor</ComboBoxItem>
-            <ComboBoxItem>Guardian</ComboBoxItem>
-            <ComboBoxItem>Ironeye</ComboBoxItem>
-            <ComboBoxItem>Raider</ComboBoxItem>
-            <ComboBoxItem>Recluse</ComboBoxItem>
-            <ComboBoxItem>Revenant</ComboBoxItem>
-            <ComboBoxItem>Wylder</ComboBoxItem>
-        </ComboBox>
-        <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="Filter:"/></TextBlock>
     </Grid>
 </UserControl>

@@ -85,38 +85,35 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Button x:Name="ButtonSetRelicsInGame"
-                            Grid.Row="0" Grid.Column="0"
-                            Margin="2"
-                            Content="Set relics in game" Click="Button_SetRelicsInGame"/>
-                    <Button x:Name="ButtonImportRelicsFromGame"
-                            Grid.Row="0" Grid.Column="1"
-                            Margin="2"
-                            Content="Import relic data from game" Click="Button_GetRelicsFromGame"/>
+                    <Button Grid.Row="0" Grid.Column="0" x:Name="ButtonSetRelicsInGame"
+                            Content="Set relics in game" Margin="0, 0, 4, 0" MinHeight="22"
+                            Click="Button_SetRelicsInGame"/>
+                    <Button Grid.Row="0" Grid.Column="1" x:Name="ButtonImportRelicsFromGame"
+                            Content="Import relic data from game" MinHeight="22"
+                            Click="Button_GetRelicsFromGame"/>
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="2">
-                        <TextBlock TextWrapping="Wrap" FontWeight="Bold" Margin="2">
+                    <StackPanel Grid.Row="1" Grid.Column="0"
+                                Orientation="Horizontal" Margin="0, 8">
+                        <TextBlock TextWrapping="Wrap" FontWeight="Bold" FontSize="14" Margin="0, 0, 4, 0">
                             <Run Language="en-au" Text="Status:"/>
                         </TextBlock>
-                        <TextBlock x:Name="TextblockConnectionStatus" TextWrapping="Wrap" Margin="2">
+                        <TextBlock x:Name="TextblockConnectionStatus" FontSize="14" TextWrapping="Wrap">
                             <Run Language="en-au" Text="Not connected"/>
                         </TextBlock>
                     </StackPanel>
 
-                    <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="2">
+                    <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         
-                        <Button x:Name="ButtonConnect"
-                                Grid.Row="0" Grid.Column="0"
-                                Margin="2"
-                                Content="Connect" Click="Button_Connect"/>
-                        <CheckBox x:Name="CheckboxAutoConnect"
-                                  Grid.Row="0" Grid.Column="1"
-                                  Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                  Content="Auto-connect at startup"/>
+                        <Button Grid.Row="0" Grid.Column="0" x:Name="ButtonConnect"
+                                Content="Connect" Margin="0,0, 4, 0" MinHeight="22"
+                                Click="Button_Connect"/>
+                        <CheckBox Grid.Row="0" Grid.Column="1" x:Name="CheckboxAutoConnect"
+                                  Content="Auto-connect at startup"
+                                  HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </Grid>
                 </Grid>
             </Grid>
