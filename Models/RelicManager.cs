@@ -163,7 +163,7 @@ public class RelicManager
         if (relicSlot >= CharacterRelics.Length)
             return;
         
-        if (effectSlot >= CharacterRelics[relicSlot].Effects.Count)
+        if (effectSlot >= CharacterRelics[relicSlot].EffectSlots.Count)
             return;
         
         Debug.Print($"Removing {(isCurse ? "curse" : "effect")} {effectSlot} from relic {relicSlot} ");
@@ -177,10 +177,10 @@ public class RelicManager
         if (relicSlot >= CharacterRelics.Length)
             return 0xFFFFFFFF;
         
-        if (effectSlot >= CharacterRelics[relicSlot].Effects.Count)
+        if (effectSlot >= CharacterRelics[relicSlot].EffectSlots.Count)
             return 0xFFFFFFFF;
         
-        var effect = CharacterRelics[relicSlot].Effects[(int)effectSlot];
+        var effect = CharacterRelics[relicSlot].EffectSlots[(int)effectSlot];
         return (isCurse ? effect.Curse : effect.Effect).Id;
     }
 
@@ -189,10 +189,10 @@ public class RelicManager
         if (relicSlot >= CharacterRelics.Length)
             return "-";
         
-        if (effectSlot >= CharacterRelics[relicSlot].Effects.Count)
+        if (effectSlot >= CharacterRelics[relicSlot].EffectSlots.Count)
             return "-";
         
-        var effect = CharacterRelics[relicSlot].Effects[(int)effectSlot];
+        var effect = CharacterRelics[relicSlot].EffectSlots[(int)effectSlot];
         return (isCurse ? effect.Curse : effect.Effect).Description;
     }
 
@@ -285,9 +285,9 @@ public class RelicManager
 
         var validator = new RelicErrors[6];
 
-        for (var i = 0; i < CharacterRelics[relicSlot].Effects.Count; i++)
+        for (var i = 0; i < CharacterRelics[relicSlot].EffectSlots.Count; i++)
         {
-            var effect = CharacterRelics[relicSlot].Effects[i].Effect;
+            var effect = CharacterRelics[relicSlot].EffectSlots[i].Effect;
             validator[i] = RelicErrors.Legitimate;
 
             Debug.Print( $"{effect.Id}: {effect.Description}");
@@ -307,12 +307,12 @@ public class RelicManager
             }
 
                 
-            for (var j = 0; j < CharacterRelics[relicSlot].Effects.Count; j++)
+            for (var j = 0; j < CharacterRelics[relicSlot].EffectSlots.Count; j++)
             {
                 if (i == j)
                     continue;
                 
-                var other =  CharacterRelics[relicSlot].Effects[j].Effect;
+                var other =  CharacterRelics[relicSlot].EffectSlots[j].Effect;
                 if (other.Category != effect.Category)
                     continue;
                 

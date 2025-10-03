@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using NightreignRelicEditor.Models;
+using NightreignRelicEditor.Models.JSON;
 
 namespace NightreignRelicEditor.Views.Controls;
 
@@ -19,6 +21,7 @@ public partial class RelicPresets : UserControl
     }
     
     
+    public const string PresetsFileName = "presets.json";
     private ObservableCollection<RelicPreset> presets = [];
     
     public RelicPresets()
@@ -78,7 +81,7 @@ public partial class RelicPresets : UserControl
 
         for (uint i = 0; i < preset.Relics.Length; i++)
         {
-            RelicManager.SetRelic(i, preset.Relics[i].Effects.ToArray());
+            RelicManager.SetRelic(i, preset.Relics[i].EffectSlots.ToArray());
         }
         
         // UpdateRelicUIElements();
@@ -115,10 +118,10 @@ public partial class RelicPresets : UserControl
         for (var i = 0; i < preset.Relics.Length; i++)
         {
             var relic = preset.Relics[i];
-            for (var j = 0; j < relic.Effects.Count; j++)
+            for (var j = 0; j < relic.EffectSlots.Count; j++)
             {
-                preset.Relics[i].Effects[j].Effect.Id = RelicManager.GetRelicEffectId((uint) i, (uint) j);
-                preset.Relics[i].Effects[j].Curse.Id = RelicManager.GetRelicEffectId((uint) i, (uint) j, true);
+                preset.Relics[i].EffectSlots[j].Effect.Id = RelicManager.GetRelicEffectId((uint) i, (uint) j);
+                preset.Relics[i].EffectSlots[j].Curse.Id = RelicManager.GetRelicEffectId((uint) i, (uint) j, true);
             }
         }
 
@@ -175,7 +178,7 @@ public partial class RelicPresets : UserControl
     
     private void LoadPresetFile()
     {
-        var fileName = System.AppDomain.CurrentDomain.BaseDirectory + "presets.nre";
+        var fileName = System.AppDomain.CurrentDomain.BaseDirectory + PresetsFileName;
         
         if (!File.Exists(fileName))
             return;
@@ -221,7 +224,7 @@ public partial class RelicPresets : UserControl
                 for (var i = 0; i < preset.Relics.Length; i++)
                 {
                     var relic = new Relic(i >= 3);
-                    foreach (var effectSlot in relic.Effects)
+                    foreach (var effectSlot in relic.EffectSlots)
                     {
                         if (index < effectArray.Length)
                             effectSlot.Effect = effectArray[index++];
@@ -242,40 +245,24 @@ public partial class RelicPresets : UserControl
 
     private void SavePresetFile()
     {
-        var fileName = System.AppDomain.CurrentDomain.BaseDirectory + "presets.nre";
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Converters =
+            {
+                new RelicEffectJsonConverter(),
+                new RelicJsonConverter()
+            }
+        };
+        
+        var fileName = System.AppDomain.CurrentDomain.BaseDirectory + PresetsFileName;
         try
         {
             using var presetFile = new StreamWriter(fileName);
             foreach (var preset in presets)
             {
-                presetFile.Write($"{preset.Name}\t");
-
-                foreach (var relic in preset.Relics.SkipLast(1))
-                {
-                    foreach (var effect in relic.Effects)
-                    {
-                        presetFile.Write($"{effect.Effect.Id}\t");
-                        
-                        if (relic.IsDeepRelic)
-                            presetFile.Write($"{effect.Curse.Id}\t");
-                    }
-                }
-                
-                var lastRelic = preset.Relics.Last();
-                foreach (var effect in lastRelic.Effects.SkipLast(1))
-                {
-                    presetFile.Write($"{effect.Effect.Id}\t");
-                    if (lastRelic.IsDeepRelic)
-                        presetFile.Write($"{effect.Curse.Id}\t");
-                }
-                
-                var lastEffect = lastRelic.Effects.Last();
-                presetFile.Write($"{lastEffect.Effect.Id}");
-                if (lastRelic.IsDeepRelic)
-                {
-                    presetFile.Write($"\t{lastEffect.Curse.Id}");
-                }
-                presetFile.Write("\n");
+                var presetJson = JsonSerializer.Serialize(preset, options);
+                presetFile.WriteLine(presetJson);
             }
         }
         catch (Exception f)

@@ -1,19 +1,25 @@
-﻿namespace NightreignRelicEditor.Models;
+﻿using System.Text.Json.Serialization;
+using System.Windows;
+
+namespace NightreignRelicEditor.Models;
 
 public class Relic(bool isDeepRelic = false)
 {
-    public List<RelicEffectSlot> Effects { get; } = [new(), new(), new()];
-    public bool IsDeepRelic { get; } = isDeepRelic;
+    [JsonInclude]
+    public List<RelicEffectSlot> EffectSlots { get; } = [new(), new(), new()];
+    
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public bool IsDeepRelic { get; init; } = isDeepRelic;
 
     public bool SetEffect(RelicEffect effect, uint slot, bool isCurse = false)
     {
         if (!IsDeepRelic && (effect.IsCurse || isCurse))
             return false;
         
-        if (slot >= Effects.Count)
-            Effects.Add(new RelicEffectSlot());
+        if (slot >= EffectSlots.Count)
+            EffectSlots.Add(new RelicEffectSlot());
         
-        var currentEffect = Effects[(int)slot];
+        var currentEffect = EffectSlots[(int)slot];
         if (isCurse)
             currentEffect.Curse = effect;
         else
@@ -24,24 +30,24 @@ public class Relic(bool isDeepRelic = false)
 
     public bool RemoveEffect(int slotIndex, bool isCurse = false)
     {
-        if (slotIndex < 0 || slotIndex >= Effects.Count)
+        if (slotIndex < 0 || slotIndex >= EffectSlots.Count)
             return false;
         
         if (isCurse)
         {
-            Effects[slotIndex].ClearCurse();
+            EffectSlots[slotIndex].ClearCurse();
 
             return true;
         }
         
-        Effects[slotIndex].ClearEffect();
+        EffectSlots[slotIndex].ClearEffect();
 
         return true;
     }
 
     public void ClearSlot()
     {
-        foreach (var effectSlot in Effects)
+        foreach (var effectSlot in EffectSlots)
         {
             effectSlot.ClearSlot();
         }
@@ -49,7 +55,7 @@ public class Relic(bool isDeepRelic = false)
 
     public void SortEffects()
     {
-        Effects.Sort((a, b) =>
+        EffectSlots.Sort((a, b) =>
         {
             var groupCompare = a.Effect.OrderGroup.CompareTo(b.Effect.OrderGroup);
             return groupCompare != 0 
