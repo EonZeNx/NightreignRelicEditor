@@ -1,40 +1,9 @@
 ﻿namespace NightreignRelicEditor.Models;
 
-public class Relic
+public class Relic(bool isDeepRelic = false)
 {
-    public List<RelicEffectSlot> Effects { get; set; } = [new(), new(), new()];
-    public bool IsDeepRelic { get; set; } = false;
-
-    public Relic(bool isDeepRelic = false)
-    {
-        IsDeepRelic = isDeepRelic;
-    }
-
-    public bool AddEffect(RelicEffect effect,  bool isCurse = false)
-    {
-        if (!IsDeepRelic && (effect.IsCurse || isCurse))
-            return false;
-        
-        if (Effects.Count >= 3)
-            return false;
-
-        var relicSlot =  new RelicEffectSlot();
-        
-        if (isCurse)
-        {
-            if (!IsDeepRelic || !effect.IsCurse)
-                return false;
-
-            relicSlot.Curse = effect;
-        }
-        else
-        {
-            relicSlot.Effect = effect;
-        }
-        
-        Effects.Add(relicSlot);
-        return true;
-    }
+    public List<RelicEffectSlot> Effects { get; } = [new(), new(), new()];
+    public bool IsDeepRelic { get; } = isDeepRelic;
 
     public bool SetEffect(RelicEffect effect, uint slot, bool isCurse = false)
     {
@@ -80,6 +49,12 @@ public class Relic
 
     public void SortEffects()
     {
-        Effects = Effects.OrderBy(x => x.Effect.OrderGroup).ThenBy(x => x.Effect.Id).ToList();
+        Effects.Sort((a, b) =>
+        {
+            var groupCompare = a.Effect.OrderGroup.CompareTo(b.Effect.OrderGroup);
+            return groupCompare != 0 
+                ? groupCompare 
+                : a.Effect.Id.CompareTo(b.Effect.Id);
+        });
     }
 }

@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="NightreignRelicEditor.Views.Controls.RelicPresets"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:NightreignRelicEditor.Views.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="0,0,0,0">
+        <Button Content="Load" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_LoadPreset" Height="20"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="85,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_SaveNewPreset" Height="20"/>
+        <Button Content="Update" HorizontalAlignment="Left" Margin="160,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_UpdatePreset" Height="20"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="310,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_DeletePreset" Height="20"/>
+        <Button Content="Rename" HorizontalAlignment="Center" Margin="0,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_RenamePreset" Height="20"/>
+        <Button Content="Move Up" HorizontalAlignment="Left" Margin="385,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_MoveUpPreset" Height="20"/>
+        <Button Content="Move Down" HorizontalAlignment="Left" Margin="460,37,0,0" VerticalAlignment="Top" Width="70" Click="Button_MoveDownPreset" Height="20"/>
+
+
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="460,11,0,0" VerticalAlignment="Top" Width="70" Click="Button_ClearPresetFilter" Height="20"/>
+
+        <ListBox x:Name="ListboxPresets" d:ItemsSource="{d:SampleData ItemCount=15}" Margin="10,62,10,10" SelectedIndex="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Load" Click="Button_LoadPreset"/>
+                    <MenuItem Header="Update" Click="Button_UpdatePreset"/>
+                    <MenuItem Header="Rename" Click="Button_RenamePreset"/>
+                    <MenuItem Header="Delete" Click="Button_DeletePreset"/>
+                    <MenuItem Header="Move Up" Click="Button_MoveUpPreset"/>
+                    <MenuItem Header="Move Down" Click="Button_MoveDownPreset"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+        <ComboBox x:Name="ComboboxFilterPresets" HorizontalAlignment="Left" Margin="44,10,85,0" VerticalAlignment="Top" Width="411" Height="22" IsEditable="True" TextBoxBase.TextChanged="comboboxFilterPresets_TextChanged">
+            <ComboBoxItem>Duchess</ComboBoxItem>
+            <ComboBoxItem>Executor</ComboBoxItem>
+            <ComboBoxItem>Guardian</ComboBoxItem>
+            <ComboBoxItem>Ironeye</ComboBoxItem>
+            <ComboBoxItem>Raider</ComboBoxItem>
+            <ComboBoxItem>Recluse</ComboBoxItem>
+            <ComboBoxItem>Revenant</ComboBoxItem>
+            <ComboBoxItem>Wylder</ComboBoxItem>
+        </ComboBox>
+        <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="en-au" Text="Filter:"/></TextBlock>
+    </Grid>
+</UserControl>

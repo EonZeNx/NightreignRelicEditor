@@ -1,11 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using NightreignRelicEditor.Models;
 using NightreignRelicEditor.ViewModels;
@@ -15,11 +10,8 @@ namespace NightreignRelicEditor.Views;
 
 public partial class MainWindow : Window
 {
-    private CheckBox[] activeRelics;
-    private RelicData[] allRelics;
-
     private MainWindowViewModel viewModel;
-    private const int relicSlotCount = 6;
+    private const int RelicSlotCount = 6;
 
     System.Windows.Threading.DispatcherTimer monitorTimer = new();
 
@@ -29,17 +21,17 @@ public partial class MainWindow : Window
         
         viewModel = (MainWindowViewModel) DataContext;
         RelicEffects.RelicManager = viewModel.RelicManager;
+        RelicPresets.RelicManager = viewModel.RelicManager;
         
         InitUI();
         LoadSettingsFile();
-        LoadPresetFile();
 
         monitorTimer.Tick += monitorTimer_Tick;
         monitorTimer.Interval = TimeSpan.FromMilliseconds(1000);
 
         Closing += ExitProgram;
 
-        if ((bool)checkboxAutoconnect.IsChecked)
+        if (CheckboxAutoConnect.IsChecked ?? false)
             Connect();
     }
 
@@ -57,31 +49,28 @@ public partial class MainWindow : Window
             InvalidateVisual(); 
             UpdateLayout();
         };
-
-        listboxPresets.ItemsSource = relicPresets;
+        
         SetUIConnectionStatus();
 
         if (viewModel.RelicManager.ConnectionStatus != ConnectionStates.Connected)
         {
-            buttonSetRelicsInGame.IsEnabled = false;
-            buttonImportRelicsFromGame.IsEnabled = false;
+            ButtonSetRelicsInGame.IsEnabled = false;
+            ButtonImportRelicsFromGame.IsEnabled = false;
         }
 
-        activeRelics = new CheckBox[] { };
-
-        for (uint x = 1; x < relicSlotCount; x++)
+        for (uint x = 1; x < RelicSlotCount; x++)
             UpdateRelicUIElements(x);
     }
 
     private void Connect()
     {
-        buttonConnect.IsEnabled = false;
+        ButtonConnect.IsEnabled = false;
         viewModel.RelicManager.ConnectToNightreign();
 
         if (viewModel.RelicManager.ConnectionStatus == ConnectionStates.Connected)            
             monitorTimer.Start();
         else
-            buttonConnect.IsEnabled = true;
+            ButtonConnect.IsEnabled = true;
 
         SetUIConnectionStatus();
     }
@@ -101,45 +90,45 @@ public partial class MainWindow : Window
     {
         if (viewModel.RelicManager.ConnectionStatus == ConnectionStates.Connected)
         {
-            buttonConnect.IsEnabled = false;
-            buttonSetRelicsInGame.IsEnabled = true;
-            buttonImportRelicsFromGame.IsEnabled = true;
+            ButtonConnect.IsEnabled = false;
+            ButtonSetRelicsInGame.IsEnabled = true;
+            ButtonImportRelicsFromGame.IsEnabled = true;
 
-            textConnectionStatus.Foreground = Brushes.Black;
-            textConnectionStatus.Text = "Connected";
+            TextblockConnectionStatus.Foreground = Brushes.Black;
+            TextblockConnectionStatus.Text = "Connected";
         }
         else
         {
-            buttonConnect.IsEnabled = true;
-            buttonSetRelicsInGame.IsEnabled = false;
-            buttonImportRelicsFromGame.IsEnabled = false;
+            ButtonConnect.IsEnabled = true;
+            ButtonSetRelicsInGame.IsEnabled = false;
+            ButtonImportRelicsFromGame.IsEnabled = false;
 
-            textConnectionStatus.Foreground = Brushes.Red;
+            TextblockConnectionStatus.Foreground = Brushes.Red;
         }
 
         switch (viewModel.RelicManager.ConnectionStatus)
         {
             
             case ConnectionStates.EACDetected:
-                textConnectionStatus.Text = "EAC detected";
+                TextblockConnectionStatus.Text = "EAC detected";
                 break;
             case ConnectionStates.NightreignNotFound:
-                textConnectionStatus.Text = "Nightreign process not found";
+                TextblockConnectionStatus.Text = "Nightreign process not found";
                 break;
             case ConnectionStates.ConnectedOffsetsNotFound:
-                textConnectionStatus.Text = "Nightreign process found, but relic memory addresses not found";
+                TextblockConnectionStatus.Text = "Nightreign process found, but relic memory addresses not found";
                 break;
             case ConnectionStates.ConnectionLost:
-                textConnectionStatus.Text = "Nightreign connection lost";
+                TextblockConnectionStatus.Text = "Nightreign connection lost";
                 break;
             case ConnectionStates.NotConnected:
-                textConnectionStatus.Text = "Not connected";
-                textConnectionStatus.Foreground = Brushes.Black;
+                TextblockConnectionStatus.Text = "Not connected";
+                TextblockConnectionStatus.Foreground = Brushes.Black;
                 break;
         }
     }
 
-    private void ExitProgram(object sender, EventArgs e)
+    private void ExitProgram(object? sender, EventArgs e)
     {
         SaveSettingsFile();
     }
@@ -168,7 +157,7 @@ public partial class MainWindow : Window
         if (viewModel.RelicManager.ConnectionStatus != ConnectionStates.Connected)
             return;
         
-        for (uint i = 0; i < relicSlotCount; i++)
+        for (uint i = 0; i < RelicSlotCount; i++)
         {
             var relicDataElement = (RelicData?) FindName($"RelicDataSlot{i}");
             if (relicDataElement is { IsActive: false })
@@ -190,7 +179,7 @@ public partial class MainWindow : Window
             }
         }
 
-        for (uint i = 0; i < relicSlotCount; i++)
+        for (uint i = 0; i < RelicSlotCount; i++)
         {
             var relicDataElement = (RelicData?) FindName($"RelicDataSlot{i}");
             if (relicDataElement is { IsActive: false })
@@ -218,282 +207,6 @@ public partial class MainWindow : Window
     }
 
     //
-    // Preset tab UI
-    //
-
-    private void Button_MoveUpPreset(object sender, RoutedEventArgs e)
-    {
-        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
-
-        if (preset == null)
-            return;
-
-        int index = FindPresetIndex(preset);
-
-        if (index == 0)
-            return;
-
-        relicPresets.Move(index--, index);
-        SavePresetFile();
-    }
-
-    private void Button_MoveDownPreset(object sender, RoutedEventArgs e)
-    {
-        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
-
-        if (preset == null)
-            return;
-
-        int index = FindPresetIndex(preset);
-
-        if (index == relicPresets.Count - 1)
-            return;
-
-        relicPresets.Move(index++, index);
-        SavePresetFile();
-    }
-
-    private void Button_LoadPreset(object sender, RoutedEventArgs e)
-    {
-        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
-
-        if (preset == null)
-            return;
-
-        for (uint x = 0; x < 3; x++)
-        {
-            if ((bool)activeRelics[x].IsChecked)
-            {
-                uint[] effectId = new uint[3];
-
-                for (uint y = 0; y < 3; y++)
-                    effectId[y] = preset.EffectId[x, y];
-
-                // viewModel.RelicManager.SetRelic(x, effectId);
-                UpdateRelicUIElements(x);
-            }
-        }
-    }
-
-    private void Button_SaveNewPreset(object sender, RoutedEventArgs e)
-    {
-        string name = Microsoft.VisualBasic.Interaction.InputBox("Description", "Enter name for preset");
-
-        if (string.IsNullOrEmpty(name))
-            return;
-
-        RelicPreset relic = new RelicPreset(name);
-
-        for (uint x = 0; x < 3; x++)
-        {
-            for (uint y = 0; y < 3; y++)
-            {
-                relic.EffectId[x, y] = viewModel.RelicManager.GetRelicEffectId(x, y);
-            }
-        }
-        relicPresets.Add(relic);
-
-        SavePresetFile();
-    }
-
-    private void Button_UpdatePreset(object sender, RoutedEventArgs e)
-    {
-        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
-
-        if (preset == null)
-            return;
-
-        MessageBoxResult result = MessageBox.Show("Update preset " + preset.Name + " with new effects?", "Corfirm Update", MessageBoxButton.YesNo);
-
-        if (result == MessageBoxResult.No)
-            return;
-
-        for (uint x = 0; x < 3; x++)
-        {
-            for (uint y = 0; y < 3; y++)
-            {
-                preset.EffectId[x, y] = viewModel.RelicManager.GetRelicEffectId(x, y);
-            }
-        }
-
-        SavePresetFile();
-    }
-
-    private void Button_RenamePreset(object sender, RoutedEventArgs e)
-    {
-        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
-
-        if (preset == null)
-            return;
-
-        string name = Microsoft.VisualBasic.Interaction.InputBox("Description", "Enter name for preset", preset.Name);
-
-        if (string.IsNullOrEmpty(name) || name == preset.Name)
-            return;
-
-        preset.Name = name;
-        listboxPresets.UpdateLayout();
-        SavePresetFile();
-    }
-
-    private void Button_DeletePreset(object sender, RoutedEventArgs e)
-    {
-        RelicPreset preset = (RelicPreset)listboxPresets.SelectedItem;
-
-        if (preset == null)
-            return;
-
-        MessageBoxResult result = MessageBox.Show("Delete the preset " + preset.Name + "?", "Corfirm Delete", MessageBoxButton.YesNo);
-
-        if (result == MessageBoxResult.No)
-            return;
-
-        if (relicPresets.Remove(preset))
-            SavePresetFile();
-    }
-
-    private void comboboxFilterPresets_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        ICollectionView view = CollectionViewSource.GetDefaultView(relicPresets);
-        view.Filter = (entry) =>
-        {
-            RelicPreset re = (RelicPreset)entry;
-            return re.Name.ToLower().Contains(comboboxFilterPresets.Text.ToLower());
-        };
-    }
-
-    private void Button_ClearPresetFilter(object sender, RoutedEventArgs e)
-    {
-        comboboxFilterPresets.Text = "";
-    }
-
-    //
-    // Presets
-    // 
-
-    ObservableCollection<RelicPreset> relicPresets = new ObservableCollection<RelicPreset>();
-
-    class RelicPreset : INotifyPropertyChanged
-    {
-        private string name = "";
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-
-            set
-            {
-                name = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public uint[,] EffectId { get; set; }
-
-        public RelicPreset(string name)
-        {
-            Name = name;
-            EffectId = new uint[3, 3];
-        }
-    }
-
-    private void LoadPresetFile()
-    {
-        try
-        {
-            string file = System.AppDomain.CurrentDomain.BaseDirectory + "presets.nre";
-
-            if (!File.Exists(file))
-                return;
-
-            using (StreamReader sr = new StreamReader(file))
-            {
-                string? line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] split = line.Split("\t");
-                    if (split.Length == 10)
-                    {
-                        RelicPreset relic = new RelicPreset(split[0]);
-
-                        relic.EffectId[0, 0] = Convert.ToUInt32(split[1]);
-                        relic.EffectId[0, 1] = Convert.ToUInt32(split[2]);
-                        relic.EffectId[0, 2] = Convert.ToUInt32(split[3]);
-
-                        relic.EffectId[1, 0] = Convert.ToUInt32(split[4]);
-                        relic.EffectId[1, 1] = Convert.ToUInt32(split[5]);
-                        relic.EffectId[1, 2] = Convert.ToUInt32(split[6]);
-
-                        relic.EffectId[2, 0] = Convert.ToUInt32(split[7]);
-                        relic.EffectId[2, 1] = Convert.ToUInt32(split[8]);
-                        relic.EffectId[2, 2] = Convert.ToUInt32(split[9]);
-
-                        relicPresets.Add(relic);
-                    }
-                }
-            }
-        }
-        catch (Exception f)
-        {
-            MessageBox.Show("Problem loading settings file.");
-        }
-    }
-
-    private void SavePresetFile()
-    {
-        string file = System.AppDomain.CurrentDomain.BaseDirectory + "presets.nre";
-        try
-        {
-            using (StreamWriter sw = new StreamWriter(file))
-            {
-                foreach (RelicPreset preset in relicPresets)
-                {
-                    sw.WriteLine(preset.Name + "\t"
-                        + preset.EffectId[0, 0] + "\t"
-                        + preset.EffectId[0, 1] + "\t"
-                        + preset.EffectId[0, 2] + "\t"
-                        + preset.EffectId[1, 0] + "\t"
-                        + preset.EffectId[1, 1] + "\t"
-                        + preset.EffectId[1, 2] + "\t"
-                        + preset.EffectId[2, 0] + "\t"
-                        + preset.EffectId[2, 1] + "\t"
-                        + preset.EffectId[2, 2]);
-                }
-            }
-        }
-        catch (Exception f)
-        {
-            MessageBox.Show("Problem saving presets file to " + file + "\n" + f.ToString());
-        }
-    }
-
-    
-
-    private int FindPresetIndex(RelicPreset rp)
-    {
-        int i = 0;
-
-        foreach (RelicPreset r in relicPresets)
-        {
-            if (r.Name == rp.Name)
-                break;
-            else
-                i++;
-        }
-
-        return i;
-    }
-
-    //
     // Settings file
     //
 
@@ -510,7 +223,7 @@ public partial class MainWindow : Window
             using (StreamWriter sw = new StreamWriter(file))
             {
                 sw.WriteLine(Settings.autoconnect.ToString() + "\t" +
-                    ((bool)checkboxAutoconnect.IsChecked ? "1" : "0"));
+                    ((bool)CheckboxAutoConnect.IsChecked ? "1" : "0"));
             }
         }
         catch (Exception e)
@@ -539,7 +252,7 @@ public partial class MainWindow : Window
                         switch (split[0])
                         {
                             case "autoconnect":
-                                checkboxAutoconnect.IsChecked = (Convert.ToUInt32(split[1]) == 1) ? true : false;
+                                CheckboxAutoConnect.IsChecked = (Convert.ToUInt32(split[1]) == 1) ? true : false;
                                 break;
                         }
                     }

@@ -3,9 +3,9 @@
 public class RelicEffect
 {
     public uint Id { get; set; } = uint.MaxValue;
-    public string Description { get; set; } = "Empty";
-    public int Category { get; set; }
-    public int OrderGroup { get; set; } = int.MaxValue;
+    public string Description { get; init; } = "Empty";
+    public int Category { get; init; }
+    public int OrderGroup { get; init; } = int.MaxValue;
     public uint Slot1Weight { get; set; }
 
     public bool IsDeepEffect => Id is >= 6_000_000 and < 7_000_000;

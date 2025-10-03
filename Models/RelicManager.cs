@@ -16,7 +16,7 @@ public class RelicManager
     private IntPtr gameDataManAddress = IntPtr.Zero;
     private nint relicBaseOffset = 0x2F4;
 
-    public Relic[] CharacterRelics { get; private set; } =
+    public Relic[] CharacterRelics { get; } =
     [
         new(), new(), new(),
         new(true), new(true), new(true)
@@ -48,6 +48,7 @@ public class RelicManager
         LoadRelicEffects();
     }
 
+    
     public void ConnectToNightreign()
     {
         if (nightreign.CheckProcessRunning("easyanticheat_eos"))
@@ -72,8 +73,6 @@ public class RelicManager
             ConnectionStatus = ConnectionStates.NightreignNotFound;
         }
     }
-
-        
 
     private bool LocateRelicAddress()
     {
@@ -146,6 +145,7 @@ public class RelicManager
         return nightreign.ReadUInt16((IntPtr)nightreign.ReadUInt64(gameDataManAddress + 0x8) + relicBaseOffset + (IntPtr)(4 * relicSlot)) * 8 + 8;
     }
 
+    
     public void SetRelicEffect(uint relicSlot, uint effectSlot, RelicEffect effect, bool isCurse = false, bool sort = false)
     {
         if (relicSlot >= CharacterRelics.Length)
@@ -260,6 +260,9 @@ public class RelicManager
         SetRelic(relicSlot, effects);
     }
 
+    public RelicEffect? GetRelicEffectFromId(uint effectId) => AllRelicEffects.FirstOrDefault(x => x.Id == effectId);
+
+    
     //
     // Verification
     //
