@@ -6,7 +6,7 @@ namespace NightreignRelicEditor.Models;
 public class Relic(bool isDeepRelic = false)
 {
     [JsonInclude]
-    public List<RelicEffectSlot> EffectSlots { get; } = [new(), new(), new()];
+    public List<RelicEffectSlot> EffectSlots { get; set; } = [new(), new(), new()];
     
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public bool IsDeepRelic { get; init; } = isDeepRelic;

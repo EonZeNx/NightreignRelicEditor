@@ -22,7 +22,27 @@ public partial class RelicPresets : UserControl
     
     
     public const string PresetsFileName = "presets.json";
+    public readonly JsonSerializerOptions JsonOptions = new()
+    {
+        WriteIndented = true,
+        Converters =
+        {
+            new RelicJsonConverter(),
+            new RelicEffectSlotJsonConverter(),
+            new RelicEffectJsonConverter(),
+        }
+    };
+    
     private ObservableCollection<RelicPreset> presets = [];
+    
+    
+    public event EventHandler? RequestRefresh;
+
+    private void RefreshUI()
+    {
+        RequestRefresh?.Invoke(this, EventArgs.Empty);
+    }
+    
     
     public RelicPresets()
     {
@@ -83,8 +103,8 @@ public partial class RelicPresets : UserControl
         {
             RelicManager.SetRelic(i, preset.Relics[i].EffectSlots.ToArray());
         }
-        
-        // UpdateRelicUIElements();
+
+        RefreshUI();
     }
 
     private void Button_SaveNewPreset(object sender, RoutedEventArgs e)
@@ -187,55 +207,11 @@ public partial class RelicPresets : UserControl
         {
             using var presetFile = new StreamReader(fileName);
             
-            string? line;
-            while ((line = presetFile.ReadLine()) != null)
-            {
-                var split = line.Split("\t");
-                if (split.Length != 37 || split.Length != 10)
-                    continue;
+            var nullablePresets = JsonSerializer.Deserialize<ObservableCollection<RelicPreset>>(presetFile.ReadToEnd(), JsonOptions);
+            if (nullablePresets is null)
+                return;
 
-                var effects = new List<RelicEffect>();
-                foreach (var effectId in split.Skip(1))
-                {
-                    try
-                    {
-                        var effect = RelicManager.GetRelicEffectFromId(Convert.ToUInt32(effectId));
-                        if (effect == null)
-                            continue;
-
-                        effects.Add(effect);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-                }
-
-                if (effects.Count != 36 || effects.Count != 9)
-                {
-                    continue;
-                }
-                
-                var preset = new RelicPreset(split[0]);
-                var effectArray = effects.ToArray();
-
-                // test this please
-                var index = 0;
-                for (var i = 0; i < preset.Relics.Length; i++)
-                {
-                    var relic = new Relic(i >= 3);
-                    foreach (var effectSlot in relic.EffectSlots)
-                    {
-                        if (index < effectArray.Length)
-                            effectSlot.Effect = effectArray[index++];
-                        if (index < effectArray.Length)
-                            effectSlot.Curse = effectArray[index++];
-                    }
-                    preset.Relics[i] = relic;
-                }
-
-                presets.Add(preset);
-            }
+            presets = nullablePresets;
         }
         catch (Exception f)
         {
@@ -245,25 +221,12 @@ public partial class RelicPresets : UserControl
 
     private void SavePresetFile()
     {
-        var options = new JsonSerializerOptions
-        {
-            WriteIndented = true,
-            Converters =
-            {
-                new RelicEffectJsonConverter(),
-                new RelicJsonConverter()
-            }
-        };
-        
         var fileName = System.AppDomain.CurrentDomain.BaseDirectory + PresetsFileName;
         try
         {
             using var presetFile = new StreamWriter(fileName);
-            foreach (var preset in presets)
-            {
-                var presetJson = JsonSerializer.Serialize(preset, options);
-                presetFile.WriteLine(presetJson);
-            }
+            var presetsJson = JsonSerializer.Serialize(presets, JsonOptions);
+            presetFile.WriteLine(presetsJson);
         }
         catch (Exception f)
         {

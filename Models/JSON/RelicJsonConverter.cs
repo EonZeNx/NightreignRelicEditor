@@ -7,7 +7,14 @@ public class RelicJsonConverter: JsonConverter<Relic>
 {
     public override Relic? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return JsonSerializer.Deserialize<Relic>(ref reader, options);
+        var subOptions = new JsonSerializerOptions(options);
+        
+        // prevent recursion
+        var jsonConverter = subOptions.Converters.FirstOrDefault(c => c.GetType() == typeof(RelicJsonConverter));
+        if (jsonConverter is not null)
+            subOptions.Converters.Remove(jsonConverter);
+        
+        return JsonSerializer.Deserialize<Relic>(ref reader, subOptions);
     }
 
     public override void Write(Utf8JsonWriter writer, Relic value, JsonSerializerOptions options)

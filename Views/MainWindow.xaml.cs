@@ -35,20 +35,23 @@ public partial class MainWindow : Window
             Connect();
     }
 
+    private void RefreshUI()
+    {
+        RelicDataSlot0.UpdateUIElements();
+        RelicDataSlot1.UpdateUIElements();
+        RelicDataSlot2.UpdateUIElements();
+        RelicDataSlot3.UpdateUIElements();
+        RelicDataSlot4.UpdateUIElements();
+        RelicDataSlot5.UpdateUIElements();
+            
+        InvalidateVisual(); 
+        UpdateLayout();
+    }
+
     private void InitUI()
     {
-        RelicEffects.RequestRefresh += (s, e) =>
-        {
-            RelicDataSlot0.UpdateUIElements();
-            RelicDataSlot1.UpdateUIElements();
-            RelicDataSlot2.UpdateUIElements();
-            RelicDataSlot3.UpdateUIElements();
-            RelicDataSlot4.UpdateUIElements();
-            RelicDataSlot5.UpdateUIElements();
-            
-            InvalidateVisual(); 
-            UpdateLayout();
-        };
+        RelicEffects.RequestRefresh += (s, e) => RefreshUI();
+        RelicPresets.RequestRefresh += (s, e) => RefreshUI();
         
         SetUIConnectionStatus();
 
